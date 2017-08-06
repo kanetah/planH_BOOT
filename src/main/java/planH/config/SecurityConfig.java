@@ -17,7 +17,7 @@ import planH.service.UserDetailsServiceImpl;
  */
 @Configuration
 @EnableWebSecurity
-@ComponentScan("planH.repository")
+@ComponentScan("planH.service")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsServiceImpl userDetailsService;
@@ -33,13 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(
             AuthenticationManagerBuilder auth
     ) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("123").roles("USER").and()
-                .withUser("u").password("123").roles("U").and()
-                .withUser("admin").password("456").roles("ADMIN");
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password("123").roles("USER").and()
+//                .withUser("u").password("123").roles("U").and()
+//                .withUser("admin").password("456").roles("ADMIN");
 
-//        auth
-//                .userDetailsService(userDetailsService);
+        auth
+                .userDetailsService(userDetailsService);
     }
 
     @Override
