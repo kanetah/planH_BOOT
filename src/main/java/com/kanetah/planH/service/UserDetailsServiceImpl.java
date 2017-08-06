@@ -9,22 +9,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import com.kanetah.planH.entity.node.User;
 import com.kanetah.planH.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
-    private UserRepository userRepository;
 
     private final AuthorityRepository authorityRepository;
 
     @Autowired
     public UserDetailsServiceImpl(AuthorityRepository authorityRepository) {
         this.authorityRepository = authorityRepository;
-    }
-
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
     }
 
     @Override

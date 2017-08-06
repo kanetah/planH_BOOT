@@ -8,7 +8,7 @@ import org.neo4j.ogm.annotation.GraphId;
 public class BaseEntity {
 
     @GraphId
-    private Long id;
+    protected Long id;
 
     public Long getId() {
         return id;
@@ -19,12 +19,17 @@ public class BaseEntity {
     }
 
     @Override
-    public int hashCode() {
-        return id==null?super.hashCode():id.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o.getClass().equals(BaseEntity.class))) return false;
+
+        BaseEntity that = (BaseEntity) o;
+
+        return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other instanceof BaseEntity && ((BaseEntity)other).id.equals(this.id);
+    public int hashCode() {
+        return getId() != null ? getId().hashCode() : 0;
     }
 }

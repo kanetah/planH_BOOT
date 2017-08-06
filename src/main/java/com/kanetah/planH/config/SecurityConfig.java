@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.rememberme.InMemoryTokenR
  */
 @Configuration
 @EnableWebSecurity
-@ComponentScan("planH.service")
+@ComponentScan("com.kanetah.planH.service")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsServiceImpl userDetailsService;

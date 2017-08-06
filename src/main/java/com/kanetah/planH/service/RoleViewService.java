@@ -1,7 +1,12 @@
 package com.kanetah.planH.service;
 
 import com.kanetah.planH.entity.node.Role;
-import com.kanetah.planH.repository.RoleRepository;
+import com.kanetah.planH.entity.node.TaskRoot;
+import com.kanetah.planH.entity.node.User;
+import com.kanetah.planH.entity.node.UserRoot;
+import com.kanetah.planH.entity.relationship.Authority;
+import com.kanetah.planH.entity.relationship.SubordinateUser;
+import com.kanetah.planH.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import com.kanetah.planH.repository.AuthorityRepository;
-import com.kanetah.planH.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,26 +22,31 @@ import java.util.List;
 @Transactional
 public class RoleViewService {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final AuthorityRepository authorityRepository;
+    private final TaskRootRepository taskRootRepository;
+    private final UserRootRepository userRootRepository;
+    private final SubordinateTaskRepository subordinateTaskRepository;
+    private final SubordinateUserRepository subordinateUserRepository;
 
     @Autowired
-    public RoleViewService(UserRepository repository, RoleRepository roleRepository, AuthorityRepository authorityRepository) {
-        this.repository = repository;
+    public RoleViewService(UserRepository userRepository, RoleRepository roleRepository, AuthorityRepository authorityRepository, TaskRootRepository taskRootRepository, UserRootRepository userRootRepository, SubordinateTaskRepository subordinateTaskRepository, SubordinateUserRepository subordinateUserRepository) {
+        this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.authorityRepository = authorityRepository;
+        this.taskRootRepository = taskRootRepository;
+        this.userRootRepository = userRootRepository;
+        this.subordinateTaskRepository = subordinateTaskRepository;
+        this.subordinateUserRepository = subordinateUserRepository;
+    }
+
+    private void before() {
     }
 
     public String getViewByRole() {
 
-//        User user = new User(213, "kane");
-//        Role role = roleRepository.findUserRole();
-//        System.out.println("NICO");
-//        Authority authority = new Authority(user,role);
-//        System.out.println("AOWU");
-//        System.out.println("POI:: " + role.getRoleName());
-//        authorityRepository.save(authority);
+        before();
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();

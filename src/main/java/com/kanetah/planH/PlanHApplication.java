@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan("planH.entity")
-public class ApplicationLaunch {
+@EntityScan("com.kanetah.planH.entity")
+public class PlanHApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApplicationLaunch.class, args);
+		SpringApplication.run(PlanHApplication.class, args);
 	}
 }
