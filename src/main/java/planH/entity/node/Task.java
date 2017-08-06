@@ -1,17 +1,18 @@
 package planH.entity.node;
 
+import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import planH.entity.base.BaseNodeEntity;
+import planH.entity.base.BaseEntity;
 import planH.entity.relationship.Submit;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Task extends BaseNodeEntity{
+@NodeEntity
+public class Task extends BaseEntity {
 
     private String subject;
     private String content;
-    private Date startline;
     private Date deadline;
     @Relationship(type = "USER_SUBMIT_TASK", direction = Relationship.UNDIRECTED)
     private ArrayList<Submit> submits = new ArrayList<>();
@@ -22,8 +23,7 @@ public class Task extends BaseNodeEntity{
     public Task(String subject, String content) {
         this.subject = subject;
         this.content = content;
-        this.startline = new Date();
-        this.deadline = new Date(startline.getTime() + 24 * 60 * 60);
+        this.deadline = new Date();
     }
 
     public String getSubject() {
@@ -32,10 +32,6 @@ public class Task extends BaseNodeEntity{
 
     public String getContent() {
         return content;
-    }
-
-    public Date getStartline() {
-        return startline;
     }
 
     public Date getDeadline() {

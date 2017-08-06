@@ -21,13 +21,13 @@ public class Submit extends BaseRelationshipEntity{
     private Task task;
     private Date submitDate;
 
-    public Submit() {
+    {
+        this.submitDate = new Date();
     }
 
     public Submit(User user, Task task) {
         this.user = user;
         this.task = task;
-        this.submitDate = new Date();
     }
 
     public void addSubmitName(String name) {

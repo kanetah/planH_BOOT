@@ -1,6 +1,8 @@
 package planH.entity.node;
 
-import planH.entity.base.BaseNodeEntity;
+import org.neo4j.ogm.annotation.NodeEntity;
+import planH.entity.base.BaseEntity;
 
-public class TaskRoot extends BaseNodeEntity {
+@NodeEntity
+public class TaskRoot extends BaseEntity {
 }

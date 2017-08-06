@@ -3,22 +3,21 @@ package planH.entity.node;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import planH.entity.base.BaseNodeEntity;
-import planH.entity.relationship.Role;
+import planH.entity.base.BaseEntity;
+import planH.entity.relationship.Authority;
 import planH.entity.relationship.Submit;
 
 import java.util.*;
 
 @NodeEntity
-public class User extends BaseNodeEntity implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
 
     private String userName;
     private long userCode;
-    @Relationship(type = "USER_HAS_ROLE", direction = Relationship.UNDIRECTED)
-    private List<Role> roleAuthorities = new ArrayList<>();
-    @Relationship(type = "USER_SUBMIT_TASK", direction = Relationship.UNDIRECTED)
+    @Relationship(type = "USER_HAS_ROLE", direction = Relationship.INCOMING)
+    private List<Authority> roleAuthorities = new ArrayList<>();
+    @Relationship(type = "USER_SUBMIT_TASK", direction = Relationship.INCOMING)
     private List<Submit> submits = new ArrayList<>();
 
     public User() {
@@ -29,7 +28,7 @@ public class User extends BaseNodeEntity implements UserDetails {
         this.userName = userName;
     }
 
-    public void addRoleAuthorities(Role authority) {
+    public void addRoleAuthorities(Authority authority) {
         roleAuthorities.add(authority);
     }
 
@@ -45,7 +44,7 @@ public class User extends BaseNodeEntity implements UserDetails {
         return userCode;
     }
 
-    public List<Role> getRoleAuthorities() {
+    public List<Authority> getRoleAuthorities() {
         return roleAuthorities;
     }
 
@@ -57,7 +56,7 @@ public class User extends BaseNodeEntity implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> set = new HashSet<>();
         roleAuthorities.forEach(r ->
-                set.add(r.getAuthority()));
+                set.add(r.getRole()));
         return set;
     }
 

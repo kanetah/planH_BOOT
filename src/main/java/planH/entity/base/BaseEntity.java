@@ -5,13 +5,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.neo4j.ogm.annotation.GraphId;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-class BaseEntity {
+public class BaseEntity {
 
     @GraphId
-    protected Long id;
-
-    BaseEntity() {
-    }
+    private Long id;
 
     public Long getId() {
         return id;
