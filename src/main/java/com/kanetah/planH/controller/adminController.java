@@ -1,10 +1,11 @@
 package com.kanetah.planH.controller;
 
-import com.kanetah.planH.entity.node.Task;
 import com.kanetah.planH.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/admin")
@@ -17,9 +18,22 @@ public class adminController {
         this.adminService = adminService;
     }
 
-    @RequestMapping(value = "/addTask")
-    public void addTask() {
+    @ResponseBody
+    @RequestMapping(
+            value = "/task/post"
+//            method = RequestMethod.POST
+    )
+    public Map<String,Object> addTask(
+//            @RequestParam(value = "subject") String subject,
+//            @RequestParam(value = "content") String content
+    ) {
 //        adminService.addTask(task);
-        System.out.println("poi");
+        System.out.println("poi!!!!!!!!!!!!!!!!!!!!!!!!!");
+//        System.out.println(subject);
+//        System.out.println(content);
+        System.out.println();
+        Map<String, Object> map = new HashMap<>();
+        map.put("return", "nico");
+        return map;
     }
 }

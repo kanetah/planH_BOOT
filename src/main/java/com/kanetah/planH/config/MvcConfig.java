@@ -1,5 +1,7 @@
 package com.kanetah.planH.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -21,5 +23,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     ) {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/admin/").setViewName("admin");
+    }
+
+    @Bean
+    public ObjectMapper ObjectMapper(){
+        return new ObjectMapper();
     }
 }
