@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
 
+    compile("org.springframework.boot:spring-boot-starter-aop:1.5.3.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-security:1.5.3.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf:1.5.3.RELEASE")
     compile("org.thymeleaf:thymeleaf-spring4")

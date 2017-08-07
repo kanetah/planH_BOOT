@@ -1,28 +1,38 @@
 package com.kanetah.planH.service;
 
-import com.kanetah.planH.entity.node.Role;
-import com.kanetah.planH.entity.node.User;
+import com.kanetah.planH.entity.node.*;
 import com.kanetah.planH.entity.relationship.Authority;
-import com.kanetah.planH.repository.AuthorityRepository;
-import com.kanetah.planH.repository.RoleRepository;
+import com.kanetah.planH.entity.relationship.SubordinateTask;
+import com.kanetah.planH.entity.relationship.SubordinateUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService {
 
-    private final RoleRepository roleRepository;
-    private final AuthorityRepository authorityRepository;
+    private final RepositoryService repositoryService;
 
     @Autowired
-    public AdminService(RoleRepository roleRepository, AuthorityRepository authorityRepository) {
-        this.roleRepository = roleRepository;
-        this.authorityRepository = authorityRepository;
+    public AdminService(RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
+    }
+
+    public void addTask(Task task) {
+
+        TaskRoot taskRoot = repositoryService.taskRootRepository.find();
+        SubordinateTask subordinateTask = new SubordinateTask(taskRoot, task);
+        repositoryService.subordinateTaskRepository.save(subordinateTask);
     }
 
     public void addUser(User user) {
-        Role role = roleRepository.findUserRole();
+
+        UserRoot userRoot = repositoryService.userRootRepository.find();
+        SubordinateUser subordinateUser = new SubordinateUser(userRoot, user);
+        repositoryService.subordinateUserRepository.save(subordinateUser);
+
+        Role role = repositoryService.roleRepository.findUserRole();
+        user = repositoryService.userRepository.findByUserName(user.getUserName());
         Authority authority = new Authority(user, role);
-        authorityRepository.save(authority);
+        repositoryService.authorityRepository.save(authority);
     }
 }

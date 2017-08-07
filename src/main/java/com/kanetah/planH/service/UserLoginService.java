@@ -12,12 +12,12 @@ import com.kanetah.planH.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserLoginService implements UserDetailsService {
 
     private final AuthorityRepository authorityRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(AuthorityRepository authorityRepository) {
+    public UserLoginService(AuthorityRepository authorityRepository) {
         this.authorityRepository = authorityRepository;
     }
 

@@ -1,6 +1,6 @@
 package com.kanetah.planH.config;
 
-import com.kanetah.planH.service.UserDetailsServiceImpl;
+import com.kanetah.planH.service.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,13 +20,13 @@ import org.springframework.security.web.authentication.rememberme.InMemoryTokenR
 @ComponentScan("com.kanetah.planH.service")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsServiceImpl userDetailsService;
+    private UserLoginService userLoginService;
 
     @Autowired
     public void setUserDetailsService(
-            UserDetailsServiceImpl userDetailsService
+            UserLoginService userLoginService
     ) {
-        this.userDetailsService = userDetailsService;
+        this.userLoginService = userLoginService;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .withUser("admin").password("456").roles("ADMIN");
 
         auth
-                .userDetailsService(userDetailsService);
+                .userDetailsService(userLoginService);
     }
 
     @Override
@@ -51,10 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
 
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/")
-//                .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
 
                 .and()
                 .rememberMe()
