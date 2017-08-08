@@ -20,20 +20,20 @@ public class adminController {
 
     @ResponseBody
     @RequestMapping(
-            value = "/task/post"
-//            method = RequestMethod.POST
+            value = "/task/post",
+            method = RequestMethod.POST
     )
     public Map<String,Object> addTask(
-//            @RequestParam(value = "subject") String subject,
-//            @RequestParam(value = "content") String content
+            @RequestParam(value = "subject") String subject,
+            @RequestParam(value = "content") String content
     ) {
 //        adminService.addTask(task);
         System.out.println("poi!!!!!!!!!!!!!!!!!!!!!!!!!");
-//        System.out.println(subject);
-//        System.out.println(content);
+        System.out.println(subject);
+        System.out.println(content);
         System.out.println();
         Map<String, Object> map = new HashMap<>();
-        map.put("return", "nico");
+        map.put("r", "nico");
         return map;
     }
 }

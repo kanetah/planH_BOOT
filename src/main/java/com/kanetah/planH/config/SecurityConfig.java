@@ -2,19 +2,17 @@ package com.kanetah.planH.config;
 
 import com.kanetah.planH.service.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 
-/**
- * Created by kane on 2017/7/19.
- * <p>
- * Spring Security 设置
- */
 @Configuration
 @EnableWebSecurity
 @ComponentScan("com.kanetah.planH.service")
@@ -33,11 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(
             AuthenticationManagerBuilder auth
     ) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("123").roles("USER").and()
-//                .withUser("u").password("123").roles("U").and()
-//                .withUser("admin").password("456").roles("ADMIN");
-
         auth
                 .userDetailsService(userLoginService);
     }
@@ -64,13 +57,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .anyRequest()
-//                .permitAll()
                 .authenticated()
 
-//                .and()
-//                .requiresChannel()
-//                .antMatchers("/poi").requiresSecure()
-// 需要SSL证书
+                .and()
+                .requiresChannel()
+                .anyRequest()
+                .requiresSecure()
+// 需要申请SSL证书
         ;
     }
 }
