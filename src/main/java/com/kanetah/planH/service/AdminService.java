@@ -17,14 +17,14 @@ public class AdminService {
         this.repositoryService = repositoryService;
     }
 
-    public void addTask(Task task) {
+    public void createTask(Task task) {
 
         TaskRoot taskRoot = repositoryService.taskRootRepository.find();
         SubordinateTask subordinateTask = new SubordinateTask(taskRoot, task);
         repositoryService.subordinateTaskRepository.save(subordinateTask);
     }
 
-    public void addUser(User user) {
+    public void createUser(User user) {
 
         UserRoot userRoot = repositoryService.userRootRepository.find();
         SubordinateUser subordinateUser = new SubordinateUser(userRoot, user);

@@ -1,5 +1,6 @@
 package com.kanetah.planH.entity.relationship;
 
+import com.kanetah.planH.entity.base.BaseRelationshipEntity;
 import com.kanetah.planH.entity.node.Task;
 import com.kanetah.planH.entity.node.TaskRoot;
 import org.neo4j.ogm.annotation.EndNode;
@@ -7,7 +8,7 @@ import org.neo4j.ogm.annotation.RelationshipEntity;
 import org.neo4j.ogm.annotation.StartNode;
 
 @RelationshipEntity(type = "Root_Has_Task")
-public class SubordinateTask {
+public class SubordinateTask extends BaseRelationshipEntity {
 
     @StartNode
     private TaskRoot taskRoot;

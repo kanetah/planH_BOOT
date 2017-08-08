@@ -20,7 +20,7 @@ public class Task extends BaseEntity {
     public Task() {
     }
 
-    public Task(String subject, String content) {
+    public Task(String subject, String content, String date) {
         this.subject = subject;
         this.content = content;
         this.deadline = new Date();

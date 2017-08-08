@@ -1,39 +1,29 @@
 $(document).ready(function () {
 
-    $('#add').click(function () {
+    $('#task').click(function () {
         $.ajaxPlanH({
-            url: '/admin/task/post',
+            url: '/admin/task/create',
             data: {
-                subject: "Test",
-                content: "do something"
+                subject: $('#subject').val(),
+                content: $('#content').val(),
+                date: $('#date').val()
             },
             success: function (data) {
-                alert(data.r)
+                alert(data)
             }
         })
     });
 
-    // $('#add').click(function () {
-    //     $.ajax({
-    //         url: '/admin/task/post',
-    //         type: 'POST',
-    //         data: {
-    //             _csrf: $("meta[name='_csrf']").attr("content"),
-    //             subject: "Test",
-    //             content: "do something"
-    //         },
-    //         dataType: "json",
-    //         success: function (data) {
-    //             alert(data.r)
-    //         },
-    //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //             alert(
-    //                 "XMLHttpRequest: " + XMLHttpRequest +
-    //                 "\ntextStatus: " + textStatus +
-    //                 "\nerrorThrown: " + errorThrown
-    //             )
-    //         }
-    //     })
-    // })
-
+    $('#user').click(function () {
+        $.ajaxPlanH({
+            url: 'admin/user/create',
+            data: {
+                code: $('#code').val(),
+                name: $('#name').val()
+            },
+            success: function () {
+                alert("su")
+            }
+        })
+    });
 });
