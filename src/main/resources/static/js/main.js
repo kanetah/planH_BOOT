@@ -4,16 +4,18 @@ $(document).ready(function () {
 
     $.ajaxPlanH = function (args) {
 
-        if (args.ajaxUrl === undefined)
-            args.ajaxUrl = '/';
-        if (args.ajaxData === undefined)
-            args.ajaxData = null;
-        if (args.onSuccess === undefined)
-            args.onSuccess = function (data) {
+        if (args.url === undefined)
+            args.url = '/';
+        if (args.data === undefined)
+            args.data = {
+                'default': 'default'
+            };
+        if (args.success === undefined)
+            args.success = function (data) {
                 alert(data)
             };
-        if (args.onError === undefined)
-            args.onError = function (XMLHttpRequest, textStatus, errorThrown) {
+        if (args.error === undefined)
+            args.error = function (XMLHttpRequest, textStatus, errorThrown) {
                 alert(
                     "XMLHttpRequest: " + XMLHttpRequest + "\n" +
                     "textStatus: " + textStatus + "\n" +
@@ -21,15 +23,29 @@ $(document).ready(function () {
                 )
             };
 
+        args.data._csrf = $("meta[name='_csrf']").attr("content");
+
         $.ajax({
-            url: args.ajaxUrl,
+            url: args.url,
             type: 'POST',
-            data: args.ajaxData,
+            data: args.data,
             dataType: "json",
-            success: args.onSuccess,
-            error: args.onError
+            success: args.success,
+            error: args.error
         })
-    }
+    };
 
+    $.ajaxPlanH({
+        url: '/role/get',
+        success: function (data) {
+            window.role = data.role;
 
+            if (window.role === 'ADMIN')
+                $('body').append('<script src="js/admin-ajax.js"><\/script>');
+            else if (window.role === 'USER')
+                $('body').append('<script src="js/user-ajax.js"><\/script>');
+            else
+                alert("Role Error")
+        }
+    });
 });
