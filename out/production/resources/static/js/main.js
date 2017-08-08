@@ -44,14 +44,8 @@ $(document).ready(function () {
                 $('body').append('<script src="js/admin-ajax.js"><\/script>');
             else if (window.role === 'USER')
                 $('body').append('<script src="js/user-ajax.js"><\/script>');
+            else
+                alert("Role Error")
         }
     });
-
-    // $.writeAdmin = function () {
-    //     document.write('<script src="js/admin-ajax.js"><\/script>');
-    // };
-    //
-    // $.writeUser = function () {
-    //     document.write('<script src="js/user-ajax.js"><\/script>');
-    // }
 });
