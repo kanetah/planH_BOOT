@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $('#task').click(function () {
         $.ajaxPlanH({
-            url: '/user/213/task/get',
+            url: '/task/get',
             data: {
                 from: $('#from').val(),
                 to: $('#to').val()

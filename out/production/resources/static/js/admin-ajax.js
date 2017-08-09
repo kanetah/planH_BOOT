@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $('#task').click(function () {
         $.ajaxPlanH({
-            url: '/admin/task/create',
+            url: '/task/create',
             data: {
                 subject: $('#subject').val(),
                 title: $('#title').val(),
@@ -10,20 +10,24 @@ $(document).ready(function () {
                 deadline: $('#date').val()
             },
             success: function (data) {
-                alert(data)
+                $('#subject').val("");
+                $('#title').val("");
+                $('#content').val("");
+                $('#date').val("");
             }
         })
     });
 
     $('#user').click(function () {
         $.ajaxPlanH({
-            url: 'admin/user/create',
+            url: '/user/create',
             data: {
                 code: $('#code').val(),
                 name: $('#name').val()
             },
             success: function () {
-                alert("su")
+                $('#code').val("");
+                $('#name').val("");
             }
         })
     });

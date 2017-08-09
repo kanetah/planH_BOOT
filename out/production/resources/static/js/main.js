@@ -1,6 +1,10 @@
 $(document).ready(function () {
 
     window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>');
+    $('body').append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
+
+    var global = {};
+    global.path_prefix_for_role = "";
 
     $.ajaxPlanH = function (args) {
 
@@ -23,6 +27,7 @@ $(document).ready(function () {
                 )
             };
 
+        args.url = global.path_prefix_for_role + args.url;
         args.data._csrf = $("meta[name='_csrf']").attr("content");
 
         $.ajax({
@@ -40,10 +45,14 @@ $(document).ready(function () {
         success: function (data) {
             window.role = data.role;
 
-            if (window.role === 'ADMIN')
+            if (window.role === 'ADMIN') {
                 $('body').append('<script src="js/admin-ajax.js"><\/script>');
-            else if (window.role === 'USER')
+                global.path_prefix_for_role = "/admin";
+            }
+            else if (window.role === 'USER') {
                 $('body').append('<script src="js/user-ajax.js"><\/script>');
+                global.path_prefix_for_role = "/user/" + $.cookie('userCode');
+            }
             else
                 alert("Role Error")
         }
