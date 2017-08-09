@@ -5,6 +5,7 @@ import com.kanetah.planH.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,19 +23,20 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(
-            value = "/task/get"
-//            method = RequestMethod.POST
+            value = "/task/get",
+            method = RequestMethod.POST
     )
-    public Map<String, Object> getTask(
-//            @PathVariable(value = "userCode") String userCode,
-//            @RequestParam(value = "from") String from,
-//            @RequestParam(value = "to") String to
+    public Object[] getTask(
+            @PathVariable(value = "userCode") String userCode,
+            @RequestParam(value = "from") String from,
+            @RequestParam(value = "to") String to
     ) {
-        List<TaskInfo> taskInfos = userService.getTask(0,0,"");
-//                Integer.valueOf(from), Integer.valueOf(to), userCode);
-        Map<String, Object> map = new HashMap<>();
+        List<TaskInfo> taskInfos = userService.getTask(
+                Integer.valueOf(from), Integer.valueOf(to), userCode);
+        List<Map<String, Object>> list = new ArrayList<>();
         TaskInfo taskInfo;
-        for (int i = 0; i < taskInfos.size(); ) {
+        int i;
+        for (i = 0; i < taskInfos.size(); ++i) {
             taskInfo = taskInfos.get(i);
             HashMap<String, Object> infoMap = new HashMap<>();
             infoMap.put("subject", taskInfo.getSubject());
@@ -43,8 +45,8 @@ public class UserController {
             infoMap.put("deadline", taskInfo.getDeadline());
             infoMap.put("submit", taskInfo.getSubmitDate());
             infoMap.put("path", taskInfo.getSubmitFilePath());
-            map.put(String.valueOf(i++), infoMap);
+            list.add(infoMap);
         }
-        return map;
+        return list.toArray();
     }
 }
