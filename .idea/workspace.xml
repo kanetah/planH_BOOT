@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="74ef58f9-fa90-4d02-b374-af45f0254ed3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/js/main.js" afterPath="$PROJECT_DIR$/out/production/resources/static/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/js/user-ajax.js" afterPath="$PROJECT_DIR$/out/production/resources/static/js/user-ajax.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -729,7 +730,7 @@
       <workItem from="1502259601707" duration="12431000" />
       <workItem from="1502277567146" duration="41000" />
       <workItem from="1502277819821" duration="416000" />
-      <workItem from="1502280343064" duration="8699000" />
+      <workItem from="1502280343064" duration="8721000" />
     </task>
     <task id="LOCAL-00001" summary="fix spring mvc return ajax">
       <created>1502284874744</created>
@@ -745,11 +746,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502288157246</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="turn to user submit">
+      <created>1502289064048</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1502289064048</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21587000" />
+    <option name="totallyTimeSpent" value="21609000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -806,7 +814,8 @@
     <MESSAGE value="how to traversal json?" />
     <MESSAGE value="fix spring mvc return ajax" />
     <MESSAGE value="simple controller and js" />
-    <option name="LAST_COMMIT_MESSAGE" value="simple controller and js" />
+    <MESSAGE value="turn to user submit" />
+    <option name="LAST_COMMIT_MESSAGE" value="turn to user submit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

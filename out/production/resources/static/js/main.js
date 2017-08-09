@@ -47,14 +47,14 @@ $(document).ready(function () {
 
             if (window.role === 'ADMIN') {
                 $('body').append('<script src="js/admin-ajax.js"><\/script>');
-                global.path_prefix_for_role = "/admin";
+                global.path_prefix_for_role = '/admin';
             }
             else if (window.role === 'USER') {
                 $('body').append('<script src="js/user-ajax.js"><\/script>');
-                global.path_prefix_for_role = "/user/" + $.cookie('userCode');
+                global.path_prefix_for_role = '/user/' + $.cookie('userCode');
             }
             else
-                alert("Role Error")
+                alert('Role Error')
         }
     });
 });

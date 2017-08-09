@@ -9,6 +9,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 var body = $('body');
+
                 $.each(data, function (idx, elem) {
                     body.append('task:' + idx);
                     body.append('<hr>');
@@ -24,6 +25,13 @@ $(document).ready(function () {
                     body.append('<br>');
                     body.append('path: ' + elem.path);
                     body.append('<hr>');
+                    body.append(
+                        '<button class = "pose" id = "task' + idx + '">提交</button>');
+                    body.append('<hr>');
+                });
+
+                $('.pose').click(function () {
+                    alert('poi' + this.id);
                 });
             }
         })
