@@ -6,7 +6,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRootRepository extends PagingAndSortingRepository<UserRoot, Long> {
+public interface UserRootRepository
+        extends PagingAndSortingRepository<UserRoot, Long> {
 
     @Query("match (node:UserRoot) return node")
     UserRoot find();

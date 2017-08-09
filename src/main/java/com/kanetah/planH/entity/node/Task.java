@@ -12,6 +12,7 @@ import java.util.Date;
 public class Task extends BaseEntity {
 
     private String subject;
+    private String title;
     private String content;
     private Date deadline;
     @Relationship(type = "USER_SUBMIT_TASK", direction = Relationship.UNDIRECTED)
@@ -20,14 +21,19 @@ public class Task extends BaseEntity {
     public Task() {
     }
 
-    public Task(String subject, String content, String date) {
+    public Task(String subject, String title, String content, String deadline) {
         this.subject = subject;
+        this.title = title;
         this.content = content;
         this.deadline = new Date();
     }
 
     public String getSubject() {
         return subject;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public String getContent() {

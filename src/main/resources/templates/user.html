@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="_csrf" th:content="${_csrf.token}" content=""/>
     <meta charset="UTF-8">
     <title>USER</title>
 </head>
+
 <body>
 <h3>USER</h3>
 <br />
 <form th:action="@{logout}" method="post">
     <input type="submit" value="注销">
 </form>
+
+<div>
+    <label for="from">开始</label><input id="from">
+    <label for="to">结束</label><input id="to">
+    <button id="task">获取</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="js/main.js"></script>
 </body>
+
 </html>

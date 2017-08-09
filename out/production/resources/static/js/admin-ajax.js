@@ -5,8 +5,9 @@ $(document).ready(function () {
             url: '/admin/task/create',
             data: {
                 subject: $('#subject').val(),
+                title: $('#title').val(),
                 content: $('#content').val(),
-                date: $('#date').val()
+                deadline: $('#date').val()
             },
             success: function (data) {
                 alert(data)

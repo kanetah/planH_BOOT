@@ -9,6 +9,7 @@ class RepositoryService {
 
     final AuthorityRepository authorityRepository;
     final RoleRepository roleRepository;
+    final SubmitRepository submitRepository;
     final SubordinateTaskRepository subordinateTaskRepository;
     final SubordinateUserRepository subordinateUserRepository;
     final TaskRepository taskRepository;
@@ -20,6 +21,7 @@ class RepositoryService {
     public RepositoryService(
             AuthorityRepository authorityRepository,
             RoleRepository roleRepository,
+            SubmitRepository submitRepository,
             SubordinateTaskRepository subordinateTaskRepository,
             SubordinateUserRepository subordinateUserRepository,
             TaskRepository taskRepository,
@@ -29,6 +31,7 @@ class RepositoryService {
     ) {
         this.authorityRepository = authorityRepository;
         this.roleRepository = roleRepository;
+        this.submitRepository = submitRepository;
         this.subordinateTaskRepository = subordinateTaskRepository;
         this.subordinateUserRepository = subordinateUserRepository;
         this.taskRepository = taskRepository;

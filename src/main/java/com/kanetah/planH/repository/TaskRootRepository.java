@@ -6,7 +6,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TaskRootRepository extends PagingAndSortingRepository<TaskRoot, Long> {
+public interface TaskRootRepository
+        extends PagingAndSortingRepository<TaskRoot, Long> {
 
     @Query("match (node:TaskRoot) return node")
     TaskRoot find();

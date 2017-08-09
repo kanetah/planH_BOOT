@@ -11,17 +11,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/admin")
-public class adminController {
+public class AdminController {
 
     private final AdminService adminService;
-    private Map<String, Object> map = new HashMap<>();
-
-    {
-        map.put("status", "created");
-    }
 
     @Autowired
-    public adminController(AdminService adminService) {
+    public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
 
@@ -32,10 +27,13 @@ public class adminController {
     )
     public Map<String, Object> createTask(
             @RequestParam(value = "subject") String subject,
+            @RequestParam(value = "title") String title,
             @RequestParam(value = "content") String content,
-            @RequestParam(value = "date") String date
+            @RequestParam(value = "deadline") String deadline
     ) {
-        adminService.createTask(new Task(subject, content, date));
+        adminService.createTask(new Task(subject, title, content, deadline));
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", "created");
         return map;
     }
 
@@ -49,6 +47,8 @@ public class adminController {
             @RequestParam(value = "name") String name
     ) {
         adminService.createUser(new User(code, name));
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", "created");
         return map;
     }
 }

@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.kanetah.planH.entity.node.Role;
 
 @Repository
-public interface RoleRepository extends PagingAndSortingRepository<Role, Long> {
+public interface RoleRepository
+        extends PagingAndSortingRepository<Role, Long> {
 
     @Query("match(node:Role) where node.roleName = 'USER' return node")
     Role findUserRole();
