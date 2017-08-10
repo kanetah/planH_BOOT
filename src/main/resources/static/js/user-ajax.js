@@ -23,9 +23,9 @@ $(document).ready(function () {
                     body.append('<br>');
                     body.append('deadline: ' + elem.deadline);
                     body.append('<br>');
-                    body.append('submit: ' + elem.submit);
+                    body.append('submitDate: ' + elem.submitDate);
                     body.append('<br>');
-                    body.append('name: ' + elem.name);
+                    body.append('submitFileName: ' + elem.submitFileName);
                     body.append('<hr>');
                     body.append(
                         '<button class = "submit" id = "task' + idx +

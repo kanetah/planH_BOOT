@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import static com.kanetah.planH.info.TaskInfoAttribute.AllTaskInfoAttribute;
+
 @Service
 public class UserService {
 
@@ -27,7 +29,7 @@ public class UserService {
         this.repositoryService = repositoryService;
     }
 
-    public List<Map<String, Object>> getTask(long form, long to, String userCode) {
+    public List<Map<String, Object>> getTask(long form, long to, long userCode) {
 
         List<TaskInfo> taskInfos = new ArrayList<>();
         //fixme 推荐算法
@@ -36,20 +38,17 @@ public class UserService {
                 taskInfos.add(new TaskInfo(e, null)));
 
         List<Map<String, Object>> ajaxList = new ArrayList<>();
-        TaskInfo taskInfo;
-        int i;
-        for (i = 0; i < taskInfos.size(); ++i) {
-            taskInfo = taskInfos.get(i);
+        TaskInfo[] taskInfo = new TaskInfo[1];
+        taskInfos.forEach(info -> {
+            taskInfo[0] = info;
             HashMap<String, Object> infoMap = new HashMap<>();
-            infoMap.put("taskId", taskInfo.getTaskId());
-            infoMap.put("subject", taskInfo.getSubject());
-            infoMap.put("title", taskInfo.getTitle());
-            infoMap.put("content", taskInfo.getContent());
-            infoMap.put("deadline", taskInfo.getDeadline());
-            infoMap.put("submit", taskInfo.getSubmitDate());
-            infoMap.put("name", taskInfo.getSubmitFileName());
+            AllTaskInfoAttribute.forEach(attribute ->
+                    infoMap.put(
+                            attribute.getValue(),
+                            attribute.invokeMargetMethod(taskInfo[0])
+                    ));
             ajaxList.add(infoMap);
-        }
+        });
 
         return ajaxList;
     }
@@ -63,16 +62,16 @@ public class UserService {
         String originalFilename = file.getOriginalFilename();
         String path = storePath + "/" + task.getSubject();
         File targetFile = new File(path);
-        if(!targetFile.exists())
-            if(!targetFile.mkdirs())
+        if (!targetFile.exists())
+            if (!targetFile.mkdirs())
                 throw new CreateFileException();
         targetFile = new File(
                 path,
                 task.getTitle() + " " + userCode +
                         originalFilename.substring(originalFilename.lastIndexOf('.'))
         );
-        if(!targetFile.exists())
-            if(!targetFile.createNewFile())
+        if (!targetFile.exists())
+            if (!targetFile.createNewFile())
                 throw new CreateFileException();
         file.transferTo(targetFile);
 

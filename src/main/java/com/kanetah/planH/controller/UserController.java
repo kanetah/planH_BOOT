@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 @RestController
@@ -33,7 +34,7 @@ public class UserController {
                 userService.getTask(
                         Long.valueOf(from),
                         Long.valueOf(to),
-                        userCode
+                        Long.valueOf(userCode)
                 ).toArray();
     }
 
