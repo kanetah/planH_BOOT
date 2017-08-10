@@ -13,7 +13,7 @@ public class TaskInfo {
     private String content;
     private Date deadline;
     private Date submitDate;
-    private String submitFilePath;
+    private String submitFileName;
 
     public TaskInfo(Task task, Submit submit) {
         this.taskId = task.getId();
@@ -24,10 +24,10 @@ public class TaskInfo {
 
         if(submit != null) {
             this.submitDate = submit.getSubmitDate();
-            this.submitFilePath = submit.getSubmitFilePath();
+            this.submitFileName = submit.getSubmitFileName();
         } else {
             this.submitDate = null;
-            this.submitFilePath = null;
+            this.submitFileName = null;
         }
     }
 
@@ -55,7 +55,7 @@ public class TaskInfo {
         return submitDate;
     }
 
-    public String getSubmitFilePath() {
-        return submitFilePath;
+    public String getSubmitFileName() {
+        return submitFileName;
     }
 }

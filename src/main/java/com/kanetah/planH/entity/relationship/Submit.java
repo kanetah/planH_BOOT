@@ -20,19 +20,16 @@ public class Submit extends BaseRelationshipEntity {
     @EndNode
     private Task task;
     private Date submitDate;
-    private String submitFilePath = null;
+    private String submitFileName = null;
 
     {
         this.submitDate = new Date();
     }
 
-    public Submit(User user, Task task) {
+    public Submit(User user, Task task, String submitFileName) {
         this.user = user;
         this.task = task;
-    }
-
-    public void setSubmitFilePath(String submitFilePath) {
-        this.submitFilePath = submitFilePath;
+        this.submitFileName = submitFileName;
     }
 
     public void addSubmitName(String name) {
@@ -55,7 +52,7 @@ public class Submit extends BaseRelationshipEntity {
         return submitDate;
     }
 
-    public String getSubmitFilePath() {
-        return submitFilePath;
+    public String getSubmitFileName() {
+        return submitFileName;
     }
 }

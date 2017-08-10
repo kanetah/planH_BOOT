@@ -11,4 +11,6 @@ public interface UserRepository
     long findUserCodeByUserName(String userName);
 
     User findByUserName(String userName);
+
+    User findByUserCode(long userCode);
 }

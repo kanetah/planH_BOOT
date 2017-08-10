@@ -25,7 +25,7 @@ $(document).ready(function () {
                     body.append('<br>');
                     body.append('submit: ' + elem.submit);
                     body.append('<br>');
-                    body.append('path: ' + elem.path);
+                    body.append('name: ' + elem.name);
                     body.append('<hr>');
                     body.append(
                         '<button class = "submit" id = "task' + idx +

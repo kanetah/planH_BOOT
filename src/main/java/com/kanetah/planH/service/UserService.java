@@ -1,6 +1,8 @@
 package com.kanetah.planH.service;
 
 import com.kanetah.planH.entity.node.Task;
+import com.kanetah.planH.entity.node.User;
+import com.kanetah.planH.entity.relationship.Submit;
 import com.kanetah.planH.info.TaskInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +27,7 @@ public class UserService {
     public List<Map<String, Object>> getTask(long form, long to, String userCode) {
 
         List<TaskInfo> taskInfos = new ArrayList<>();
-        //fixme
+        //fixme 推荐算法
         Iterator<Task> iterator = repositoryService.taskRepository.findAll().iterator();
         iterator.forEachRemaining(e ->
                 taskInfos.add(new TaskInfo(e, null)));
@@ -42,7 +44,7 @@ public class UserService {
             infoMap.put("content", taskInfo.getContent());
             infoMap.put("deadline", taskInfo.getDeadline());
             infoMap.put("submit", taskInfo.getSubmitDate());
-            infoMap.put("path", taskInfo.getSubmitFilePath());
+            infoMap.put("name", taskInfo.getSubmitFileName());
             ajaxList.add(infoMap);
         }
 
@@ -51,19 +53,32 @@ public class UserService {
 
     public Map<String, Object> submitTask(long userCode, Long taskId, MultipartFile file)
             throws IOException {
-        System.out.println(userCode);
-        System.out.println(taskId);
-        System.out.println(file.getSize());
 
-        System.out.println("开始");
-        String path = "D:/temp/aaa";
-        String fileName = file.getOriginalFilename();
-        System.out.println(path);
-        File targetFile = new File(path, fileName);
+        Task task = repositoryService.taskRepository.findOne(taskId);
+        User user = repositoryService.userRepository.findByUserCode(userCode);
+
+        String originalFilename = file.getOriginalFilename();
+        String path = "D:/temp/" + task.getSubject();
+        File targetFile = new File(path);
+        if(!targetFile.exists())
+            if(!targetFile.mkdirs())
+                throw new CreateFileException();
+        targetFile = new File(
+                path,
+                task.getTitle() + " " + userCode +
+                        originalFilename.substring(originalFilename.lastIndexOf('.'))
+        );
         if(!targetFile.exists())
             if(!targetFile.createNewFile())
                 throw new CreateFileException();
         file.transferTo(targetFile);
+
+        Submit submit = new Submit(
+                user,
+                task,
+                originalFilename
+        );
+        repositoryService.submitRepository.save(submit);
 
         Map<String, Object> map = new HashMap<>();
         map.put("status", "patched");
