@@ -31,6 +31,7 @@ public class UserService {
         for (i = 0; i < taskInfos.size(); ++i) {
             taskInfo = taskInfos.get(i);
             HashMap<String, Object> infoMap = new HashMap<>();
+            infoMap.put("taskId", taskInfo.getTaskId());
             infoMap.put("subject", taskInfo.getSubject());
             infoMap.put("title", taskInfo.getTitle());
             infoMap.put("content", taskInfo.getContent());

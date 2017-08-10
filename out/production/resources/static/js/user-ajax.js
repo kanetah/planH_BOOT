@@ -13,6 +13,8 @@ $(document).ready(function () {
                 $.each(data, function (idx, elem) {
                     body.append('task:' + idx);
                     body.append('<hr>');
+                    body.append('taskId: ' + elem.taskId);
+                    body.append('<hr>');
                     body.append('subject: ' + elem.subject);
                     body.append('<br>');
                     body.append('title: ' + elem.title);
@@ -26,12 +28,26 @@ $(document).ready(function () {
                     body.append('path: ' + elem.path);
                     body.append('<hr>');
                     body.append(
-                        '<button class = "pose" id = "task' + idx + '">提交</button>');
+                        '<button class = "submit" id = "task' + idx +
+                        '" name = "' + elem.taskId + '">提交</button>');
                     body.append('<hr>');
                 });
 
-                $('.pose').click(function () {
-                    alert('poi' + this.id);
+                $('.submit').click(function () {
+                    var uploadForm = $('#upload');
+                    uploadForm.find('> [name = "taskId"]').val(this.name);
+                    var formData = new FormData(uploadForm[0]);
+
+                    $.ajaxPlanH({
+                        url: "/task/patch",
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (date) {
+                            alert(date.status)
+                        }
+                    })
                 });
             }
         })

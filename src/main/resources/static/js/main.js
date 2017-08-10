@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>');
+    window.jQuery || document.getElementById("body").appendChild(document.createTextNode('<script src="js/vendor/jquery.min.js"><\/script>'));
     $('body').append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
 
     var global = {};
@@ -10,10 +10,16 @@ $(document).ready(function () {
 
         if (args.url === undefined)
             args.url = '/';
+        if (args.type === undefined)
+            args.type = 'POST';
+        if (args.async === undefined)
+            args.async = true;
         if (args.data === undefined)
             args.data = {
                 'default': 'default'
             };
+        if (args.dataType === undefined)
+            args.dataType = "json";
         if (args.success === undefined)
             args.success = function (data) {
                 alert(data)
@@ -28,16 +34,14 @@ $(document).ready(function () {
             };
 
         args.url = global.path_prefix_for_role + args.url;
-        args.data._csrf = $("meta[name='_csrf']").attr("content");
 
-        $.ajax({
-            url: args.url,
-            type: 'POST',
-            data: args.data,
-            dataType: "json",
-            success: args.success,
-            error: args.error
-        })
+        var token = $("meta[name='_csrf']").attr("content");
+        if (args.data instanceof FormData)
+            args.data.append("_csrf", token);
+        else
+            args.data._csrf = token;
+
+        $.ajax(args);
     };
 
     $.ajaxPlanH({

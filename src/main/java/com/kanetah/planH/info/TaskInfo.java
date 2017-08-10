@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class TaskInfo {
 
+    private Long taskId;
     private String subject;
     private String title;
     private String content;
@@ -15,6 +16,7 @@ public class TaskInfo {
     private String submitFilePath;
 
     public TaskInfo(Task task, Submit submit) {
+        this.taskId = task.getId();
         this.subject = task.getSubject();
         this.title = task.getTitle();
         this.content = task.getContent();
@@ -27,6 +29,10 @@ public class TaskInfo {
             this.submitDate = null;
             this.submitFilePath = null;
         }
+    }
+
+    public Long getTaskId() {
+        return taskId;
     }
 
     public String getSubject() {

@@ -8,18 +8,27 @@
 
 <body>
 <h3>USER</h3>
-<br />
+<br/>
 <form th:action="@{logout}" method="post">
     <input type="submit" value="注销">
 </form>
 
 <div>
-    <label for="from">开始</label><input id="from">
-    <label for="to">结束</label><input id="to">
+    <label for="from">开始</label><input id="from" value="2">
+    <label for="to">结束</label><input id="to" value="3">
     <button id="task">获取</button>
 </div>
 
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<div>
+    <form id="upload">
+        <!--<label>指定文件名：<input name="filename"/></label>-->
+        <label>上传文件：<input type="file" name="file"/></label>
+        <!--<input type="hidden" name="userCode"/>-->
+        <input type="hidden" name="taskId"/>
+    </form>
+</div>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 
