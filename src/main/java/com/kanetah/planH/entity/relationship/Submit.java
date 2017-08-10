@@ -26,6 +26,9 @@ public class Submit extends BaseRelationshipEntity {
         this.submitDate = new Date();
     }
 
+    public Submit() {
+    }
+
     public Submit(User user, Task task, String submitFileName) {
         this.user = user;
         this.task = task;

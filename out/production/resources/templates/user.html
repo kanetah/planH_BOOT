@@ -4,32 +4,34 @@
     <meta name="_csrf" th:content="${_csrf.token}" content=""/>
     <meta charset="UTF-8">
     <title>USER</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/user.css">
 </head>
 
 <body>
-<h3>USER</h3>
-<br/>
-<form th:action="@{logout}" method="post">
-    <input type="submit" value="注销">
-</form>
 
-<div>
-    <label for="from">开始</label><input id="from" value="2">
-    <label for="to">结束</label><input id="to" value="3">
-    <button id="task">获取</button>
-</div>
+<main>
+    <h3>USER</h3>
+    <br/>
+    <button id="logout">注销</button>
 
-<div>
-    <form id="upload">
-        <!--<label>指定文件名：<input name="filename"/></label>-->
-        <label>上传文件：<input type="file" name="file"/></label>
-        <!--<input type="hidden" name="userCode"/>-->
-        <input type="hidden" name="taskId"/>
-    </form>
-</div>
+    <div>
+        <label for="from">开始</label><input id="from" value="2">
+        <label for="to">结束</label><input id="to" value="3">
+        <button id="task">获取</button>
+    </div>
 
-<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+    <div>
+        <form id="upload">
+            <!--<label>指定文件名：<input name="filename"/></label>-->
+            <label>上传文件：<input type="file" name="file"/></label>
+            <!--<input type="hidden" name="userCode"/>-->
+            <input type="hidden" name="taskId"/>
+        </form>
+    </div>
+</main>
+
 <script src="js/main.js"></script>
 </body>
-
 </html>

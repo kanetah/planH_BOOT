@@ -42,8 +42,6 @@ $(document).ready(function () {
                         url: "/task/patch",
                         data: formData,
                         cache: false,
-                        contentType: false,
-                        processData: false,
                         success: function (date) {
                             alert(date.status)
                         }

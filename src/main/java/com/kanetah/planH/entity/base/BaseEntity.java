@@ -10,6 +10,9 @@ public class BaseEntity {
     @GraphId
     protected Long id;
 
+    public BaseEntity() {
+    }
+
     public Long getId() {
         return id;
     }

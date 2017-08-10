@@ -5,6 +5,7 @@ import com.kanetah.planH.entity.node.User;
 import com.kanetah.planH.entity.relationship.Submit;
 import com.kanetah.planH.info.TaskInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,6 +19,8 @@ import java.util.*;
 public class UserService {
 
     private final RepositoryService repositoryService;
+    @Value(value = "${planH.attribute.userPatchFileStorePath}")
+    private String storePath;
 
     @Autowired
     public UserService(RepositoryService repositoryService) {
@@ -58,7 +61,7 @@ public class UserService {
         User user = repositoryService.userRepository.findByUserCode(userCode);
 
         String originalFilename = file.getOriginalFilename();
-        String path = "D:/temp/" + task.getSubject();
+        String path = storePath + "/" + task.getSubject();
         File targetFile = new File(path);
         if(!targetFile.exists())
             if(!targetFile.mkdirs())
@@ -73,11 +76,7 @@ public class UserService {
                 throw new CreateFileException();
         file.transferTo(targetFile);
 
-        Submit submit = new Submit(
-                user,
-                task,
-                originalFilename
-        );
+        Submit submit = new Submit(user, task, originalFilename);
         repositoryService.submitRepository.save(submit);
 
         Map<String, Object> map = new HashMap<>();

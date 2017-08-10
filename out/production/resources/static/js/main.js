@@ -10,21 +10,21 @@ $(document).ready(function () {
 
         if (args.url === undefined)
             args.url = '/';
+        if (args.const_url === undefined)
+            args.url = global.path_prefix_for_role + args.url;
+        else
+            args.url = args.const_url;
         if (args.type === undefined)
             args.type = 'POST';
         if (args.async === undefined)
             args.async = true;
         if (args.data === undefined)
             args.data = {
-                'default': 'default'
+                'data': 'undefined'
             };
         if (args.dataType === undefined)
             args.dataType = "json";
-        if (args.success === undefined)
-            args.success = function (data) {
-                alert(data)
-            };
-        if (args.error === undefined)
+        if (args.error === undefined && args.complete === undefined)
             args.error = function (XMLHttpRequest, textStatus, errorThrown) {
                 alert(
                     "XMLHttpRequest: " + XMLHttpRequest + "\n" +
@@ -33,11 +33,12 @@ $(document).ready(function () {
                 )
             };
 
-        args.url = global.path_prefix_for_role + args.url;
-
         var token = $("meta[name='_csrf']").attr("content");
-        if (args.data instanceof FormData)
+        if (args.data instanceof FormData) {
             args.data.append("_csrf", token);
+            args.contentType = false;
+            args.processData = false;
+        }
         else
             args.data._csrf = token;
 
@@ -45,20 +46,30 @@ $(document).ready(function () {
     };
 
     $.ajaxPlanH({
-        url: '/role/get',
+        const_url: '/role/get',
         success: function (data) {
-            window.role = data.role;
+            var body = $('body');
+            global.role = data.role;
 
-            if (window.role === 'ADMIN') {
-                $('body').append('<script src="js/admin-ajax.js"><\/script>');
+            if (global.role === 'ADMIN') {
+                body.append('<script src="js/admin.js"><\/script>');
+                body.append('<script src="js/admin-ajax.js"><\/script>');
                 global.path_prefix_for_role = '/admin';
-            }
-            else if (window.role === 'USER') {
-                $('body').append('<script src="js/user-ajax.js"><\/script>');
+            } else if (global.role === 'USER') {
+                body.append('<script src="js/user.js"><\/script>');
+                body.append('<script src="js/user-ajax.js"><\/script>');
                 global.path_prefix_for_role = '/user/' + $.cookie('userCode');
-            }
-            else
+            } else
                 alert('Role Error')
         }
+    });
+
+    $('#logout').click(function () {
+        $.ajaxPlanH({
+            const_url: '/logout',
+            complete: function () {
+                window.location.reload();
+            }
+        })
     });
 });
