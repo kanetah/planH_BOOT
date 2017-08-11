@@ -3,6 +3,7 @@ package kanetah.planH.service;
 import kanetah.planH.entity.node.Task;
 import kanetah.planH.entity.node.User;
 import kanetah.planH.entity.relationship.Submit;
+import kanetah.planH.info.Info;
 import kanetah.planH.info.TaskInfo;
 import kanetah.planH.info.TaskInfoAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,16 @@ public class UserService {
     private final RepositoryService repositoryService;
     @Value(value = "${planH.attribute.userPatchFileStorePath}")
     private String storePath;
+    @Autowired
+    private Info info;
 
     @Autowired
-    public UserService(RepositoryService repositoryService) {
+    public UserService(
+            RepositoryService repositoryService,
+            Info info
+    ) {
         this.repositoryService = repositoryService;
+        this.info = info;
     }
 
     public List<Map<String, Object>> getTask(long form, long to, long userCode) {
@@ -38,10 +45,10 @@ public class UserService {
 
         List<Map<String, Object>> ajaxList = new ArrayList<>();
         TaskInfo[] taskInfo = new TaskInfo[1];
-        taskInfos.forEach(info -> {
-            taskInfo[0] = info;
+        taskInfos.forEach(task -> {
+            taskInfo[0] = task;
             HashMap<String, Object> infoMap = new HashMap<>();
-            TaskInfoAttribute.AllTaskInfoAttribute.forEach(attribute ->
+            info.getEnumList(task.getClass()).forEach(attribute ->
                     infoMap.put(
                             attribute.getValue(),
                             attribute.invokeMargetMethod(taskInfo[0])

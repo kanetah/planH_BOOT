@@ -2,82 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74ef58f9-fa90-4d02-b374-af45f0254ed3" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/PlanHApplication.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/config/MvcConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/config/SecurityConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/controller/AuxiliaryAjaxController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/controller/UserController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/controller/UserPageController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/controller/adminController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/controller/indexController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/base/BaseEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/base/BaseRelationshipEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/node/Role.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/node/Task.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/node/TaskRoot.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/node/User.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/node/UserRoot.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/relationship/Authority.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/relationship/Submit.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/relationship/SubordinateTask.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/entity/relationship/SubordinateUser.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/info/TaskInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/AuthorityRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/RoleRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/SubmitRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/SubordinateTaskRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/SubordinateUserRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/TaskRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/TaskRootRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/UserRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/repository/UserRootRepository.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/AdminService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/RepositoryService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/RoleViewService$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/RoleViewService$UserRoleException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/RoleViewService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/UserLoginService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/UserService$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/UserService$CreateFileException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/com/kanetah/planH/service/UserService.class" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/Info.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoAttributeTemplate" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoEnumInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/kane.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/kane.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/PlanHApplication.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/PlanHApplication.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/config/MvcConfig.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/config/MvcConfig.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/config/SecurityConfig.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/config/SecurityConfig.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/controller/AdminController.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/controller/AdminController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/controller/AuxiliaryAjaxController.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/controller/AuxiliaryAjaxController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/controller/IndexController.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/controller/IndexController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/controller/UserController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/controller/UserPageController.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/controller/UserPageController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/base/BaseEntity.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/base/BaseEntity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/base/BaseRelationshipEntity.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/base/BaseRelationshipEntity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/node/Role.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/node/Role.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/node/Task.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/node/Task.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/node/TaskRoot.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/node/TaskRoot.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/node/User.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/node/User.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/node/UserRoot.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/node/UserRoot.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/relationship/Authority.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/relationship/Authority.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/relationship/Submit.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/relationship/Submit.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/relationship/SubordinateTask.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/relationship/SubordinateTask.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/entity/relationship/SubordinateUser.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/entity/relationship/SubordinateUser.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/info/DynamicEnumFactory.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/DynamicEnumFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/info/InfoEnumAddable.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoEnumAddable.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/info/TaskInfo.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/info/TaskInfoAttribute.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfoAttribute.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/AuthorityRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/AuthorityRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/RoleRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/RoleRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/SubmitRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/SubmitRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/SubordinateTaskRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/SubordinateTaskRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/SubordinateUserRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/SubordinateUserRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/TaskRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/TaskRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/TaskRootRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/TaskRootRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/UserRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/UserRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/UserRootRepository.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/repository/UserRootRepository.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/service/AdminService.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/service/AdminService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/service/RepositoryService.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/service/RepositoryService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/service/RoleViewService.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/service/RoleViewService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/service/UserLoginService.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/service/UserLoginService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/kanetah/planH/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/service/UserService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfoAttribute.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfoAttribute.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kanetah/planH/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/service/UserService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -123,48 +54,29 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="TaskInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-661">
-              <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskInfoAttribute.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfoAttribute.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="14" column="35" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="JavaScript File" />
         <option value="CSS File" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>async</find>
+      <find>TaskInfoAttribute</find>
+      <find>TaskInfo</find>
     </findStrings>
+    <replaceStrings>
+      <replace>&quot;&quot;&quot;InfoAttributeTemplate&quot;&quot;&quot;</replace>
+      <replace>&quot;&quot;&quot;OriginClassName&quot;&quot;&quot;</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -526,8 +438,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/SubordinateTaskRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/SubmitRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kanetah/planH/service/RepositoryService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/AuthorityRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/kanetah/planH/repository/RoleRepository.java" />
@@ -571,7 +481,14 @@
         <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/config/SecurityConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/service/RepositoryService.java" />
         <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/service/AdminService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoEnumAddable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoEnumInterface.java" />
+        <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoEnum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/info/Info.java" />
         <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfoAttribute.java" />
+        <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoAttributeTemplate" />
+        <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/info/JavaStringCompiler.java" />
       </list>
     </option>
   </component>
@@ -808,12 +725,13 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="getSubmitFilePath&#9;null&#9;null&#10;async&#9;PSI&#9;JAVA://javax.websocket.RemoteEndpoint.Async&#10;XMLHttp&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="String&#9;FILE&#9;file://C:/Users/kane/Downloads/compiler-master/src/main/java/com/itranswarp/compiler/JavaStringCompiler.java&#10;TaskInfoAttribute&#9;PSI&#9;JAVA://kanetah.planH.info.TaskInfoAttribute&#10;getSubmitFilePath&#9;null&#9;null&#10;async&#9;PSI&#9;JAVA://javax.websocket.RemoteEndpoint.Async&#10;XMLHttp&#9;null&#9;null" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../WSproject" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\project\planH_BOOT\src\main\java\kanetah\planH\info" />
       <recent name="D:\project\planH_BOOT\src\main\resources\static\css" />
       <recent name="D:\project\planH_BOOT\src\main\resources\static\js\vendor" />
     </key>
@@ -831,6 +749,25 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.PlanHApplication">
+    <configuration name="Info" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="kanetah.planH.info.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="kanetah.planH.info.Info" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="planH_BOOT_main" />
+      <envs />
+    </configuration>
     <configuration name="PlanHApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -922,9 +859,14 @@
       <properties />
       <listeners />
     </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Spring Boot.PlanHApplication" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Info" />
+    </list>
     <recent_temporary>
-      <list size="1">
+      <list size="2">
         <item index="0" class="java.lang.String" itemvalue="Spring Boot.PlanHApplication" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Info" />
       </list>
     </recent_temporary>
   </component>
@@ -947,7 +889,7 @@
       <workItem from="1502280343064" duration="8776000" />
       <workItem from="1502337084512" duration="15187000" />
       <workItem from="1502362975678" duration="15281000" />
-      <workItem from="1502427037472" duration="9954000" />
+      <workItem from="1502427037472" duration="17437000" />
     </task>
     <task id="LOCAL-00001" summary="fix spring mvc return ajax">
       <created>1502284874744</created>
@@ -1005,11 +947,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502433729689</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="refactor package">
+      <created>1502437486716</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1502437486716</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62086000" />
+    <option name="totallyTimeSpent" value="69569000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1022,7 +971,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32764506" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1038,7 +986,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2526998" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2526998" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1072,7 +1020,8 @@
     <MESSAGE value="now patch file is done" />
     <MESSAGE value="reflect test" />
     <MESSAGE value="dynamic enum" />
-    <option name="LAST_COMMIT_MESSAGE" value="dynamic enum" />
+    <MESSAGE value="refactor package" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1083,57 +1032,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.neo4j/neo4j-ogm-core/2.1.2/62e6bfb4983c94cdf10e7bddd518b4a52bfceedc/neo4j-ogm-core-2.1.2-sources.jar!/org/neo4j/ogm/context/GraphEntityMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.neo4j/neo4j-ogm-core/2.1.2/62e6bfb4983c94cdf10e7bddd518b4a52bfceedc/neo4j-ogm-core-2.1.2-sources.jar!/org/neo4j/ogm/entity/io/EntityFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/entity/base/BaseEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="12" column="25" lean-forward="false" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/entity/base/BaseRelationshipEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/entity/node/Role.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#760#761#0" expanded="false" />
-            <element signature="e#801#802#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/entity/node/TaskRoot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/entity/node/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1319,6 +1217,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1374,77 +1273,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/reflect/Field.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1146">
-          <caret line="564" column="15" lean-forward="false" selection-start-line="564" selection-start-column="15" selection-end-line="564" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5226">
-          <caret line="118" column="19" lean-forward="false" selection-start-line="118" selection-start-column="19" selection-end-line="118" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="6" column="52" lean-forward="true" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoEnumAddable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/DynamicEnumFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3098">
-          <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#391#421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/compiler-master/src/main/java/com/itranswarp/compiler/JavaStringCompiler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/compiler-master/src/main/java/com/itranswarp/compiler/MemoryClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/compiler-master/src/main/java/com/itranswarp/compiler/MemoryJavaFileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-538">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/reflect/Method.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
@@ -1458,7 +1286,7 @@
         <state relative-caret-position="576">
           <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1496,7 +1324,7 @@
         <state relative-caret-position="396">
           <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1511,13 +1339,140 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfoAttribute.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/SuppressWarnings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="53" column="18" lean-forward="false" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="54" column="22" lean-forward="false" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Class.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="118" column="19" lean-forward="false" selection-start-line="118" selection-start-column="19" selection-end-line="118" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoEnumInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/reflect/Field.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8682">
+          <caret line="62" column="6" lean-forward="false" selection-start-line="62" selection-start-column="6" selection-end-line="62" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/DynamicEnumFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="16" column="34" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#391#421#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoEnumAddable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
-          <caret line="14" column="35" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="35" />
+          <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/Info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/TaskInfoAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#484#724#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/InfoAttributeTemplate">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/compiler-master/src/main/java/com/itranswarp/compiler/JavaStringCompiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="10" column="48" lean-forward="false" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/compiler-master/src/main/java/com/itranswarp/compiler/MemoryClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/compiler-master/src/main/java/com/itranswarp/compiler/MemoryJavaFileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2569">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/info/JavaStringCompiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
