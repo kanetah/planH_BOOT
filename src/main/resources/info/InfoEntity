@@ -1,0 +1,12 @@
+[
+  {
+    "class": "TaskInfo",
+    "taskId": "java.lang.Long",
+    "subject": "java.lang.String",
+    "title": "java.lang.String",
+    "content": "java.lang.String",
+    "deadline": "java.util.Date",
+    "submitDate": "java.util.Date",
+    "submitFileName": "java.lang.String"
+  }
+]

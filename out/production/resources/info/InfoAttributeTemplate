@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public enum TaskInfoAttribute implements InfoEnumInterface {
+public enum """OriginClassName"""Attribute implements InfoEnumInterface {
     ;
 
-    public static final List<InfoEnumInterface> AllTaskInfoAttribute = new ArrayList<>();
+    public static final List<InfoEnumInterface> All"""OriginClassName"""Attribute = new ArrayList<>();
     private static final Class targetClass;
 
     static {
@@ -25,11 +25,12 @@ public enum TaskInfoAttribute implements InfoEnumInterface {
             targetClass = Class.forName(targetClassName);
 
             for (Field field : targetClass.getDeclaredFields())
-                InfoEnumAddable.addInfoEnum(TaskInfoAttribute.class, field.getName());
+                kanetah.planH.info.InfoEnumAddable.addInfoEnum(
+                    """OriginClassName"""Attribute.class, field.getName());
 
-            AllTaskInfoAttribute.addAll(
+            All"""OriginClassName"""Attribute.addAll(
                     Arrays.asList(
-                            TaskInfoAttribute.values()
+                            """OriginClassName"""Attribute.values()
                     ));
 
         } catch (ClassNotFoundException e) {
@@ -40,7 +41,7 @@ public enum TaskInfoAttribute implements InfoEnumInterface {
     private final String value;
     private final String method;
 
-    TaskInfoAttribute(String value) {
+    """OriginClassName"""Attribute(String value) {
         this.value = value;
         this.method = "get" + value.substring(0, 1).toUpperCase() + value.substring(1);
     }

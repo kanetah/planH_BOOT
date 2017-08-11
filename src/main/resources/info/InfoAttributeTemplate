@@ -25,7 +25,8 @@ public enum """OriginClassName"""Attribute implements InfoEnumInterface {
             targetClass = Class.forName(targetClassName);
 
             for (Field field : targetClass.getDeclaredFields())
-                InfoEnumAddable.addInfoEnum("""OriginClassName"""Attribute.class, field.getName());
+                kanetah.planH.info.InfoEnumAddable.addInfoEnum(
+                    """OriginClassName"""Attribute.class, field.getName());
 
             All"""OriginClassName"""Attribute.addAll(
                     Arrays.asList(

@@ -1,6 +1,6 @@
 package kanetah.planH.info;
 
-interface InfoEnumAddable {
+public interface InfoEnumAddable {
     static <T extends Enum<?>> void addInfoEnum(
             Class<T> enumType,
             String value

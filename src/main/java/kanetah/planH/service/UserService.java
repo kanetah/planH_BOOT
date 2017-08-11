@@ -5,7 +5,6 @@ import kanetah.planH.entity.node.User;
 import kanetah.planH.entity.relationship.Submit;
 import kanetah.planH.info.Info;
 import kanetah.planH.info.TaskInfo;
-import kanetah.planH.info.TaskInfoAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ import java.util.*;
 public class UserService {
 
     private final RepositoryService repositoryService;
-    @Value(value = "${planH.attribute.userPatchFileStorePath}")
+    @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
     @Autowired
     private Info info;
