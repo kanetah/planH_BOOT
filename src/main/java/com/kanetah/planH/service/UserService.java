@@ -1,5 +1,7 @@
 package com.kanetah.planH.service;
 
+import static com.kanetah.planH.info.TaskInfoAttribute.*;
+
 import com.kanetah.planH.entity.node.Task;
 import com.kanetah.planH.entity.node.User;
 import com.kanetah.planH.entity.relationship.Submit;
@@ -14,8 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
-import static com.kanetah.planH.info.TaskInfoAttribute.AllTaskInfoAttribute;
 
 @Service
 public class UserService {
