@@ -1,5 +1,6 @@
 package kanetah.planH.info;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,16 +11,20 @@ import org.springframework.util.FileCopyUtils;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.Reader;
 import java.lang.reflect.Field;
 import java.util.*;
 
 @Component
 public class Info implements InitializingBean {
 
+    @Value(value = "${kanetah.planH.infoEntityJsonPath}")
+    private String infoEntityJsonPath;
     @Value(value = "${kanetah.planH.infoAttributeTemplatePath}")
-    private String enumFilePath;
+    private String infoAttributeTemplatePath;
     private final JavaStringCompiler compiler;
     private Map<String, Class<?>> classMap = new HashMap<>();
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
     public Info(JavaStringCompiler compiler) {
@@ -28,13 +33,28 @@ public class Info implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Resource resource = new ClassPathResource(enumFilePath);
-        File infoAttributeTemplateFile = resource.getFile();
-        FileReader reader = new FileReader(infoAttributeTemplateFile);
-        String contentString = FileCopyUtils.copyToString(reader);
+
+        Resource resource = new ClassPathResource(infoEntityJsonPath);
+        File infoEntityJsonFile = resource.getFile();
+        Map jsonData =
+                mapper.readValue(infoEntityJsonFile, Map.class);
+        jsonData.forEach((className,value) -> {
+            if(value instanceof Map)
+                ((Map) value).forEach((sk, sv) -> {
+                    if(sv instanceof Iterable)
+                        ((Iterable) sv).forEach(
+                                System.out::println
+                        );
+                });
+        });
 
         // fixme
         List<String> classNameList = Collections.singletonList("TaskInfo");
+
+        resource = new ClassPathResource(infoAttributeTemplatePath);
+        File infoAttributeTemplateFile = resource.getFile();
+        Reader reader = new FileReader(infoAttributeTemplateFile);
+        String contentString = FileCopyUtils.copyToString(reader);
 
         classNameList.forEach(name -> {
             String classString = contentString.replace(

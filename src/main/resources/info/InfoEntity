@@ -1,12 +1,15 @@
-[
-  {
-    "class": "TaskInfo",
-    "taskId": "java.lang.Long",
-    "subject": "java.lang.String",
-    "title": "java.lang.String",
-    "content": "java.lang.String",
-    "deadline": "java.util.Date",
-    "submitDate": "java.util.Date",
-    "submitFileName": "java.lang.String"
+{
+  "kanetah.planH.info.TaskInfo": {
+    "kanetah.planH.entity.node.Task": [
+      "taskId",
+      "subject",
+      "title",
+      "content",
+      "deadline"
+    ],
+    "kanetah.planH.entity.relationship.Submit": [
+      "submitDate",
+      "submitFileName"
+    ]
   }
-]
+}
