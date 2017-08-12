@@ -94,7 +94,8 @@ public class Info implements InitializingBean {
                         ((Iterable) originClassField).forEach(fieldName -> {
                                     try {
                                         Class clazz = Class.forName(originClassNameString);
-                                        Field field = clazz.getDeclaredField(fieldName.toString());
+                                        Field field = getDeclaredField(clazz, fieldName.toString());
+                                        assert field != null;
                                         String fieldTypeNameString = field.getType().getTypeName();
                                         String fieldNameString = field.getName();
 
@@ -147,8 +148,8 @@ public class Info implements InitializingBean {
                     "\"\"\"argsInit\"\"\"", initString[0]
             );
             codeString[0] = codeString[0].replaceAll(
-                    "\"\"\"InfoEntityFieldTemplate\"\"\"|\"\"\"InfoEntityMethodTemplate\"\"\""
-                    , "");
+                    "\"\"\"InfoEntityFieldTemplate\"\"\"|\"\"\"InfoEntityMethodTemplate\"\"\"",
+                    "");
 
             String finalTargetClassName = "kanetah.planH.info." + targetClassName[0];
             Map<String, byte[]> results = compiler.compile(
@@ -207,7 +208,19 @@ public class Info implements InitializingBean {
         }
     }
 
-    public static Class<?> forName(String name) {
+    static Class<?> forName(String name) {
         return classMap.get(name);
+    }
+
+    private static Field getDeclaredField(Class<?> clazz, String fieldName) {
+        Field field;
+        for (; clazz != Object.class; clazz = clazz.getSuperclass()) {
+            try {
+                field = clazz.getDeclaredField(fieldName);
+                return field;
+            } catch (Exception ignored) {
+            }
+        }
+        return null;
     }
 }

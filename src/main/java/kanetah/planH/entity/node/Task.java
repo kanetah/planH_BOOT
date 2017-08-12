@@ -11,7 +11,7 @@ import java.util.Date;
 @NodeEntity
 public class Task extends BaseEntity {
 
-    private Long taskId = id;
+    private Long taskId;
     private String subject;
     private String title;
     private String content;
@@ -30,7 +30,7 @@ public class Task extends BaseEntity {
     }
 
     public Long getTaskId() {
-        return taskId;
+        return id;
     }
 
     public String getSubject() {

@@ -36,7 +36,7 @@ public class UserService {
     public List<Map<String, Object>> getTask(long form, long to, long userCode) {
 
         List<Object> taskInfoList = new ArrayList<>();
-        //fixme 推荐算法
+        // fixme 推荐算法
         Iterator<Task> iterator = repositoryService.taskRepository.findAll().iterator();
         iterator.forEachRemaining(e ->
                 taskInfoList.add(info.byOrigin(e, new Submit())));

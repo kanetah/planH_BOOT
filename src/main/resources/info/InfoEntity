@@ -1,7 +1,7 @@
 {
   "TaskInfo": {
     "kanetah.planH.entity.node.Task": [
-      "taskId",
+      "id",
       "subject",
       "title",
       "content",
