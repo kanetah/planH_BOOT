@@ -4,7 +4,6 @@ import kanetah.planH.entity.node.Task;
 import kanetah.planH.entity.node.User;
 import kanetah.planH.entity.relationship.Submit;
 import kanetah.planH.info.Info;
-import kanetah.planH.info.TaskInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -36,15 +35,15 @@ public class UserService {
 
     public List<Map<String, Object>> getTask(long form, long to, long userCode) {
 
-        List<TaskInfo> taskInfos = new ArrayList<>();
+        List<Object> taskInfoList = new ArrayList<>();
         //fixme 推荐算法
         Iterator<Task> iterator = repositoryService.taskRepository.findAll().iterator();
         iterator.forEachRemaining(e ->
-                taskInfos.add(new TaskInfo(e, null)));
+                taskInfoList.add(info.byOrigin(e, new Submit())));
 
         List<Map<String, Object>> ajaxList = new ArrayList<>();
-        TaskInfo[] taskInfo = new TaskInfo[1];
-        taskInfos.forEach(task -> {
+        Object[] taskInfo = new Object[1];
+        taskInfoList.forEach(task -> {
             taskInfo[0] = task;
             HashMap<String, Object> infoMap = new HashMap<>();
             info.getEnumList(task.getClass()).forEach(attribute ->

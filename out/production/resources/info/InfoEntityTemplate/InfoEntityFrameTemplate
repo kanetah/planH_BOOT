@@ -1,0 +1,21 @@
+package """packageName""";
+
+public class """className""" {
+
+"""InfoEntityFieldTemplate"""
+
+    public """className"""() {
+    }
+
+    public static Object create(
+            """argsNameValue"""
+    ) {
+        """className""" instance = new """className"""();
+
+"""argsInit"""
+
+        return instance;
+    }
+
+"""InfoEntityMethodTemplate"""
+}

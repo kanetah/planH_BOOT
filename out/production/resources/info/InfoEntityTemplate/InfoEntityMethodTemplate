@@ -1,0 +1,2 @@
+
+    public """fieldClassName""" get"""FieldName"""() { return """fieldName"""; }

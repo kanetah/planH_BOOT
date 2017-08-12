@@ -144,9 +144,8 @@ class MemoryClassLoader extends URLClassLoader {
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         byte[] buf = classBytes.get(name);
-        if (buf == null) {
-            return super.findClass(name);
-        }
+        if (buf == null)
+            return Info.forName(name);
         classBytes.remove(name);
         return defineClass(name, buf, 0, buf.length);
     }
