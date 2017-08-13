@@ -1,45 +1,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login planH</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PlanH - 登录</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body onload='document.f.username.focus();'>
 
-<div th:if="${param.error}">
-    用户名或密码错
-</div>
-<div th:if="${param.logout}">
-    您已注销成功
-</div>
+<body>
+<main>
+    <div id="content">
+        <form name='login_form' th:action='@{/login}' method='POST'>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon">
+                    学号
+                </span>
+                <input name='password' type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <br>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon">
+                    姓名
+                </span>
+                <input name='username' type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <br>
+            <input id="login_btn" name="submit" type="submit"
+                   value="登陆 PlanH" class="btn btn-default btn-lg"/>
+            <br>
+            <div id="remember_div">
+                <input id="remember_me" checked name="remember-me" type="checkbox"/>
+                <label for="remember_me">下次自动登录</label>
+            </div>
+        </form>
+    </div>
+</main>
 
-<div id="content">
-    <form name='f' th:action='@{/login}' method='POST'>
-        <table>
-            <tr>
-                <td>User:</td>
-                <td>
-                    <input type='text' name='username' value=''/></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type='text' name='password'/></td>
-            </tr>
-            <!--<tr>-->
-                <!--<td>Password:</td>-->
-                <!--<td><input type='password' name='password'/></td>-->
-            <!--</tr>-->
-            <tr>
-                <td colspan='2'>
-                    <input id="remember_me" name="remember-me" type="checkbox"/>
-                    <label for="remember_me" class="inline">Remember me</label></td>
-            </tr>
-            <tr>
-                <td colspan='2'>
-                    <input name="submit" type="submit" value="登陆"/></td>
-            </tr>
-        </table>
-    </form>
-</div>
-
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>
