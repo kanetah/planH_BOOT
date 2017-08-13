@@ -1,3 +1,20 @@
 body {
     background: whitesmoke;
 }
+
+.nav {
+    width: 70%;
+    margin: auto;
+}
+
+.nav-pills > li > a,
+.nav-pills > li > button {
+    border-radius: 0;
+}
+
+#logout {
+    color: red;
+    height: 40px;
+    border-color: red;
+    background-color: rgba(0, 0, 0, 0);
+}

@@ -29,14 +29,15 @@ public class Info implements InitializingBean {
     private String infoEntityMethodTemplatePath;
     @Value(value = "${kanetah.planH.infoAttributeTemplatePath}")
     private String infoAttributeTemplatePath;
+    @Value(value = "${kanetah.planH.infoClassPackageName}")
+    private String infoClassPackageName;
+    @Value(value = "${kanetah.planH.infoClassEnumSuffix}")
+    private String infoClassEnumSuffix;
     private final JavaStringCompiler compiler;
     private static Map<String, Class<?>> classMap = new HashMap<>();
     private Map<String, String> classTokenMap = new HashMap<>();
     private List<String> infoClassNameList = new ArrayList<>();
     private ObjectMapper mapper = new ObjectMapper();
-
-    private String packageName = "kanetah.planH.info";
-    private String enumSuffix = "Attribute";
 
     @Autowired
     public Info(JavaStringCompiler compiler) {
@@ -74,7 +75,7 @@ public class Info implements InitializingBean {
             codeString[0] = frameString.replace("\"\"\"className\"\"\"", targetClassName[0]);
             String[] initString = {""};
             final String[] argsNameValue = {""};
-            codeString[0] = codeString[0].replace("\"\"\"packageName\"\"\"", packageName);
+            codeString[0] = codeString[0].replace("\"\"\"packageName\"\"\"", infoClassPackageName);
             String[] tokenString = {""};
 
             if (value instanceof Map)
@@ -169,10 +170,10 @@ public class Info implements InitializingBean {
             String classString = contentString.replace(
                     "\"\"\"OriginClassName\"\"\"", name);
             Map<String, byte[]> results = compiler.compile(
-                    name + enumSuffix + ".java", classString);
+                    name + infoClassEnumSuffix + ".java", classString);
             Class<?> clazz = compiler.loadClass(
-                    packageName + "." + name + enumSuffix, results);
-            classMap.put(packageName + "." + name + enumSuffix, clazz);
+                    infoClassPackageName + "." + name + infoClassEnumSuffix, results);
+            classMap.put(infoClassPackageName + "." + name + infoClassEnumSuffix, clazz);
         });
     }
 
@@ -199,7 +200,7 @@ public class Info implements InitializingBean {
     public List<InfoEnumInterface> getEnumList(Class targetClass) {
         try {
             String className = targetClass.getName();
-            className += enumSuffix;
+            className += infoClassEnumSuffix;
             Field field = forName(className).
                     getField("All" + className.substring(className.lastIndexOf('.') + 1));
             return (List<InfoEnumInterface>) field.get(null);
@@ -208,7 +209,7 @@ public class Info implements InitializingBean {
         }
     }
 
-    static Class<?> forName(String name) {
+    public static Class<?> forName(String name) {
         return classMap.get(name);
     }
 

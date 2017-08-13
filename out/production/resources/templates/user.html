@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_csrf" th:content="${_csrf.token}" content=""/>
-    <meta charset="UTF-8">
-    <title>USER</title>
+
+    <title>Plan-H</title>
+
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/user.css">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/user.css" rel="stylesheet">
 </head>
 
 <body>
-
 <main>
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active">
+            <a href="">Plan-H</a>
+        </li>
+        <li role="presentation">
+            <a href="https://github.com/kanetah/planH_BOOT">code</a>
+        </li>
+        <li role="presentation" class="navbar-right">
+            <button id="logout" class="btn btn-default">注销</button>
+        </li>
+    </ul>
     <h3>USER</h3>
     <br/>
-    <button id="logout">注销</button>
-
-    <div>
-        <label for="from">开始</label><input id="from" value="2">
-        <label for="to">结束</label><input id="to" value="3">
-        <button id="task">获取</button>
-    </div>
-
-    <div>
-        <form id="upload">
-            <!--<label>指定文件名：<input name="filename"/></label>-->
-            <label>上传文件：<input type="file" name="file"/></label>
-            <!--<input type="hidden" name="userCode"/>-->
-            <input type="hidden" name="taskId"/>
-        </form>
-    </div>
+    <button id="task">获取</button>
 </main>
+
+<div>
+    <form id="upload">
+        <label>上传文件：<input type="file" name="file"/></label>
+        <input type="hidden" name="taskId"/>
+    </form>
+</div>
 
 <script src="js/main.js"></script>
 </body>

@@ -1,10 +1,12 @@
 $(document).ready(function () {
 
-    window.jQuery || document.getElementById("body").appendChild(document.createTextNode('<script src="js/vendor/jquery.min.js"><\/script>'));
-    $('body').append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
-
     var global = {};
     global.path_prefix_for_role = "";
+
+    window.jQuery || document.getElementById("body").appendChild(document.createTextNode('<script src="js/vendor/jquery.min.js"><\/script>'));
+    global.body = $('body');
+    global.body.append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
+    global.body.append('<script src="js/vendor/bootstrap.min.js"></script>');
 
     $.ajaxPlanH = function (args) {
 
@@ -48,7 +50,7 @@ $(document).ready(function () {
     $.ajaxPlanH({
         const_url: '/role/get',
         success: function (data) {
-            var body = $('body');
+            var body = global.body;
             global.role = data.role;
 
             if (global.role === 'ADMIN') {
