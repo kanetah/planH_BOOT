@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -53,5 +54,21 @@ public class UserController {
                         Long.valueOf(taskId),
                         file
                 );
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/username",
+            method = RequestMethod.POST
+    )
+    public Map<String, Object> readUsername(
+            @PathVariable(value = "userCode") String userCode
+    ) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(
+                "username",
+                userService.getUserName(Long.valueOf(userCode))
+        );
+        return map;
     }
 }

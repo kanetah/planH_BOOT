@@ -20,6 +20,6 @@ public class UserPageController {
         cookie.setPath("/");
         response.addCookie(cookie);
 
-        return "user";
+        return "user_x";
     }
 }

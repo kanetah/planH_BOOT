@@ -1,6 +1,14 @@
 $(document).ready(function () {
 
+    $.ajaxPlanH({
+        url: '/username',
+        success: function (data) {
+            $('#username').html('hi, ' + data.username);
+        }
+    });
+
     $('#task').click(function () {
+        alert("poi");
         $.ajaxPlanH({
             url: '/task/fetch',
             data: {

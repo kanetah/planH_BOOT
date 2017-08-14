@@ -1,19 +1,19 @@
 $(document).ready(function () {
 
-    var global = {};
-    global.path_prefix_for_role = "";
+    $.global = {};
+    $.global.path_prefix_for_role = "";
 
     window.jQuery || document.getElementById("body").appendChild(document.createTextNode('<script src="js/vendor/jquery.min.js"><\/script>'));
-    global.body = $('body');
-    global.body.append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
-    global.body.append('<script src="js/vendor/bootstrap.min.js"></script>');
+    $.global.body = $('body');
+    $.global.body.append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
+    $.global.body.append('<script src="js/vendor/bootstrap.min.js"></script>');
 
     $.ajaxPlanH = function (args) {
 
         if (args.url === undefined)
             args.url = '/';
         if (args.const_url === undefined)
-            args.url = global.path_prefix_for_role + args.url;
+            args.url = $.global.path_prefix_for_role + args.url;
         else
             args.url = args.const_url;
         if (args.type === undefined)
@@ -50,17 +50,17 @@ $(document).ready(function () {
     $.ajaxPlanH({
         const_url: '/role/get',
         success: function (data) {
-            var body = global.body;
-            global.role = data.role;
+            var body = $.global.body;
+            $.global.role = data.role;
 
-            if (global.role === 'ADMIN') {
+            if ($.global.role === 'ADMIN') {
+                $.global.path_prefix_for_role = '/admin';
                 body.append('<script src="js/admin.js"><\/script>');
                 body.append('<script src="js/admin-ajax.js"><\/script>');
-                global.path_prefix_for_role = '/admin';
-            } else if (global.role === 'USER') {
+            } else if ($.global.role === 'USER') {
+                $.global.path_prefix_for_role = '/user/' + $.cookie('userCode');
                 body.append('<script src="js/user.js"><\/script>');
                 body.append('<script src="js/user-ajax.js"><\/script>');
-                global.path_prefix_for_role = '/user/' + $.cookie('userCode');
             } else
                 alert('Role Error')
         }

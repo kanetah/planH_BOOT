@@ -5,6 +5,7 @@ body {
 .nav {
     width: 70%;
     margin: auto;
+    background: rebeccapurple;
 }
 
 .nav-pills > li > a,
@@ -12,9 +13,10 @@ body {
     border-radius: 0;
 }
 
+.navbar-right {
+    margin: 0;
+}
+
 #logout {
-    color: red;
-    height: 40px;
-    border-color: red;
-    background-color: rgba(0, 0, 0, 0);
+    /*height: 40px;*/
 }

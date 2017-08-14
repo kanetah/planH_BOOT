@@ -33,6 +33,11 @@ public class UserService {
         this.info = info;
     }
 
+    public String getUserName(long userCode) {
+        return
+                repositoryService.userRepository.findByUserCode(userCode).getUserName();
+    }
+
     public List<Map<String, Object>> getTask(long form, long to, long userCode) {
 
         List<Object> taskInfoList = new ArrayList<>();
