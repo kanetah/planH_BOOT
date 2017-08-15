@@ -44,8 +44,9 @@ $(document).ready(function () {
     };
 
     function showTask(node) {
-        if(node === null)
+        if(node === null) {
             return;
+        }
         node.fadeIn(700, function () {
             showTask(tasks.pop());
         });
