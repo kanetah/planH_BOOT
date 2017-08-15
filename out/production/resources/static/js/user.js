@@ -7,17 +7,47 @@ $(document).ready(function () {
         $(window).on('scroll', materialKitDemo.checkScrollForParallax);
     }
 
-     $.addTask = function (task_data) {
-        alert(task_data.id);
+    var tasks = [];
+    $.addTask = function (task_data, field_name) {
+
         var template = $('.template').clone(true);
         template.removeClass('template');
         template.css('display', 'none');
-        var nodes = template.childNodes;
-        $.each(nodes, function (idx, e) {
-            if(e.class.contains('task_id'))
-                e.html(e.html() + task_data.id);
+        $('.wrapper').append(template);
+
+        template.find('.task_id > span').html(task_data[field_name[0]['field']]);
+        template.find('.subject > li > a').append(task_data[field_name[1]['field']]);
+        template.find('.title').html(task_data[field_name[2]['field']]);
+        template.find('.content > p').html(task_data[field_name[3]['field']]);
+        template.find('.deadline > .date').html(task_data[field_name[4]['field']].substr(0, 10));
+        var label = template.find('.deadline > .label');
+        if(
+            task_data[field_name[6]['field']] === undefined ||
+            task_data[field_name[6]['field']] === null ||
+            task_data[field_name[6]['field']] === ""
+        ) {
+            label.addClass('label-danger');
+            label.html('未提交');
+        } else {
+            label.addClass('label-info');
+            label.html('已提交');
+            var file = template.find('.submitFileName');
+            file.html(task_data[field_name[6]['field']]);
+            file.attr('title', '已提交于：' + task_data[field_name[5]['field']]);
+        }
+
+        tasks.unshift(template);
+    };
+
+    $.showBuffTask = function () {
+        showTask(tasks.pop());
+    };
+
+    function showTask(node) {
+        if(node === null)
+            return;
+        node.fadeIn(700, function () {
+            showTask(tasks.pop());
         });
-        $('.wrapper').appendChild(template);
-        template.fadeIn(9000);
-     }
+    }
 });

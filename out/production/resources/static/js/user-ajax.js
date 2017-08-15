@@ -20,19 +20,9 @@ $(document).ready(function () {
                     const_url: '/info/task',
                     success: function (info_fields) {
                         $.each(data, function (idx, elem) {
-                            // alert(elem.id);
-                            $.addTask(elem);
-                            body.append('task:' + idx);
-                            body.append('<hr>');
-                            $.each(info_fields, function (i, e) {
-                                body.append(e['field'] + ': ' + elem[e['field']]);
-                                body.append('<br>');
-                            });
-                            body.append(
-                                '<button class = "submit" id = "task' + idx +
-                                '" name = "' + elem.id + '">提交</button>');
-                            body.append('<hr>');
+                            $.addTask(elem, info_fields);
                         });
+                        $.showBuffTask();
 
                         $('.submit').click(function () {
                             var uploadForm = $('#upload');
