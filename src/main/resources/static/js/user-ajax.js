@@ -8,7 +8,6 @@ $(document).ready(function () {
     });
 
     $('#task').click(function () {
-        alert("poi");
         $.ajaxPlanH({
             url: '/task/fetch',
             data: {
@@ -16,11 +15,13 @@ $(document).ready(function () {
                 to: 5
             },
             success: function (data) {
-                var body = $('body');
+                var body = $('.wrapper');
                 $.ajaxPlanH({
                     const_url: '/info/task',
                     success: function (info_fields) {
                         $.each(data, function (idx, elem) {
+                            // alert(elem.id);
+                            $.addTask(elem);
                             body.append('task:' + idx);
                             body.append('<hr>');
                             $.each(info_fields, function (i, e) {

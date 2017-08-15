@@ -8,10 +8,77 @@
 
 .task {
     margin: 20px auto auto;
-    background-color: #CC66CC;
+    background-color: white;
     width: 50%;
     height: 300px;
-    color: white;
 }
 
+.task_id {
+    color: #90a4ae;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
 
+.subject {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+.title {
+    font-size: x-large;
+    font-weight: bold;
+    position: absolute;
+    top: 3%;
+    left: 10%;
+}
+
+.content {
+    width: 60%;
+    height: 50%;
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    border-radius: 5px;
+    border: 3px solid #99CCFF;
+}
+
+.content > p {
+    margin: 5px;
+    text-indent: 1.5em;
+    word-wrap: break-word
+}
+
+.submit {
+    position: absolute;
+    bottom: 7%;
+    right: 5%;
+}
+
+.deadline {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+}
+
+.submitFileName {
+    position: absolute;
+    bottom: 40%;
+    right: 12%;
+}
+
+.template {
+    display: none;
+}
+
+.copyright {
+    cursor: default !important;
+}
+
+.kane,
+.kane:hover {
+    text-decoration: none;
+    cursor: default !important;
+    color: black !important;
+}
