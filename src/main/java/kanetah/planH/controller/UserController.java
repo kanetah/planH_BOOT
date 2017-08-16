@@ -29,7 +29,8 @@ public class UserController {
             @PathVariable(value = "userCode") String userCode,
             @RequestParam(value = "from") String from,
             @RequestParam(value = "to") String to
-    ) {
+    ) throws InterruptedException {
+        Thread.sleep(1000);// fixme
         return
                 userService.getTask(
                         Long.valueOf(from),

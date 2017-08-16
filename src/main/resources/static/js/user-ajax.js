@@ -38,6 +38,8 @@ $(document).ready(function () {
                                 }
                             })
                         });
+
+                        $.setLoadingFlag(false);
                     }
                 });
             }

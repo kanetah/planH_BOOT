@@ -12,7 +12,8 @@ $(document).ready(function () {
 
         var template = $('.template').clone(true);
         template.removeClass('template');
-        template.css('display', 'none');
+        template.css('top', '50px');
+        template.css('opacity', '0');
         $('.wrapper').append(template);
 
         template.find('.task_id > span').html(task_data[field_name[0]['field']]);
@@ -21,7 +22,7 @@ $(document).ready(function () {
         template.find('.content > p').html(task_data[field_name[3]['field']]);
         template.find('.deadline > .date').html(task_data[field_name[4]['field']].substr(0, 10));
         var label = template.find('.deadline > .label');
-        if(
+        if (
             task_data[field_name[6]['field']] === undefined ||
             task_data[field_name[6]['field']] === null ||
             task_data[field_name[6]['field']] === ""
@@ -44,11 +45,32 @@ $(document).ready(function () {
     };
 
     function showTask(node) {
-        if(node === null) {
+        if (node === null) {
             return;
         }
-        node.fadeIn(700, function () {
+
+        node.animate({
+            top: 0,
+            opacity: 1.0
+        }, 1000, "swing", function () {
             showTask(tasks.pop());
-        });
+        })
+    }
+
+    var loadingFlag = false;
+    $(window).scroll(function () {
+        var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+        if(scrollBottom < 15 && loadingFlag === false){
+            $.setLoadingFlag(true);
+            $('#task').trigger('click');
+        }
+    });
+
+    $.setLoadingFlag = function (val) {
+        if(val)
+            $('#spinnerHolder').append('<div class="spinner"></div>');
+        else
+            $('.spinner').remove();
+        loadingFlag = val;
     }
 });

@@ -25,6 +25,7 @@
           crossorigin="anonymous">
     <link href="css/material-kit.css" rel="stylesheet"/>
 
+    <link href="css/spinner.css" rel="stylesheet"/>
     <link href="css/main_x.css" rel="stylesheet"/>
     <link href="css/user_x.css" rel="stylesheet"/>
 </head>
@@ -34,12 +35,10 @@
 <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
     <div class="container">
         <div class="navbar-header">
-            <a href="#">
+            <a href="">
                 <div class="logo-container">
                     <div class="logo">
-                        <img src="img/logo.png" alt="Creative Tim Logo" rel="tooltip"
-                             title="头像"
-                             data-placement="bottom" data-html="true">
+                        <img src="img/logo.png" data-html="true">
                     </div>
                     <div class="brand" id="username">
                         hello :)
@@ -51,35 +50,36 @@
         <div class="collapse navbar-collapse" id="navigation-index">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="components-documentation.html" target="_blank">
-                        <i class="material-icons">dashboard</i> Components
+                    <a rel="tooltip" title="前往教务处" data-placement="top"
+                       href="http://jwc.xmut.edu.cn/" target="_blank">
+                        <i class="fa fa-graduation-cap"></i>&nbsp;&nbsp;XMUT
                     </a>
                 </li>
                 <li>
-                    <a href="#/material-kit-pro/presentation.html?ref=utp-freebie" target="_blank">
-                        <i class="material-icons">unarchive</i> Upgrade to PRO
+                    <a rel="tooltip" title="前往GitHub" data-placement="top"
+                       href="https://github.com/kanetah/planH_BOOT" target="_blank">
+                        <i class="fa fa-github"></i>&nbsp;reading code
                     </a>
                 </li>
                 <li>
-                    <a rel="tooltip" title="Follow us on Twitter" data-placement="bottom"
-                       href="https://twitter.com/CreativeTim" target="_blank"
-                       class="btn btn-white btn-simple btn-just-icon">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-                <li>
-                    <a rel="tooltip" title="Like us on Facebook" data-placement="bottom"
-                       href="https://www.facebook.com/CreativeTim" target="_blank"
-                       class="btn btn-white btn-simple btn-just-icon">
-                        <i class="fa fa-facebook-square"></i>
-                    </a>
-                </li>
-                <li>
-                    <a id="task"
-                       rel="tooltip" title="Follow us on Instagram" data-placement="bottom"
+                    <a rel="tooltip" title="设置" data-placement="bottom"
                        target="_blank"
                        class="btn btn-white btn-simple btn-just-icon">
-                        <i class="fa fa-instagram"></i>
+                        <i class="glyphicon glyphicon-cog"></i>
+                    </a>
+                </li>
+                <li>
+                    <a rel="tooltip" title="加载更多" data-placement="bottom"
+                       id="task" target="_blank"
+                       class="btn btn-white btn-simple btn-just-icon">
+                        <i class="glyphicon glyphicon-refresh"></i>
+                    </a>
+                </li>
+                <li>
+                    <a rel="tooltip" title="注销" data-placement="bottom"
+                       id="logout" target="_blank"
+                       class="btn btn-white btn-simple btn-just-icon">
+                        <i class="glyphicon glyphicon-log-out"></i>
                     </a>
                 </li>
             </ul>
@@ -102,7 +102,7 @@
         </div>
     </div>
 
-    <div class="main main-raised task">
+    <div class="main main-raised task" style="display: none">
         <span class="task_id">task_id: 110</span>
         <ul class="nav nav-pills subject" role="tablist">
             <li>
@@ -154,6 +154,8 @@
     </div>
 </div>
 
+<div id="spinnerHolder">
+</div>
 
 <footer class="footer">
     <div class="container">
