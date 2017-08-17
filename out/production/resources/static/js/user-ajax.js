@@ -7,14 +7,31 @@ $(document).ready(function () {
         }
     });
 
+    $.task_index = 0;
+
     $('#task').click(function () {
+
+        if($.task_index === null)
+            return;
+        $.setLoadingFlag(true);
+
         $.ajaxPlanH({
             url: '/task/fetch',
             data: {
-                from: 0,
-                to: 5
+                from: $.task_index,
+                to: $.task_index + 5
             },
             success: function (data) {
+                if(data.length === 0){
+                    $.task_index = null;
+                    $.setLoadingFlag(false);
+                    $('#task').attr({"disabled":"disabled"});
+                    $('.wrapper').append(
+                        '<br/>---&nbsp;&nbsp;没有了&nbsp;&nbsp;---'
+                    );
+                    return;
+                }
+                $.task_index += 5;
                 $.ajaxPlanH({
                     const_url: '/info/task',
                     success: function (info_fields) {
@@ -24,8 +41,9 @@ $(document).ready(function () {
                         $.showBuffTask();
 
                         $('.submit').click(function () {
-                            var uploadForm = $('#upload');
+                            var uploadForm = $('#task_form_' + this.name);
                             uploadForm.find('> [name = "taskId"]').val(this.name);
+                            uploadForm.find('> [name = "file"]').click();
                             var formData = new FormData(uploadForm[0]);
 
                             $.ajaxPlanH({
@@ -37,7 +55,6 @@ $(document).ready(function () {
                                 }
                             })
                         });
-
                         $.setLoadingFlag(false);
                     }
                 });

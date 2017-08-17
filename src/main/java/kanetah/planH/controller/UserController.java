@@ -30,11 +30,10 @@ public class UserController {
             @RequestParam(value = "from") String from,
             @RequestParam(value = "to") String to
     ) throws InterruptedException {
-        Thread.sleep(1000);// fixme
         return
                 userService.getTask(
-                        Long.valueOf(from),
-                        Long.valueOf(to),
+                        Integer.valueOf(from),
+                        Integer.valueOf(to),
                         Long.valueOf(userCode)
                 ).toArray();
     }

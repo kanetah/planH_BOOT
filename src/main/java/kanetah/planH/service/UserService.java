@@ -23,6 +23,7 @@ public class UserService {
     private String storePath;
     @Autowired
     private Info info;
+    private Map<Long, List<Task>> BuffMap = new HashMap<>();
 
     @Autowired
     public UserService(
@@ -39,10 +40,9 @@ public class UserService {
                         .findByUserCode(userCode).getUserName();
     }
 
-    public List<Map<String, Object>> getTask(long form, long to, long userCode) {
+    public List<Map<String, Object>> getTask(int from, int to, long userCode) {
 
         List<Object> taskInfoList = new ArrayList<>();
-        // fixme 推荐算法
         Map<Long, Submit> submitMap = new HashMap<>();
         repositoryService.submitRepository
                 .findAllByUser_UserCode(userCode).forEach(submit ->
@@ -50,18 +50,41 @@ public class UserService {
                         submit.getTask().getTaskId(),
                         submit
                 ));
-        Iterator<Task> iterator = repositoryService.taskRepository.findAll().iterator();
-        iterator.forEachRemaining(task -> {
-                    Submit submit = submitMap.get(task.getTaskId());
-                    if (submit == null) submit = new Submit();
-                    taskInfoList.add(
-                            info.byOrigin(
-                                    task,
-                                    submit
-                            )
-                    );
-                }
-        );
+
+        if (from == 0) {
+            Stack<Task> taskStack = new Stack<>();
+            List<Task> submitted = new ArrayList<>();
+            repositoryService.taskRepository
+                    .findAll().iterator()
+                    .forEachRemaining(task -> {
+                        if (submitMap.get(task.getTaskId()) == null)
+                            taskStack.push(task);
+                        else
+                            submitted.add(task);
+                    });
+            List<Task> taskList = new ArrayList<>();
+            while (!taskStack.empty())
+                taskList.add(taskStack.pop());
+            taskList.addAll(submitted);
+            BuffMap.put(userCode, taskList);
+        }
+
+        List<Task> tasks = BuffMap.get(userCode);
+        for (int i = from; i < to; ++i) {
+            try {
+                Task task = tasks.get(i);
+                Submit submit = submitMap.get(task.getTaskId());
+                if (submit == null) submit = new Submit();
+                taskInfoList.add(
+                        info.byOrigin(
+                                task,
+                                submit
+                        )
+                );
+            } catch (IndexOutOfBoundsException e) {
+                break;
+            }
+        }
 
         List<Map<String, Object>> ajaxList = new ArrayList<>();
         Object[] taskInfo = new Object[1];

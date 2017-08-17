@@ -12,11 +12,12 @@ $(document).ready(function () {
 
         var template = $('.template').clone(true);
         template.removeClass('template');
-        template.css('top', '50px');
+        template.css('top', '100px');
         template.css('opacity', '0');
         $('.wrapper').append(template);
 
         template.find('.task_id > span').html(task_data[field_name[0]['field']]);
+        template.find('.submit').attr("name", task_data[field_name[0]['field']]);
         template.find('.subject > li > a').append(task_data[field_name[1]['field']]);
         template.find('.title').html(task_data[field_name[2]['field']]);
         template.find('.content > p').html(task_data[field_name[3]['field']]);
@@ -29,10 +30,23 @@ $(document).ready(function () {
         ) {
             label.addClass('label-danger');
             label.html('未提交');
+            template.find('.submitFileName > a').attr(
+                'id',
+                'task_a_' + task_data[field_name[0]['field']]
+            );
+            template.find('.submitFileName > form').attr(
+                'id',
+                'task_form_' + task_data[field_name[0]['field']]
+            );
+            template.find('.submitFileName > form > [type = "file"]').attr(
+                'id',
+                task_data[field_name[0]['field']]
+            );
         } else {
             label.addClass('label-info');
             label.html('已提交');
-            var file = template.find('.submitFileName');
+            template.find('.submitFileName > form').css('display', 'none');
+            var file = template.find('.submitFileName > a');
             file.html(task_data[field_name[6]['field']]);
         }
 
@@ -44,14 +58,15 @@ $(document).ready(function () {
     };
 
     function showTask(node) {
-        if (node === null) {
+
+        if (node === null || node === undefined) {
             return;
         }
 
         node.animate({
             top: 0,
             opacity: 1.0
-        }, 1000, "swing", function () {
+        }, 700, "swing", function () {
             showTask(tasks.pop());
         })
     }
@@ -59,17 +74,30 @@ $(document).ready(function () {
     var loadingFlag = false;
     $(window).scroll(function () {
         var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-        if(scrollBottom < 15 && loadingFlag === false){
-            $.setLoadingFlag(true);
+        if (scrollBottom < 15 && loadingFlag === false) {
             $('#task').trigger('click');
         }
     });
 
     $.setLoadingFlag = function (val) {
-        if(val)
+        if (val)
             $('#spinnerHolder').append('<div class="spinner"></div>');
         else
             $('.spinner').remove();
         loadingFlag = val;
-    }
+    };
+
+    $('[type = "file"]').on('change', function () {
+        $('#task_a_' + this.id)
+            .html(
+                this.value.substr(
+                    this.value.lastIndexOf('\\') + 1
+                )
+            );
+    });
+
+    $('.submitFileName > form').on('click', function () {
+        // $('#' + this.id).html('');
+        // $('#' + this.id).find('[type = "file"]').val('');
+    });
 });
