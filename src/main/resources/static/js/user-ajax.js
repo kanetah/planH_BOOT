@@ -43,7 +43,6 @@ $(document).ready(function () {
                         $('.submit').click(function () {
                             var uploadForm = $('#task_form_' + this.name);
                             uploadForm.find('> [name = "taskId"]').val(this.name);
-                            // uploadForm.find('> [name = "file"]').click();
                             var formData = new FormData(uploadForm[0]);
 
                             $.ajaxPlanH({

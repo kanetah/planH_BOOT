@@ -45,7 +45,7 @@ $(document).ready(function () {
         } else {
             label.addClass('label-info');
             label.html('已提交');
-            template.find('.submitFileName > form').css('display', 'none');
+            // template.find('.submitFileName > form').css('display', 'none');
             var file = template.find('.submitFileName > a');
             file.html(task_data[field_name[6]['field']]);
         }
@@ -87,17 +87,17 @@ $(document).ready(function () {
         loadingFlag = val;
     };
 
+    var firstChange = true;
     $('[type = "file"]').on('change', function () {
+        if (firstChange) {
+            $('[name = "' + this.id + '"]').removeAttr("disabled");
+            firstChange = false;
+        }
         $('#task_a_' + this.id)
             .html(
                 this.value.substr(
                     this.value.lastIndexOf('\\') + 1
                 )
             );
-    });
-
-    $('.submitFileName > form').on('click', function () {
-        // $('#' + this.id).html('');
-        // $('#' + this.id).find('[type = "file"]').val('');
     });
 });

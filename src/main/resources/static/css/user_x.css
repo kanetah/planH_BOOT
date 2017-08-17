@@ -55,10 +55,12 @@
     word-wrap: break-word
 }
 
-.submit {
+.submit_div {
     position: absolute;
     bottom: 7%;
-    right: 5%;
+    right: 0;
+    width: 30%;
+    text-align: center;
 }
 
 .deadline {
