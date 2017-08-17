@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SubmitRepository
         extends PagingAndSortingRepository<Submit, Long> {
+    Submit findByUser_UserCodeAndTask_TaskId(long userCode, long taskId);
+
+    Iterable<Submit> findAllByUser_UserCode(long userCode);
 }

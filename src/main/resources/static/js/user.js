@@ -34,7 +34,6 @@ $(document).ready(function () {
             label.html('已提交');
             var file = template.find('.submitFileName');
             file.html(task_data[field_name[6]['field']]);
-            file.attr('title', '已提交于：' + task_data[field_name[5]['field']]);
         }
 
         tasks.unshift(template);

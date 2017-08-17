@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @EntityScan("kanetah.planH.entity")
 public class PlanHApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		SpringApplication.run(PlanHApplication.class, args);
-	}
+        SpringApplication.run(PlanHApplication.class, args);
+    }
 }

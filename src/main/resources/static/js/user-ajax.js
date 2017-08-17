@@ -15,7 +15,6 @@ $(document).ready(function () {
                 to: 5
             },
             success: function (data) {
-                var body = $('.wrapper');
                 $.ajaxPlanH({
                     const_url: '/info/task',
                     success: function (info_fields) {

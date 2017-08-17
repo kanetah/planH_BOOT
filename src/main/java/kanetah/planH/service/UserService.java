@@ -35,16 +35,33 @@ public class UserService {
 
     public String getUserName(long userCode) {
         return
-                repositoryService.userRepository.findByUserCode(userCode).getUserName();
+                repositoryService.userRepository
+                        .findByUserCode(userCode).getUserName();
     }
 
     public List<Map<String, Object>> getTask(long form, long to, long userCode) {
 
         List<Object> taskInfoList = new ArrayList<>();
         // fixme 推荐算法
+        Map<Long, Submit> submitMap = new HashMap<>();
+        repositoryService.submitRepository
+                .findAllByUser_UserCode(userCode).forEach(submit ->
+                submitMap.put(
+                        submit.getTask().getTaskId(),
+                        submit
+                ));
         Iterator<Task> iterator = repositoryService.taskRepository.findAll().iterator();
-        iterator.forEachRemaining(e ->
-                taskInfoList.add(info.byOrigin(e, new Submit())));
+        iterator.forEachRemaining(task -> {
+                    Submit submit = submitMap.get(task.getTaskId());
+                    if (submit == null) submit = new Submit();
+                    taskInfoList.add(
+                            info.byOrigin(
+                                    task,
+                                    submit
+                            )
+                    );
+                }
+        );
 
         List<Map<String, Object>> ajaxList = new ArrayList<>();
         Object[] taskInfo = new Object[1];
@@ -84,7 +101,7 @@ public class UserService {
                 throw new CreateFileException();
         file.transferTo(targetFile);
 
-        Submit submit = new Submit(user, task, originalFilename);
+        Submit submit = new Submit(user, task, originalFilename, new Date());
         repositoryService.submitRepository.save(submit);
 
         Map<String, Object> map = new HashMap<>();
