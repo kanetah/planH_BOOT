@@ -100,4 +100,28 @@ $(document).ready(function () {
                 )
             );
     });
+
+    var arrow = $('.right-list-arrow');
+    arrow.animate({
+        right: 0,
+        opacity: 0.5
+    }, 1000, "swing");
+    arrow.click(function () {
+        $('.right-list').animate({
+            right: 0
+        }, 1000, "swing");
+        arrow.animate({
+            right: '-5%',
+            opacity: 0.0
+        }, 1000, "swing");
+    });
+    $('.right-list > span > i').click(function () {
+        $('.right-list').animate({
+            right: '-20%'
+        }, 1000, "swing");
+        arrow.animate({
+            right: 0,
+            opacity: 0.5
+        }, 1500, "swing");
+    });
 });
