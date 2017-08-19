@@ -48,6 +48,7 @@ public class UserController {
             @RequestPart(value = "file") MultipartFile file,
             @PathVariable(value = "taskId") String taskId
     ) throws IOException {
+        System.out.println("file: " + file.getName());
         return
                 userService.submitTask(
                         Long.valueOf(userCode),

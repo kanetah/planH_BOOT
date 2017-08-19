@@ -122,8 +122,6 @@ $(document).ready(function () {
 
     $.addSubmit = function (file, task_id) {
 
-        alert("poi");
-
         var template = $('.submit-template').clone(true);
         template.removeClass('submit-template');
         // template.css('top', '100px');
@@ -132,12 +130,29 @@ $(document).ready(function () {
         template.find('.loading-id').html(task_id);
         var progress_bar = template.find('> .progress > .progress-bar');
 
-        file.attr('data-url', $.global.path_prefix_for_role + '/task/patch/' + task_id);
+        // file.attr('data-url', $.global.path_prefix_for_role + '/task/patch/' + task_id);
         // file.fileupload({
         //     dataType: 'json',
         //     done: function (e, data) {
         //         alert("done");
+        //     },
+        //     progressall: function (e, data) {//设置上传进度事件的回调函数
+        //         var progress = parseInt(data.loaded / data.total * 5, 10);
+        //         progress_bar.css(
+        //             'width',
+        //             progress + '%'
+        //         );
         //     }
         // });
+        file.fileupload({
+            url: $.global.path_prefix_for_role + '/task/patch/' + task_id,
+            sequentialUploads: true
+        }).bind('fileuploadprogress', function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            progress_bar.css('width',progress + '%');
+            // progress_bar.html(progress + '%');
+        }).bind('fileuploaddone', function (e, data) {
+            alert("o_poi");
+        });
     };
 });

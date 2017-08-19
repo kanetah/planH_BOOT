@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74ef58f9-fa90-4d02-b374-af45f0254ed3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.fileupload.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.iframe-transport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.ui.widget.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/kanetah/planH/controller/UserController.class" afterPath="$PROJECT_DIR$/out/production/classes/kanetah/planH/controller/UserController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/css/user_x.css" afterPath="$PROJECT_DIR$/out/production/resources/static/css/user_x.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/js/user-ajax.js" afterPath="$PROJECT_DIR$/out/production/resources/static/js/user-ajax.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/js/user.js" afterPath="$PROJECT_DIR$/out/production/resources/static/js/user.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/templates/user_x.html" afterPath="$PROJECT_DIR$/out/production/resources/templates/user_x.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/kanetah/planH/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/kanetah/planH/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/css/user_x.css" afterPath="$PROJECT_DIR$/src/main/resources/static/css/user_x.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/user.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/user.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/user_x.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/user_x.html" />
     </list>
@@ -63,8 +59,8 @@
       <file leaf-file-name="user_x.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user_x.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
+            <state relative-caret-position="563">
+              <caret line="128" column="27" lean-forward="true" selection-start-line="128" selection-start-column="27" selection-end-line="128" selection-end-column="27" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -75,7 +71,7 @@
       <file leaf-file-name="user_x.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/user_x.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="-360">
               <caret line="182" column="7" lean-forward="false" selection-start-line="182" selection-start-column="7" selection-end-line="182" selection-end-column="7" />
               <folding />
             </state>
@@ -85,8 +81,8 @@
       <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="46" column="62" lean-forward="true" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="62" />
+            <state relative-caret-position="127">
+              <caret line="50" column="54" lean-forward="true" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -95,8 +91,8 @@
       <file leaf-file-name="user-ajax.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+            <state relative-caret-position="328">
+              <caret line="48" column="41" lean-forward="true" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
               <folding>
                 <marker date="1503146451347" expanded="true" signature="797:803" ph="&amp;nbsp;" />
                 <marker date="1503146451347" expanded="true" signature="803:809" ph="&amp;nbsp;" />
@@ -110,9 +106,21 @@
       <file leaf-file-name="user.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2232">
-              <caret line="19" column="37" lean-forward="false" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+            <state relative-caret-position="408">
+              <caret line="146" column="19" lean-forward="false" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquery.fileupload.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.fileupload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1984">
+              <caret line="133" column="73" lean-forward="false" selection-start-line="133" selection-start-column="70" selection-end-line="133" selection-end-column="73" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,6 +161,7 @@
       <find>progressall</find>
       <find>$.widget</find>
       <find>on</find>
+      <find>url</find>
       <find>addSubmit</find>
     </findStrings>
     <replaceStrings>
@@ -567,9 +576,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.fileupload.js" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.iframe-transport.js" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.ui.widget.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" />
         <option value="$PROJECT_DIR$/src/main/java/kanetah/planH/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/user_x.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/user.js" />
       </list>
     </option>
@@ -1077,7 +1086,7 @@
       <workItem from="1502887245468" duration="1361000" />
       <workItem from="1502960146324" duration="17514000" />
       <workItem from="1503041151930" duration="10161000" />
-      <workItem from="1503139518195" duration="6616000" />
+      <workItem from="1503139518195" duration="7488000" />
     </task>
     <task id="LOCAL-00001" summary="fix spring mvc return ajax">
       <created>1502284874744</created>
@@ -1191,7 +1200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1503049794451</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="try to use bootstrap fileupload">
+      <created>1503146638448</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1503146638448</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1209,7 +1225,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214763000" />
+    <option name="totallyTimeSpent" value="215635000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1280,7 +1296,8 @@
     <MESSAGE value="css" />
     <MESSAGE value="debug find submit return null" />
     <MESSAGE value="progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="progress" />
+    <MESSAGE value="try to use bootstrap fileupload" />
+    <option name="LAST_COMMIT_MESSAGE" value="try to use bootstrap fileupload" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1592,16 +1609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.fileupload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="86" column="9" lean-forward="false" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -1610,9 +1617,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="50" column="54" lean-forward="true" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/user_x.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
+        <state relative-caret-position="-360">
           <caret line="182" column="7" lean-forward="false" selection-start-line="182" selection-start-column="7" selection-end-line="182" selection-end-column="7" />
           <folding />
         </state>
@@ -1620,26 +1635,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user_x.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
+        <state relative-caret-position="563">
+          <caret line="128" column="27" lean-forward="true" selection-start-line="128" selection-start-column="27" selection-end-line="128" selection-end-column="27" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/kanetah/planH/controller/UserController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.fileupload.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="46" column="62" lean-forward="true" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="62" />
-          <folding />
+        <state relative-caret-position="1984">
+          <caret line="133" column="73" lean-forward="false" selection-start-line="133" selection-start-column="70" selection-end-line="133" selection-end-column="73" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+        <state relative-caret-position="328">
+          <caret line="48" column="41" lean-forward="true" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
           <folding>
             <marker date="1503146451347" expanded="true" signature="797:803" ph="&amp;nbsp;" />
             <marker date="1503146451347" expanded="true" signature="803:809" ph="&amp;nbsp;" />
@@ -1651,8 +1668,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2232">
-          <caret line="19" column="37" lean-forward="false" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        <state relative-caret-position="408">
+          <caret line="146" column="19" lean-forward="false" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
           <folding />
         </state>
       </provider>
