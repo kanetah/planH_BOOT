@@ -63,11 +63,6 @@
     text-align: center;
 }
 
-.submit {
-    /*position: absolute;*/
-    /*right: 5%;*/
-}
-
 .deadline {
     position: absolute;
     bottom: 10%;
@@ -118,6 +113,96 @@
 
 .template {
     display: none;
+}
+
+.right-list-arrow {
+    position: fixed;
+    top: 55%;
+    right: -5%;
+    width: 5%;
+    height: 15%;
+    background-color: gray;
+    opacity: 0.0;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    z-index: 99;
+    cursor: pointer;
+}
+
+.right-list-arrow > svg {
+    fill: whitesmoke;
+    fill-rule: evenodd;
+}
+
+.right-list {
+    position: fixed;
+    top: 170px;
+    right: -20%;
+    width: 20%;
+    height: 70%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.right-list > span > i {
+    position: relative;
+    top: 50%;
+    left: 3px;
+    cursor: pointer;
+}
+
+.right-list > .loading-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 90%;
+    background-color: whitesmoke;
+}
+
+.submit-template {
+    display: none;
+}
+
+.progress {
+    height: 15px;
+    margin-bottom: -3px;
+}
+
+.progress .progress-bar, .progress .progress-bar.progress-bar-default {
+    background-color: #337ab7;
+}
+
+.loading-box-title {
+    float: right;
+}
+
+.submit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.loading-title {
+    font-size: larger;
+    padding-left: 15px;
+}
+
+.loading-id:before {
+    content: "task_id: ";
+}
+
+.loading-id {
+    color: #90a4ae;
+    margin: 10px;
+    position: relative;
+    top: 10px;
+}
+
+.submit-template > button {
+    float: right;
 }
 
 .copyright {

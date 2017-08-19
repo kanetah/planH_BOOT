@@ -40,19 +40,22 @@ $(document).ready(function () {
                         });
                         $.showBuffTask();
 
-                        $('.submit').click(function () {
+                        $('.submit-button').click(function () {
                             var uploadForm = $('#task_form_' + this.name);
-                            uploadForm.find('> [name = "taskId"]').val(this.name);
-                            var formData = new FormData(uploadForm[0]);
-
-                            $.ajaxPlanH({
-                                url: "/task/patch",
-                                data: formData,
-                                cache: false,
-                                success: function (date) {
-                                    alert(date.status)
-                                }
-                            })
+                            // uploadForm.find('> [name = "taskId"]').val(this.name);
+                            // var formData = new FormData(uploadForm[0]);
+                            $.addSubmit(
+                                uploadForm.find('> [name = "file"]'),
+                                this.name
+                            );
+                            // $.ajaxPlanH({
+                            //     url: "/task/patch",
+                            //     data: formData,
+                            //     cache: false,
+                            //     success: function (date) {
+                            //         alert(date.status)
+                            //     }
+                            // })
                         });
                         $.setLoadingFlag(false);
                     }

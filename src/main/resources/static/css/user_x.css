@@ -163,6 +163,10 @@
     background-color: whitesmoke;
 }
 
+.submit-template {
+    display: none;
+}
+
 .progress {
     height: 15px;
     margin-bottom: -3px;
@@ -176,7 +180,7 @@
     float: right;
 }
 
-.submit-template {
+.submit {
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -186,7 +190,7 @@
     padding-left: 15px;
 }
 
-.loading-id:before{
+.loading-id:before {
     content: "task_id: ";
 }
 

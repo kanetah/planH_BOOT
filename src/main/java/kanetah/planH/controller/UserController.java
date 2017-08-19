@@ -40,13 +40,13 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(
-            value = "/task/patch",
+            value = "/task/patch/{taskId}",
             method = RequestMethod.POST
     )
     public Map<String, Object> submitTask(
             @PathVariable(value = "userCode") String userCode,
             @RequestPart(value = "file") MultipartFile file,
-            @RequestParam(value = "taskId") String taskId
+            @PathVariable(value = "taskId") String taskId
     ) throws IOException {
         return
                 userService.submitTask(
