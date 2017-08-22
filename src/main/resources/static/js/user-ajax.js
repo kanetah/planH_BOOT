@@ -3,7 +3,7 @@ $(document).ready(function () {
     $.ajaxPlanH({
         url: '/username',
         success: function (data) {
-            $('#username').html('hi, ' + data.username);
+            $('#username').html(data.username);
         }
     });
 
@@ -39,24 +39,6 @@ $(document).ready(function () {
                             $.addTask(elem, info_fields);
                         });
                         $.showBuffTask();
-
-                        $('.submit-button').click(function () {
-                            var uploadForm = $('#task_form_' + this.name);
-                            // uploadForm.find('> [name = "taskId"]').val(this.name);
-                            // var formData = new FormData(uploadForm[0]);
-                            $.addSubmit(
-                                uploadForm.find('> [name = "file"]'),
-                                this.name
-                            );
-                            // $.ajaxPlanH({
-                            //     url: "/task/patch",
-                            //     data: formData,
-                            //     cache: false,
-                            //     success: function (date) {
-                            //         alert(date.status)
-                            //     }
-                            // })
-                        });
                         $.setLoadingFlag(false);
                     }
                 });
