@@ -3,13 +3,11 @@ $(document).ready(function () {
 
     if (window_width >= 992) {
         big_image = $('.wrapper > .header');
-
         $(window).on('scroll', materialKitDemo.checkScrollForParallax);
     }
 
     var tasks = [];
     $.addTask = function (task_data, field_name) {
-
         var template = $('.template').clone(true);
         template.removeClass('template');
         template.css('top', '100px');
@@ -17,24 +15,21 @@ $(document).ready(function () {
         $('.wrapper').append(template);
 
         template.find('.task_id > span').html(task_data[field_name[0]['field']]);
-        template.find('.submit-button').attr("name", task_data[field_name[0]['field']]);
         template.find('.subject > li > a').append(task_data[field_name[1]['field']]);
         template.find('.title').html(task_data[field_name[2]['field']]);
         template.find('.content > p').html(task_data[field_name[3]['field']]);
         template.find('.deadline > .date').html(task_data[field_name[4]['field']].substr(0, 10));
         var label = template.find('.deadline > .label');
-        template.find('.submitFileName > a').attr(
-            'id',
-            'task_a_' + task_data[field_name[0]['field']]
-        );
-        template.find('.submitFileName > form').attr(
-            'id',
-            'task_form_' + task_data[field_name[0]['field']]
-        );
-        template.find('.submitFileName > form > [type = "file"]').attr(
-            'id',
-            task_data[field_name[0]['field']]
-        );
+        template.find('.submitFileName > form > [type = "file"]')
+            .on('change', function () {
+                template.find('.submit-button').removeAttr("disabled");
+                template.find('.submitFileName > a')
+                    .html(
+                        this.value.substr(
+                            this.value.lastIndexOf('\\') + 1
+                        )
+                    );
+            });
         if (
             task_data[field_name[6]['field']] === undefined ||
             task_data[field_name[6]['field']] === null ||
@@ -49,6 +44,17 @@ $(document).ready(function () {
             file.html(task_data[field_name[6]['field']]);
         }
 
+        template.find('.submit_div > .submit-button')
+            .bind("click", function (event) {
+                var uploadForm = template.find('.submitFileName > form');
+                $.addSubmit(
+                    // uploadForm.find('> [type = "file"]'),
+                    uploadForm,
+                    task_data[field_name[0]['field']]
+                );
+                event.stopPropagation();
+            });
+
         tasks.unshift(template);
     };
 
@@ -57,10 +63,8 @@ $(document).ready(function () {
     };
 
     function showNode(node) {
-
         if (node === null || node === undefined)
             return;
-
         node.animate({
             top: 0,
             opacity: 1.0
@@ -84,16 +88,6 @@ $(document).ready(function () {
             $('.spinner').remove();
         loadingFlag = val;
     };
-
-    $('[type = "file"]').on('change', function () {
-        $('[name = "' + this.id + '"]').removeAttr("disabled");
-        $('#task_a_' + this.id)
-            .html(
-                this.value.substr(
-                    this.value.lastIndexOf('\\') + 1
-                )
-            );
-    });
 
     var arrow = $('.right-list-arrow');
     arrow.animate({
@@ -120,39 +114,34 @@ $(document).ready(function () {
         }, 1500, "swing");
     });
 
-    $.addSubmit = function (file, task_id) {
+    $.addSubmit = function (form_data, task_id) {
+
+        if(arrow.css('right') !== '-5%') {
+            arrow.click();
+        }
 
         var template = $('.submit-template').clone(true);
         template.removeClass('submit-template');
-        // template.css('top', '100px');
-        // template.css('opacity', '0');
         $('.loading-box').append(template);
         template.find('.loading-id').html(task_id);
         var progress_bar = template.find('> .progress > .progress-bar');
 
-        // file.attr('data-url', $.global.path_prefix_for_role + '/task/patch/' + task_id);
-        // file.fileupload({
-        //     dataType: 'json',
-        //     done: function (e, data) {
-        //         alert("done");
-        //     },
-        //     progressall: function (e, data) {//设置上传进度事件的回调函数
-        //         var progress = parseInt(data.loaded / data.total * 5, 10);
-        //         progress_bar.css(
-        //             'width',
-        //             progress + '%'
-        //         );
-        //     }
-        // });
-        file.fileupload({
-            url: $.global.path_prefix_for_role + '/task/patch/' + task_id,
-            sequentialUploads: true
-        }).bind('fileuploadprogress', function (e, data) {
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            progress_bar.css('width',progress + '%');
-            // progress_bar.html(progress + '%');
-        }).bind('fileuploaddone', function (e, data) {
-            alert("o_poi");
+        $.ajaxPlanH({
+            url: '/task/patch/' + task_id,
+            data: new FormData(form_data[0]),
+            cache: false,
+            beforeSend: function () {
+                progress_bar.css('width', '30%');
+            },
+            success: function () {
+                progress_bar.css('width', '100%');
+            },
+            error: function () {
+                progress_bar.css('background-color', 'red');
+            },
+            complete: function () {
+                progress_bar.removeClass('active');
+            }
         });
     };
 });

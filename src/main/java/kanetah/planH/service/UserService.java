@@ -19,17 +19,15 @@ import java.util.*;
 public class UserService {
 
     private final RepositoryService repositoryService;
+    private final Info info;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
-    @Autowired
-    private Info info;
     private Map<Long, List<Task>> BuffMap = new HashMap<>();
 
     @Autowired
     public UserService(
             RepositoryService repositoryService,
-            Info info
-    ) {
+            Info info) {
         this.repositoryService = repositoryService;
         this.info = info;
     }
@@ -45,11 +43,16 @@ public class UserService {
         List<Object> taskInfoList = new ArrayList<>();
         Map<Long, Submit> submitMap = new HashMap<>();
         repositoryService.submitRepository
-                .findAllByUser_UserCode(userCode).forEach(submit ->
-                submitMap.put(
-                        submit.getTask().getTaskId(),
-                        submit
-                ));
+                .findAllByUser_UserCode(userCode).forEach(submit -> {
+            Submit oldSubmit = submitMap.get(submit.getTask().getTaskId());
+            if (oldSubmit != null)
+                if (oldSubmit.getSubmitDate().compareTo(submit.getSubmitDate()) > 0)
+                    return;
+            submitMap.put(
+                    submit.getTask().getTaskId(),
+                    submit
+            );
+        });
 
         if (from == 0) {
             Stack<Task> taskStack = new Stack<>();
@@ -109,7 +112,7 @@ public class UserService {
         User user = repositoryService.userRepository.findByUserCode(userCode);
 
         String originalFilename = file.getOriginalFilename();
-        String path = storePath + "/" + task.getSubject();
+        String path = storePath + "/" + task.getSubject() + "/" + taskId + "_" + task.getTitle();
         File targetFile = new File(path);
         if (!targetFile.exists())
             if (!targetFile.mkdirs())
@@ -133,7 +136,7 @@ public class UserService {
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-            reason = "can not create new file")
+            reason = "Can not create new file")
     private class CreateFileException extends RuntimeException {
     }
 }

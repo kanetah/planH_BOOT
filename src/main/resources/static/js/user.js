@@ -116,34 +116,32 @@ $(document).ready(function () {
 
     $.addSubmit = function (form_data, task_id) {
 
-        // var template = $('.submit-template').clone(true);
-        // template.removeClass('submit-template');
-        // $('.loading-box').append(template);
-        // template.find('.loading-id').html(task_id);
-        // var progress_bar = template.find('> .progress > .progress-bar');
+        if(arrow.css('right') !== '-5%') {
+            arrow.click();
+        }
+
+        var template = $('.submit-template').clone(true);
+        template.removeClass('submit-template');
+        $('.loading-box').append(template);
+        template.find('.loading-id').html(task_id);
+        var progress_bar = template.find('> .progress > .progress-bar');
 
         $.ajaxPlanH({
             url: '/task/patch/' + task_id,
             data: new FormData(form_data[0]),
             cache: false,
+            beforeSend: function () {
+                progress_bar.css('width', '30%');
+            },
             success: function () {
-                alert('poi')
+                progress_bar.css('width', '100%');
+            },
+            error: function () {
+                progress_bar.css('background-color', 'red');
+            },
+            complete: function () {
+                progress_bar.removeClass('active');
             }
-        })
-
-        // file.attr('data-url', $.global.path_prefix_for_role + '/task/patch/' + task_id);
-        // alert('poi');
-        // file.fileupload();
-        // alert('after');
-        // file.fileupload({
-        //     url: $.global.path_prefix_for_role + '/task/patch/' + task_id,
-        //     sequentialUploads: true
-        // }).bind('fileuploadprogress', function (e, data) {
-        //     var progress = parseInt(data.loaded / data.total * 100, 10);
-        //     progress_bar.css('width', progress + '%');
-        //     // progress_bar.html(progress + '%');
-        // }).bind('fileuploaddone', function (e, data) {
-        //     alert("o_poi");
-        // });
+        });
     };
 });
