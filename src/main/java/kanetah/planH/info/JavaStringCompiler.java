@@ -17,18 +17,35 @@ import java.util.Map;
 import javax.tools.*;
 import javax.tools.JavaCompiler.CompilationTask;
 
+/**
+ * created by kane on 2017/08/11
+ *
+ * 基于字符串的字节码编译器
+ */
 @Component
 public class JavaStringCompiler {
 
+    // java编译器
     private JavaCompiler compiler;
+    // 标准java文件管理器
     private StandardJavaFileManager stdManager;
 
+    /**
+     * 构造器
+     */
     public JavaStringCompiler() {
         this.compiler = ToolProvider.getSystemJavaCompiler();
         this.stdManager = compiler.getStandardFileManager(
                 null, null, null);
     }
 
+    /**
+     * 编译
+     *
+     * @param fileName 文件名（类名）
+     * @param source 源代码
+     * @return 字节码
+     */
     public Map<String, byte[]> compile(String fileName, String source) {
         try (MemoryJavaFileManager manager = new MemoryJavaFileManager(stdManager)) {
             JavaFileObject javaFileObject = manager.makeStringSource(fileName, source);
@@ -45,6 +62,13 @@ public class JavaStringCompiler {
         }
     }
 
+    /**
+     * 加载类
+     *
+     * @param name 类名
+     * @param classBytes 字节码
+     * @return 类对象
+     */
     public Class<?> loadClass(String name, Map<String, byte[]> classBytes) {
 
         try (MemoryClassLoader classLoader = new MemoryClassLoader(classBytes)) {

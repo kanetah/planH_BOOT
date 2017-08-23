@@ -17,11 +17,13 @@ import sun.reflect.ReflectionFactory;
  */
 class DynamicEnumFactory {
 
+    // 反射工厂
     private static ReflectionFactory reflectionFactory
             = ReflectionFactory.getReflectionFactory();
 
     /**
-     * 为枚举类添加一个枚举值
+     * 为枚举类添加一个枚举
+     * 基于反射，把枚举类的属性列表全部取出来，增加一个新的枚举以后再放回去
      *
      * @param enumType 枚举类的Class对象
      * @param enumName 被添加的枚举名
@@ -36,27 +38,29 @@ class DynamicEnumFactory {
             Class<?>[] additionalTypes,
             Object[] additionalValues
     ) {
+        // 类型检查
         if (!Enum.class.isAssignableFrom(enumType)) {
             throw new RuntimeException(
                     "class " + enumType + " is not an instance of Enum"
             );
         }
 
+        // 寻找枚举类中的"$VALUES"域，取消其默认java语言访问控制检查
         Field valuesField = null;
-        Field[] fields = enumType.getDeclaredFields();
-        for (Field field : fields) {
+        for (Field field : enumType.getDeclaredFields())
             if (field.getName().contains("$VALUES")) {
                 valuesField = field;
                 break;
             }
-        }
         AccessibleObject.setAccessible(new Field[]{valuesField}, true);
 
         try {
             assert valuesField != null;
+            // 复制原枚举
             T[] previousValues = (T[]) valuesField.get(enumType);
             List<T> values = new ArrayList<>(Arrays.asList(previousValues));
 
+            // 构造新的枚举
             T newValue = (T) makeEnum(
                     enumType,
                     enumName,
@@ -64,10 +68,13 @@ class DynamicEnumFactory {
                     additionalTypes,
                     additionalValues
             );
+            // 添加新枚举
             values.add(newValue);
+            // 重新设置枚举类的域
             setFailSafeFieldValue(
                     valuesField, null,
                     values.toArray((T[]) Array.newInstance(enumType, 0)));
+            // 清空枚举缓存
             cleanEnumCache(enumType);
 
         } catch (Exception e) {
@@ -76,6 +83,15 @@ class DynamicEnumFactory {
         }
     }
 
+    /**
+     * 无视属性修饰符向域中强制写入值
+     *
+     * @param field 被修改的域
+     * @param target 被修改的对象
+     * @param value 值
+     * @throws NoSuchFieldException 类中没有指定的域
+     * @throws IllegalAccessException 非法存取
+     */
     private static void setFailSafeFieldValue(
             Field field, Object target, Object value
     ) throws NoSuchFieldException, IllegalAccessException {
@@ -93,6 +109,14 @@ class DynamicEnumFactory {
         fa.set(target, value);
     }
 
+    /**
+     * 强制修改一个指定枚举的指定域为null
+     *
+     * @param enumClass 被修改的枚举
+     * @param fieldName 要修改的域名
+     * @throws NoSuchFieldException 类中没有指定的域
+     * @throws IllegalAccessException 非法存取
+     */
     private static void blankField(
             Class<?> enumClass, String fieldName
     ) throws NoSuchFieldException, IllegalAccessException {
@@ -106,6 +130,13 @@ class DynamicEnumFactory {
         }
     }
 
+    /**
+     * 清除枚举缓存
+     *
+     * @param enumClass 枚举类
+     * @throws NoSuchFieldException 类中没有指定的域
+     * @throws IllegalAccessException 非法存取
+     */
     private static void cleanEnumCache(
             Class<?> enumClass
     ) throws NoSuchFieldException, IllegalAccessException {
@@ -113,6 +144,14 @@ class DynamicEnumFactory {
         blankField(enumClass, "enumConstants");
     }
 
+    /**
+     * 获取枚举构造器接口
+     *
+     * @param enumClass 被获取的枚举
+     * @param additionalParameterTypes 构造器参数类型数组
+     * @return 构造器接口
+     * @throws NoSuchMethodException 类中没有指定的域
+     */
     private static ConstructorAccessor getConstructorAccessor(
             Class<?> enumClass,
             Class<?>[] additionalParameterTypes
@@ -124,6 +163,19 @@ class DynamicEnumFactory {
         return reflectionFactory.newConstructorAccessor(enumClass.getDeclaredConstructor(parameterTypes));
     }
 
+    /**
+     * 生成一个新的枚举值
+     *
+     * @param enumClass 枚举类Class对象
+     * @param value 新枚举值的名字
+     * @param ordinal 序数
+     * @param additionalTypes 构造器参数类型数组
+     * @param additionalValues 构造器参数数组
+     * @return 新的枚举值
+     * @throws NoSuchMethodException 类中没有指定的域
+     * @throws InvocationTargetException 调用目标异常
+     * @throws InstantiationException 实例化异常
+     */
     private static Object makeEnum(
             Class<?> enumClass,
             String value,
