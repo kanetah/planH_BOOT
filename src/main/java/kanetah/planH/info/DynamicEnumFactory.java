@@ -9,11 +9,26 @@ import sun.reflect.ConstructorAccessor;
 import sun.reflect.FieldAccessor;
 import sun.reflect.ReflectionFactory;
 
+/**
+ * created by kane on 2017/08/11
+ *
+ * 动态枚举工厂
+ * 在运行时为枚举类添加枚举值
+ */
 class DynamicEnumFactory {
 
     private static ReflectionFactory reflectionFactory
             = ReflectionFactory.getReflectionFactory();
 
+    /**
+     * 为枚举类添加一个枚举值
+     *
+     * @param enumType 枚举类的Class对象
+     * @param enumName 被添加的枚举名
+     * @param additionalTypes 枚举构造器参数类型数组
+     * @param additionalValues 枚举构造器参数数组
+     * @param <T> 枚举类型
+     */
     @SuppressWarnings("unchecked")
     static <T extends Enum<?>> void addEnum(
             Class<T> enumType,

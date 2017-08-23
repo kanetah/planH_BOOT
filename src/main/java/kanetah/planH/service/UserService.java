@@ -4,6 +4,7 @@ import kanetah.planH.entity.node.Task;
 import kanetah.planH.entity.node.User;
 import kanetah.planH.entity.relationship.Submit;
 import kanetah.planH.info.Info;
+import kanetah.planH.info.InfoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class UserService {
     @Autowired
     public UserService(
             RepositoryService repositoryService,
-            Info info) {
+            InfoImpl info) {
         this.repositoryService = repositoryService;
         this.info = info;
     }
@@ -136,7 +137,7 @@ public class UserService {
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-            reason = "Can not create new file")
+            reason = "can not create new file")
     private class CreateFileException extends RuntimeException {
     }
 }

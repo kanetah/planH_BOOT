@@ -20,37 +20,37 @@ import javax.tools.JavaCompiler.CompilationTask;
 @Component
 public class JavaStringCompiler {
 
-	private JavaCompiler compiler;
-	private StandardJavaFileManager stdManager;
+    private JavaCompiler compiler;
+    private StandardJavaFileManager stdManager;
 
-	public JavaStringCompiler() {
-		this.compiler = ToolProvider.getSystemJavaCompiler();
-		this.stdManager = compiler.getStandardFileManager(
-		        null, null, null);
-	}
+    public JavaStringCompiler() {
+        this.compiler = ToolProvider.getSystemJavaCompiler();
+        this.stdManager = compiler.getStandardFileManager(
+                null, null, null);
+    }
 
-	public Map<String, byte[]> compile(String fileName, String source) {
-		try (MemoryJavaFileManager manager = new MemoryJavaFileManager(stdManager)) {
-			JavaFileObject javaFileObject = manager.makeStringSource(fileName, source);
-			CompilationTask task =
+    public Map<String, byte[]> compile(String fileName, String source) {
+        try (MemoryJavaFileManager manager = new MemoryJavaFileManager(stdManager)) {
+            JavaFileObject javaFileObject = manager.makeStringSource(fileName, source);
+            CompilationTask task =
                     compiler.getTask(null, manager, null, null,
                             null, Collections.singletonList(javaFileObject));
-			Boolean result = task.call();
-			if (result == null || !result) {
-				throw new RuntimeException("Compilation failed.");
-			}
-			return manager.getClassBytes();
-		} catch (IOException e) {
+            Boolean result = task.call();
+            if (result == null || !result) {
+                throw new RuntimeException("Compilation failed.");
+            }
+            return manager.getClassBytes();
+        } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
 
-	public Class<?> loadClass(String name, Map<String, byte[]> classBytes) {
+    public Class<?> loadClass(String name, Map<String, byte[]> classBytes) {
 
-		try (MemoryClassLoader classLoader = new MemoryClassLoader(classBytes)) {
-			return classLoader.loadClass(name);
-		} catch (IOException | ClassNotFoundException e) {
-		    throw new RuntimeException(e.getMessage(), e);
+        try (MemoryClassLoader classLoader = new MemoryClassLoader(classBytes)) {
+            return classLoader.loadClass(name);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 }
@@ -143,7 +143,7 @@ class MemoryClassLoader extends URLClassLoader {
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-        Class<?> clazz =  Info.forName(name);
+        Class<?> clazz = Info.forName(name);
         if (clazz != null)
             return clazz;
 
