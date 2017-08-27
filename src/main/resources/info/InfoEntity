@@ -1,13 +1,13 @@
 {
   "TaskInfo": {
-    "kanetah.planH.entity.node.Task": [
+    "top.kanetah.planH.entity.node.Task": [
       "id",
       "subject",
       "title",
       "content",
       "deadline"
     ],
-    "kanetah.planH.entity.relationship.Submit": [
+    "top.kanetah.planH.entity.relationship.Submit": [
       "submitDate",
       "submitFileName"
     ]
