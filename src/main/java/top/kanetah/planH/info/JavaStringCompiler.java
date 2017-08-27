@@ -2,14 +2,12 @@ package top.kanetah.planH.info;
 
 import org.springframework.stereotype.Component;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FilterOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.CharBuffer;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,17 +45,22 @@ public class JavaStringCompiler {
      * @return 字节码
      */
     Map<String, byte[]> compile(String fileName, String source) {
-        try (MemoryJavaFileManager manager = new MemoryJavaFileManager(stdManager)) {
-            JavaFileObject javaFileObject = manager.makeStringSource(fileName, source);
-            CompilationTask task =
-                    compiler.getTask(null, manager, null, null,
-                            null, Collections.singletonList(javaFileObject));
+        try (MemoryJavaFileManager javaFileManager = new MemoryJavaFileManager(stdManager)) {
+            JavaFileObject javaFileObject = javaFileManager.makeStringSource(fileName, source);
+            CompilationTask task = compiler.getTask(
+                    null,
+                    javaFileManager,
+                    null,
+                    null,
+                    null,
+                    Collections.singletonList(javaFileObject)
+            );
             Boolean result = task.call();
 
             if (result == null || !result)
                 throw new RuntimeException("Compilation failed: result = " + result + ".");
             else
-                return manager.getClassBytes();
+                return javaFileManager.getClassBytes();
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
