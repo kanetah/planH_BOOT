@@ -19,7 +19,7 @@ import javax.tools.JavaCompiler.CompilationTask;
 
 /**
  * created by kane on 2017/08/11
- *
+ * <p>
  * 基于字符串的字节码编译器
  */
 @Component
@@ -40,23 +40,24 @@ public class JavaStringCompiler {
     }
 
     /**
-     * 编译
+     * 执行编译任务
      *
      * @param fileName 文件名（类名）
-     * @param source 源代码
+     * @param source   源代码字符串
      * @return 字节码
      */
-    public Map<String, byte[]> compile(String fileName, String source) {
+    Map<String, byte[]> compile(String fileName, String source) {
         try (MemoryJavaFileManager manager = new MemoryJavaFileManager(stdManager)) {
             JavaFileObject javaFileObject = manager.makeStringSource(fileName, source);
             CompilationTask task =
                     compiler.getTask(null, manager, null, null,
                             null, Collections.singletonList(javaFileObject));
             Boolean result = task.call();
-            if (result == null || !result) {
-                throw new RuntimeException("Compilation failed.");
-            }
-            return manager.getClassBytes();
+
+            if (result == null || !result)
+                throw new RuntimeException("Compilation failed: result = " + result + ".");
+            else
+                return manager.getClassBytes();
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
@@ -65,11 +66,11 @@ public class JavaStringCompiler {
     /**
      * 加载类
      *
-     * @param name 类名
+     * @param name       类名
      * @param classBytes 字节码
      * @return 类对象
      */
-    public Class<?> loadClass(String name, Map<String, byte[]> classBytes) {
+    Class<?> loadClass(String name, Map<String, byte[]> classBytes) {
 
         try (MemoryClassLoader classLoader = new MemoryClassLoader(classBytes)) {
             return classLoader.loadClass(name);
