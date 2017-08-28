@@ -51,14 +51,15 @@ public class JavaStringCompiler {
             JavaFileObject javaFileObject = javaFileManager.makeStringSource(fileName, source);
 
             Iterable<String> options = null;
-            String classPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+            String classPath =
+                    this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
             // 当程序以jar包形式运行时，为编译器指定classpath
             if (classPath.contains(".jar"))
                 options = Arrays.asList(
                         "-classpath",
-                        classPath.substring(
-                                classPath.indexOf("/") + 1, classPath.indexOf("/libs")
-                        ) + "/classes/java/main"
+                        classPath.substring( // 应依不同操作系统的文件管理系统而修改此处
+                                classPath.indexOf("/"), classPath.indexOf("/libs")
+                        ) + "/classes/java/main" // 针对CentOS的设置
                 );
 
             // 获取编译任务对象
@@ -74,7 +75,10 @@ public class JavaStringCompiler {
 
             if (result == null || !result)
                 // 编译出错
-                throw new RuntimeException("Compilation failed: result = " + result + ".");
+                throw new RuntimeException(
+                        "Compilation failed: result = " + result + ".\n"
+                                + classPath + "\n"
+                );
             else
                 // 编译成功
                 return javaFileManager.getClassBytes();
