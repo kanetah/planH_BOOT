@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
@@ -264,8 +263,8 @@ public class InfoImpl implements Info, InitializingBean {
     }
 
     /**
-     * InputStream to file
-     * @param ins InputStream
+     * 将输入流转换为（临时）文件
+     * @param ins 输入流
      */
     private static File inputStreamToFile(InputStream ins) {
         try {

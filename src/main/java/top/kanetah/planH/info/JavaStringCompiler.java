@@ -7,7 +7,6 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.CharBuffer;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,12 +17,12 @@ import javax.tools.JavaCompiler.CompilationTask;
 /**
  * created by kane on 2017/08/11
  * <p>
- * 基于字符串的字节码编译器
+ * 针对字符串的字节码编译器
  */
 @Component
 public class JavaStringCompiler {
 
-    // java编译器
+    // java编译器接口
     private JavaCompiler compiler;
     // 标准java文件管理器
     private StandardJavaFileManager stdManager;
@@ -32,6 +31,7 @@ public class JavaStringCompiler {
      * 构造器
      */
     public JavaStringCompiler() {
+        // 依赖于tools.jar
         this.compiler = ToolProvider.getSystemJavaCompiler();
         this.stdManager = compiler.getStandardFileManager(
                 null, null, null);
@@ -46,7 +46,9 @@ public class JavaStringCompiler {
      */
     Map<String, byte[]> compile(String fileName, String source) {
         try (MemoryJavaFileManager javaFileManager = new MemoryJavaFileManager(stdManager)) {
+            // 获取编译单元
             JavaFileObject javaFileObject = javaFileManager.makeStringSource(fileName, source);
+            // 获取编译任务对象
             CompilationTask task = compiler.getTask(
                     null,
                     javaFileManager,
@@ -55,11 +57,13 @@ public class JavaStringCompiler {
                     null,
                     Collections.singletonList(javaFileObject)
             );
-            Boolean result = task.call();
+            Boolean result = task.call(); // 执行编译
 
             if (result == null || !result)
+                // 编译出错
                 throw new RuntimeException("Compilation failed: result = " + result + ".");
             else
+                // 编译成功
                 return javaFileManager.getClassBytes();
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
@@ -71,7 +75,7 @@ public class JavaStringCompiler {
      *
      * @param name       类名
      * @param classBytes 字节码
-     * @return 类对象
+     * @return 被加载类的Class对象
      */
     Class<?> loadClass(String name, Map<String, byte[]> classBytes) {
 
@@ -83,6 +87,9 @@ public class JavaStringCompiler {
     }
 }
 
+/**
+ * 基于内存的java文件管理器
+ */
 class MemoryJavaFileManager extends ForwardingJavaFileManager<JavaFileManager> {
 
     private final Map<String, byte[]> classBytes = new HashMap<>();
@@ -160,6 +167,9 @@ class MemoryJavaFileManager extends ForwardingJavaFileManager<JavaFileManager> {
     }
 }
 
+/**
+ * 基于内存的类加载器
+ */
 class MemoryClassLoader extends URLClassLoader {
 
     private Map<String, byte[]> classBytes = new HashMap<>();
@@ -169,6 +179,13 @@ class MemoryClassLoader extends URLClassLoader {
         this.classBytes.putAll(classBytes);
     }
 
+    /**
+     * 重载：优先从运行时动态生成的类中寻找目标类
+     *
+     * @param name 目标类类名
+     * @return 目标类Class对象
+     * @throws ClassNotFoundException 未找到
+     */
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         Class<?> clazz = Info.forName(name);
