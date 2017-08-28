@@ -73,7 +73,7 @@ public class InfoImpl implements Info, InitializingBean {
                 new FileReader(infoEntityFieldTemplateFile));
         String methodString = FileCopyUtils.copyToString(
                 new FileReader(infoEntityMethodTemplateFile));
-        String[] targetClassName = {""};
+        final String[] targetClassName = {""};
 
         /* 动态加载配置的报表类 */
         jsonData.forEach((className, value) -> {

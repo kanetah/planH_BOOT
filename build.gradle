@@ -19,7 +19,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group 'top.kanetah'
-version '0.3.6-SNAPSHOT'
+version '0.3.7-SNAPSHOT'
 
 description = """SDN4 University"""
 
@@ -49,8 +49,8 @@ dependencies {
     testCompile('org.springframework.security:spring-security-test')
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'top.kanetah.planH.PlanHApplication'
-    }
-}
+//jar {
+//    manifest {
+//        attributes 'Main-Class': 'top.kanetah.planH.PlanHApplication'
+//    }
+//}

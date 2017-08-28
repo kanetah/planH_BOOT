@@ -63,7 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .requiresChannel()
                 .anyRequest()
                 .requiresSecure()
-// 需要申请SSL证书
         ;
     }
 }

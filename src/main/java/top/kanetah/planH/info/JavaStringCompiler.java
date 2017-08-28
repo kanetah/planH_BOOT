@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.CharBuffer;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,12 +49,24 @@ public class JavaStringCompiler {
         try (MemoryJavaFileManager javaFileManager = new MemoryJavaFileManager(stdManager)) {
             // 获取编译单元
             JavaFileObject javaFileObject = javaFileManager.makeStringSource(fileName, source);
+
+            Iterable<String> options = null;
+            String classPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+            // 当程序以jar包形式运行时，为编译器指定classpath
+            if (classPath.contains(".jar"))
+                options = Arrays.asList(
+                        "-classpath",
+                        classPath.substring(
+                                classPath.indexOf("/") + 1, classPath.indexOf("/libs")
+                        ) + "/classes/java/main"
+                );
+
             // 获取编译任务对象
             CompilationTask task = compiler.getTask(
                     null,
                     javaFileManager,
                     null,
-                    null,
+                    options,
                     null,
                     Collections.singletonList(javaFileObject)
             );
