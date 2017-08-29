@@ -9,12 +9,12 @@ import org.springframework.web.servlet.config.annotation.*;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-//    private final LoginInterceptor loginInterceptor;
-//
-//    @Autowired
-//    public MvcConfig(LoginInterceptor loginInterceptor) {
-//        this.loginInterceptor = loginInterceptor;
-//    }
+    private final LoginInterceptor loginInterceptor;
+
+    @Autowired
+    public MvcConfig(LoginInterceptor loginInterceptor) {
+        this.loginInterceptor = loginInterceptor;
+    }
 
     @Override
     public void configureDefaultServletHandling(
@@ -36,12 +36,12 @@ public class MvcConfig implements WebMvcConfigurer {
         );
     }
 
-//    @Override
-//    public void addInterceptors(
-//            InterceptorRegistry registry
-//    ) {
-//        registry.addInterceptor(loginInterceptor).addPathPatterns("/login");
-//    }
+    @Override
+    public void addInterceptors(
+            InterceptorRegistry registry
+    ) {
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/login");
+    }
 
     @Bean
     public ObjectMapper ObjectMapper(){

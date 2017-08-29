@@ -1,5 +1,6 @@
 package top.kanetah.planH.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import top.kanetah.planH.entity.node.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,13 @@ import java.util.List;
 @Transactional
 public class RoleViewService {
 
+    private final RepositoryService repositoryService;
+
+    @Autowired
+    public RoleViewService(RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
+    }
+
     private UserDetails userDetails() {
 
         return (UserDetails) SecurityContextHolder.getContext()
@@ -22,6 +30,8 @@ public class RoleViewService {
     }
 
     public String getViewByRole() {
+
+        repositoryService.userRepository.deleteById(24L);
 
         List<String> roles = getRole();
         if (roles.contains(Role.ROLE_ADMIN))
