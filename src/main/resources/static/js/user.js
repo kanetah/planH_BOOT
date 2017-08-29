@@ -48,9 +48,9 @@ $(document).ready(function () {
             .bind("click", function (event) {
                 var uploadForm = template.find('.submitFileName > form');
                 $.addSubmit(
-                    // uploadForm.find('> [type = "file"]'),
                     uploadForm,
-                    task_data[field_name[0]['field']]
+                    task_data[field_name[0]['field']],
+                    label
                 );
                 event.stopPropagation();
             });
@@ -114,7 +114,7 @@ $(document).ready(function () {
         }, 1500, "swing");
     });
 
-    $.addSubmit = function (form_data, task_id) {
+    $.addSubmit = function (form_data, task_id, label) {
 
         if(arrow.css('right') !== '-5%') {
             arrow.click();
@@ -135,9 +135,13 @@ $(document).ready(function () {
             },
             success: function () {
                 progress_bar.css('width', '100%');
+                label.removeClass('label-danger');
+                label.addClass('label-info');
+                label.html('已提交');
             },
             error: function () {
                 progress_bar.css('background-color', 'red');
+                label.html('提交失败');
             },
             complete: function () {
                 progress_bar.removeClass('active');

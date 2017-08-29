@@ -38,6 +38,7 @@ repositories {
 
 dependencies {
 
+    compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-data-neo4j')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
@@ -48,9 +49,3 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
 }
-
-//jar {
-//    manifest {
-//        attributes 'Main-Class': 'top.kanetah.planH.PlanHApplication'
-//    }
-//}
