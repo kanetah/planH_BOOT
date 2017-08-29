@@ -29,7 +29,6 @@ public class MvcConfig implements WebMvcConfigurer {
     ) {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/admin/").setViewName("admin");
-        registry.addViewController("/index/").setViewName("index");
         registry.addRedirectViewController(
                 "/css/bootstrap.css.map",
                 "/css/bootstrap.min.css.map"
