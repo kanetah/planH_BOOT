@@ -2,9 +2,12 @@ package top.kanetah.planH.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
+
+import javax.servlet.MultipartConfigElement;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
@@ -43,7 +46,15 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public ObjectMapper ObjectMapper(){
+    public ObjectMapper ObjectMapper() {
         return new ObjectMapper();
+    }
+
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        factory.setMaxFileSize("1024MB");
+        factory.setMaxRequestSize("1056MB");
+        return factory.createMultipartConfig();
     }
 }

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+    <script src="https://cdn.bootcss.com/three.js/r83/three.min.js"></script>
     <link href="css/main.css" rel="stylesheet">
     <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -33,20 +34,22 @@
 <main>
     <div id="content">
         <form name='login_form' th:action='@{/login}' method='POST'>
-            <div class="input-group input-group-lg">
+            <div class="input-group input-group-lg" id="pwd-div">
                 <span class="input-group-addon">
                     学号
                 </span>
-                <input name='password' type="text" autocomplete="off"
-                       class="form-control" aria-describedby="basic-addon1">
+                <input name='password' type="text" autocomplete="off" id="user-code"
+                       class="form-control" aria-describedby="basic-addon1"/>
             </div>
             <br>
-            <div class="input-group input-group-lg">
+            <div id="user-name">
+                <div class="input-group input-group-lg">
                 <span class="input-group-addon">
                     姓名
                 </span>
-                <input name='username' type="text" autocomplete="off"
-                       class="form-control" aria-describedby="basic-addon1">
+                    <input name='username' type="text" autocomplete="off"
+                           class="form-control" aria-describedby="basic-addon1"/>
+                </div>
             </div>
             <br>
             <input id="login_btn" name="submit" type="submit"
@@ -66,7 +69,6 @@
 <script src="js/login.js"></script>
 
 <div id="universe"/>
-<script src='js/three.min.js'></script>
-<script src="js/index.js"></script>
+<script src="js/universe.js"></script>
 </body>
 </html>
