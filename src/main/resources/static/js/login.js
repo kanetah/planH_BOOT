@@ -8,4 +8,45 @@ $(document).ready(function () {
             userCode.val(userCode.val().replace($.cookie("userCodePrefix"), ""));
         return true;
     });
+
+    var drag = function (obj) {
+
+        obj.bind("mousedown", start);
+        var gapX;
+        var gapY;
+
+        function start(event) {
+            if (event.button === 0) {
+                gapX = event.clientX - obj.offset().left;
+                gapY = event.clientY - obj.offset().top;
+                $(document).bind("mouseup", stop);
+            }
+        }
+
+        function stop(event) {
+
+            var username_div = $("#user-name");
+            var password_div = $('#pwd-div');
+            var username = $('[name="username"]');
+            var password = $('[name="password"]');
+
+            if ((event.clientY - gapY) > 10) {
+                password.val("");
+                username.val("");
+                password_div.find('span').html("学号");
+                username_div.slideDown("slow", function () {
+                    password.attr("type", "text");
+                });
+            } else if ((event.clientY - gapY) < -10) {
+                password.val("");
+                password_div.find('span').html("口令");
+                username_div.slideUp("slow", function () {
+                    username.val("admin");
+                    password.attr("type", "password");
+                });
+            }
+            $(document).unbind("mouseup", stop);
+        }
+    };
+    drag($("main"));
 });

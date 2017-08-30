@@ -33,20 +33,22 @@
 <main>
     <div id="content">
         <form name='login_form' th:action='@{/login}' method='POST'>
-            <div class="input-group input-group-lg">
+            <div class="input-group input-group-lg" id="pwd-div">
                 <span class="input-group-addon">
                     学号
                 </span>
-                <input name='password' type="text" autocomplete="off"
-                       class="form-control" aria-describedby="basic-addon1">
+                <input name='password' type="text" autocomplete="off" id="user-code"
+                       class="form-control" aria-describedby="basic-addon1"/>
             </div>
             <br>
-            <div class="input-group input-group-lg">
+            <div id="user-name">
+                <div class="input-group input-group-lg">
                 <span class="input-group-addon">
                     姓名
                 </span>
-                <input name='username' type="text" autocomplete="off"
-                       class="form-control" aria-describedby="basic-addon1">
+                    <input name='username' type="text" autocomplete="off"
+                           class="form-control" aria-describedby="basic-addon1"/>
+                </div>
             </div>
             <br>
             <input id="login_btn" name="submit" type="submit"
