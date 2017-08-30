@@ -34,12 +34,14 @@
 <main>
     <div id="content">
         <form name='login_form' th:action='@{/login}' method='POST'>
-            <div class="input-group input-group-lg" id="pwd-div">
+            <div id="pwd-div">
+                <div class="input-group input-group-lg">
                 <span class="input-group-addon">
                     学号
                 </span>
-                <input name='password' type="text" autocomplete="off" id="user-code"
-                       class="form-control" aria-describedby="basic-addon1"/>
+                    <input name='password' type="text" autocomplete="off" id="user-code"
+                           class="form-control" aria-describedby="basic-addon1"/>
+                </div>
             </div>
             <br>
             <div id="user-name">

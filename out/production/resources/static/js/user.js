@@ -43,6 +43,12 @@ $(document).ready(function () {
             var file = template.find('.submitFileName > a');
             file.html(task_data[field_name[6]['field']]);
         }
+        var deadline = new Date(
+            task_data[field_name[4]['field']]
+        );
+        var now = new Date();
+        if(now > deadline)
+            label.before("<span class='label label-default'>已截止</span>");
 
         template.find('.submit_div > .submit-button')
             .bind("click", function (event) {
@@ -141,6 +147,8 @@ $(document).ready(function () {
             },
             error: function () {
                 progress_bar.css('background-color', 'red');
+                label.removeClass('label-info');
+                label.addClass('label-danger');
                 label.html('提交失败');
             },
             complete: function () {

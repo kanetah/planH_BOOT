@@ -31,8 +31,6 @@ public class RoleViewService {
 
     public String getViewByRole() {
 
-        repositoryService.userRepository.deleteById(24L);
-
         List<String> roles = getRole();
         if (roles.contains(Role.ROLE_ADMIN))
             return "forward:admin/";

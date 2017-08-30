@@ -73,6 +73,10 @@
     left: 10%;
 }
 
+.deadline > .date:after{
+    content: " 截止";
+}
+
 .submitFileName {
     position: absolute;
     bottom: 40%;

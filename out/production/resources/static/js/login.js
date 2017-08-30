@@ -33,20 +33,22 @@ $(document).ready(function () {
             if ((event.clientY - gapY) > 10) {
                 password.val("");
                 username.val("");
-                password_div.find('span').html("学号");
+                password_div.find('div > span').html("学号");
                 username_div.slideDown("slow", function () {
                     password.attr("type", "text");
                 });
             } else if ((event.clientY - gapY) < -10) {
                 password.val("");
-                password_div.find('span').html("口令");
+                password_div.find('div > span').html("口令");
                 username_div.slideUp("slow", function () {
                     username.val("admin");
                     password.attr("type", "password");
                 });
             }
             $(document).unbind("mouseup", stop);
+            password.focus();
         }
     };
+
     drag($("main"));
 });
