@@ -22,10 +22,6 @@ public class Submit extends BaseRelationshipEntity {
     private Date submitDate;
     private String submitFileName;
 
-//    {
-//        this.submitDate = new Date();
-//    }
-
     public Submit() {
     }
 

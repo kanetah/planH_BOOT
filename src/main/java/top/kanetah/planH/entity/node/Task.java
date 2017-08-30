@@ -6,12 +6,13 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 @NodeEntity
 public class Task extends BaseEntity {
 
-    private long taskId;
     private String subject;
     private String title;
     private String content;
@@ -26,7 +27,13 @@ public class Task extends BaseEntity {
         this.subject = subject;
         this.title = title;
         this.content = content;
-        this.deadline = new Date();
+        String[] d = deadline.split("[.\\\\/-]");
+        this.deadline = new GregorianCalendar(
+                Integer.valueOf(d[0]),
+                Integer.valueOf(d[1]) - 1,
+                Integer.valueOf(d[2]) + 1,
+                7, 59, 59
+        ).getTime();
     }
 
     public Long getTaskId() {
