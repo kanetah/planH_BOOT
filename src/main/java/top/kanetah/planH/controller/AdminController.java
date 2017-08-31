@@ -6,12 +6,19 @@ import top.kanetah.planH.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/admin")
 public class AdminController {
+
+    private final Map<String, Object> map = new HashMap<>();
+
+    {
+        map.put("status", "created");
+    }
 
     private final AdminService adminService;
 
@@ -32,8 +39,6 @@ public class AdminController {
             @RequestParam(value = "deadline") String deadline
     ) {
         adminService.createTask(new Task(subject, title, content, deadline));
-        Map<String, Object> map = new HashMap<>();
-        map.put("status", "created");
         return map;
     }
 
@@ -47,8 +52,28 @@ public class AdminController {
             @RequestParam(value = "name") String name
     ) {
         adminService.createUser(new User(code, name));
-        Map<String, Object> map = new HashMap<>();
-        map.put("status", "created");
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/user/batch",
+            method = RequestMethod.GET
+    )
+    public Map<String, Object> batchCreateUser(
+    ) throws IOException {
+        adminService.batchCreateUser();
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/reset",
+            method = RequestMethod.GET
+    )
+    public Map<String, Object> resetAdmin(
+    ) {
+        adminService.resetAdmin();
         return map;
     }
 }

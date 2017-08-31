@@ -11,4 +11,7 @@ public interface RoleRepository
 
     @Query("match(node:Role) where node.roleName = 'USER' return node")
     Role findUserRole();
+
+    @Query("match(node:Role) where node.roleName = 'ADMIN' return node")
+    Role findAdminRole();
 }
