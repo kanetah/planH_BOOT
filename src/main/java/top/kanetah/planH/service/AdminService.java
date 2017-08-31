@@ -5,6 +5,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.multipart.MultipartFile;
 import top.kanetah.planH.entity.relationship.SubordinateUser;
 import top.kanetah.planH.entity.node.*;
 import top.kanetah.planH.entity.relationship.Authority;
@@ -12,7 +13,6 @@ import top.kanetah.planH.entity.relationship.SubordinateTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -66,9 +66,9 @@ public class AdminService {
         repositoryService.authorityRepository.save(authority);
     }
 
-    public void batchCreateUser() throws IOException {
+    public void batchCreateUser(MultipartFile file) throws IOException {
 
-        InputStream inputStream = new FileInputStream("d:\\a.xls");
+        InputStream inputStream = file.getInputStream();
         POIFSFileSystem fs = new POIFSFileSystem(inputStream);
         HSSFWorkbook workbook = new HSSFWorkbook(fs);
         HSSFSheet sheet = workbook.getSheetAt(0);
@@ -80,8 +80,10 @@ public class AdminService {
             if (r.getStringCellValue().equals(nameMark))
                 index.put(nameMark, r.getColumnIndex());
         });
+
         repositoryService.userRepository.deleteAll();
         resetAdmin();
+
         for (int i = 2; i <= sheet.getLastRowNum(); ++i) {
             row = sheet.getRow(i);
             String code = row.getCell(index.get(codeMark)).getStringCellValue()

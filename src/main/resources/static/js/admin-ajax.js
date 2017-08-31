@@ -31,4 +31,8 @@ $(document).ready(function () {
             }
         })
     });
+
+    $('#batch_user').click(function () {
+
+    })
 });

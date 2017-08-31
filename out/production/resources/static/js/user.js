@@ -7,18 +7,18 @@ $(document).ready(function () {
     }
 
     var tasks = [];
-    $.addTask = function (task_data, field_name) {
+    $.addTask = function (task_data) {
         var template = $('.template').clone(true);
         template.removeClass('template');
         template.css('top', '100px');
         template.css('opacity', '0');
         $('.wrapper').append(template);
 
-        template.find('.task_id > span').html(task_data[field_name[0]['field']]);
-        template.find('.subject > li > a').append(task_data[field_name[1]['field']]);
-        template.find('.title').html(task_data[field_name[2]['field']]);
-        template.find('.content > p').html(task_data[field_name[3]['field']]);
-        template.find('.deadline > .date').html(task_data[field_name[4]['field']].substr(0, 10));
+        template.find('.task_id > span').html(task_data[$._info_fields[0]['field']]);
+        template.find('.subject > li > a').append(task_data[$._info_fields[1]['field']]);
+        template.find('.title').html(task_data[$._info_fields[2]['field']]);
+        template.find('.content > p').html(task_data[$._info_fields[3]['field']]);
+        template.find('.deadline > .date').html(task_data[$._info_fields[4]['field']].substr(0, 10));
         var label = template.find('.deadline > .label');
         template.find('.submitFileName > form > [type = "file"]')
             .on('change', function () {
@@ -31,9 +31,9 @@ $(document).ready(function () {
                     );
             });
         if (
-            task_data[field_name[6]['field']] === undefined ||
-            task_data[field_name[6]['field']] === null ||
-            task_data[field_name[6]['field']] === ""
+            task_data[$._info_fields[6]['field']] === undefined ||
+            task_data[$._info_fields[6]['field']] === null ||
+            task_data[$._info_fields[6]['field']] === ""
         ) {
             label.addClass('label-danger');
             label.html('未提交');
@@ -41,10 +41,10 @@ $(document).ready(function () {
             label.addClass('label-info');
             label.html('已提交');
             var file = template.find('.submitFileName > a');
-            file.html(task_data[field_name[6]['field']]);
+            file.html(task_data[$._info_fields[6]['field']]);
         }
         var deadline = new Date(
-            task_data[field_name[4]['field']]
+            task_data[$._info_fields[4]['field']]
         );
         var now = new Date();
         if(now > deadline)
@@ -55,7 +55,7 @@ $(document).ready(function () {
                 var uploadForm = template.find('.submitFileName > form');
                 $.addSubmit(
                     uploadForm,
-                    task_data[field_name[0]['field']],
+                    task_data[$._info_fields[0]['field']],
                     label
                 );
                 event.stopPropagation();
@@ -119,41 +119,4 @@ $(document).ready(function () {
             opacity: 0.5
         }, 1500, "swing");
     });
-
-    $.addSubmit = function (form_data, task_id, label) {
-
-        if(arrow.css('right') !== '-5%') {
-            arrow.click();
-        }
-
-        var template = $('.submit-template').clone(true);
-        template.removeClass('submit-template');
-        $('.loading-box').append(template);
-        template.find('.loading-id').html(task_id);
-        var progress_bar = template.find('> .progress > .progress-bar');
-
-        $.ajaxPlanH({
-            url: '/task/patch/' + task_id,
-            data: new FormData(form_data[0]),
-            cache: false,
-            beforeSend: function () {
-                progress_bar.css('width', '30%');
-            },
-            success: function () {
-                progress_bar.css('width', '100%');
-                label.removeClass('label-danger');
-                label.addClass('label-info');
-                label.html('已提交');
-            },
-            error: function () {
-                progress_bar.css('background-color', 'red');
-                label.removeClass('label-info');
-                label.addClass('label-danger');
-                label.html('提交失败');
-            },
-            complete: function () {
-                progress_bar.removeClass('active');
-            }
-        });
-    };
 });

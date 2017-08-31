@@ -1,5 +1,6 @@
 package top.kanetah.planH.controller;
 
+import org.springframework.web.multipart.MultipartFile;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.entity.node.User;
 import top.kanetah.planH.service.AdminService;
@@ -58,11 +59,12 @@ public class AdminController {
     @ResponseBody
     @RequestMapping(
             value = "/user/batch",
-            method = RequestMethod.GET
+            method = RequestMethod.POST
     )
     public Map<String, Object> batchCreateUser(
+            @RequestPart(value = "file") MultipartFile file
     ) throws IOException {
-        adminService.batchCreateUser();
+        adminService.batchCreateUser(file);
         return map;
     }
 
