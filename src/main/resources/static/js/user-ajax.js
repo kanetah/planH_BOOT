@@ -18,6 +18,7 @@ $(document).ready(function () {
 
     $('#task').click(function () {
 
+        var icon = $('#task').find('> i');
         if ($.task_index === null)
             return;
         $.setLoadingFlag(true);
@@ -27,6 +28,14 @@ $(document).ready(function () {
             data: {
                 from: $.task_index,
                 to: $.task_index + 5
+            },
+            beforeSend: function () {
+                icon.rotate({
+                    animateTo: 720, duration: 2000,
+                    callback: function () {
+                        icon.rotate(0);
+                    }
+                });
             },
             success: function (data) {
                 if (data.length === 0) {
