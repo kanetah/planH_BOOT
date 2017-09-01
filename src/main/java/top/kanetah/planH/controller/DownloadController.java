@@ -13,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import top.kanetah.planH.info.InfoImpl;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 @Controller
@@ -29,12 +29,12 @@ public class DownloadController implements InitializingBean {
     @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
-        Map jsonData =
-                new ObjectMapper().readValue(
-                        downloadFilePropertiesResource.getFile(),
-                        Map.class
-                );
-        jsonData.forEach((k, v) -> {
+        new ObjectMapper().readValue(
+                InfoImpl.inputStreamToFile(
+                        downloadFilePropertiesResource.getInputStream()
+                ),
+                Map.class
+        ).forEach((k, v) -> {
             String value = v.toString();
             value = value.substring(1, value.length() - 1);
             String[] values = value.split(", ");

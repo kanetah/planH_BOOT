@@ -55,16 +55,24 @@ public class InfoImpl implements Info, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
+        File infoEntityJsonFile =
+                inputStreamToFile(infoEntityJsonResource.getInputStream());
+        File infoEntityFrameTemplateFile =
+                inputStreamToFile(infoEntityFrameTemplateResource.getInputStream());
+        File infoEntityFieldTemplateFile =
+                inputStreamToFile(infoEntityFieldTemplateResource.getInputStream());
+        File infoEntityMethodTemplateFile =
+                inputStreamToFile(infoEntityMethodTemplateResource.getInputStream());
         // 指定报表类内容的配置是一个json文件，通过jackson处理
         Map jsonData =
-                new ObjectMapper().readValue(infoEntityJsonResource.getFile(), Map.class);
+                new ObjectMapper().readValue(infoEntityJsonFile, Map.class);
 
         String frameString = FileCopyUtils.copyToString(
-                new FileReader(infoEntityFrameTemplateResource.getFile()));
+                new FileReader(infoEntityFrameTemplateFile));
         String fieldString = FileCopyUtils.copyToString(
-                new FileReader(infoEntityFieldTemplateResource.getFile()));
+                new FileReader(infoEntityFieldTemplateFile));
         String methodString = FileCopyUtils.copyToString(
-                new FileReader(infoEntityMethodTemplateResource.getFile()));
+                new FileReader(infoEntityMethodTemplateFile));
         final String[] targetClassName = {""};
 
         /* 动态加载配置的报表类 */
@@ -170,7 +178,9 @@ public class InfoImpl implements Info, InitializingBean {
         /* 报表类完成加载 */
 
         /* 开始加载枚举类 */
-        Reader reader = new FileReader(infoAttributeTemplateResource.getFile());
+        File infoAttributeTemplateFile =
+                inputStreamToFile(infoAttributeTemplateResource.getInputStream());
+        Reader reader = new FileReader(infoAttributeTemplateFile);
         String contentString = FileCopyUtils.copyToString(reader);
 
         infoClassNameList.forEach(name -> {
@@ -250,5 +260,26 @@ public class InfoImpl implements Info, InitializingBean {
             }
         }
         return field;
+    }
+
+    /**
+     * 将输入流转换为（临时）文件
+     * @param ins 输入流
+     */
+    public static File inputStreamToFile(InputStream ins) {
+        try {
+            File file = File.createTempFile("planHTemplate",".tmp");
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            ins.close();
+            return file;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 }
