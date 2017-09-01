@@ -28,6 +28,8 @@ public class AdminService {
     private String codeMark;
     @Value(value = "${kanetah.planH.userNameMark}")
     private String nameMark;
+    @Value(value = "${kanetah.planH.admin.password}")
+    private String adminPassword;
 
     @Autowired
     public AdminService(RepositoryService repositoryService) {
@@ -55,7 +57,7 @@ public class AdminService {
 
     public void resetAdmin() {
 
-        User admin = new User(0, "admin");
+        User admin = new User(Long.valueOf(adminPassword), "admin");
         UserRoot userRoot = repositoryService.userRootRepository.find();
         SubordinateUser subordinateUser = new SubordinateUser(userRoot, admin);
         repositoryService.subordinateUserRepository.save(subordinateUser);

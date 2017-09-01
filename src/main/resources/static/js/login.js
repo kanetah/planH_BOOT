@@ -43,10 +43,10 @@ $(document).ready(function () {
                 username_div.slideUp("slow", function () {
                     username.val("admin");
                     password.attr("type", "password");
+                    password.focus();
                 });
             }
             $(document).unbind("mouseup", stop);
-            password.focus();
         }
     };
 
