@@ -1,8 +1,9 @@
 $(document).ready(function () {
     var window_width = $(window).width();
+    var wrapper = $('.wrapper');
 
     if (window_width >= 992) {
-        big_image = $('.wrapper > .header');
+        big_image = wrapper.find('> .header');
         $(window).on('scroll', materialKitDemo.checkScrollForParallax);
     }
 
@@ -12,7 +13,7 @@ $(document).ready(function () {
         template.removeClass('template');
         template.css('top', '100px');
         template.css('opacity', '0');
-        $('.wrapper').append(template);
+        wrapper.append(template);
 
         template.find('.task_id > span').html(task_data[$._info_fields[0]['field']]);
         template.find('.subject > li > a').append(task_data[$._info_fields[1]['field']]);
@@ -87,24 +88,29 @@ $(document).ready(function () {
         }
     });
 
+    var spinnerHolder = $('#spinnerHolder');
     $.setLoadingFlag = function (val) {
         if (val)
-            $('#spinnerHolder').append('<div class="spinner"></div>');
+            spinnerHolder.append('<div class="spinner"></div>');
         else
-            $('.spinner').remove();
+            spinnerHolder.find('> .spinner').remove();
         loadingFlag = val;
     };
 
-    var right_list_icon = $('.right-list > span > i');
+    var right_list = $('.right-list');
+    right_list.animate({
+        right: '-18%'
+    });
+    var right_list_icon = right_list.find('> span > i');
     var right_list_icon_flag = false;
     right_list_icon.click(function () {
         if (right_list_icon_flag) {
-            $('.right-list').animate({
+            right_list.animate({
                 right: '-18%'
             }, 1000, "swing");
             right_list_icon.rotate({animateTo: 0});
         } else {
-            $('.right-list').animate({
+            right_list.animate({
                 right: '0'
             }, 1000, "swing");
             right_list_icon.rotate({animateTo: 180});
@@ -112,16 +118,20 @@ $(document).ready(function () {
         right_list_icon_flag = !right_list_icon_flag;
     });
 
-    var download_icon = $('.download_file_div > span > i');
+    var download_file_div = $('.download_file_div');
+    download_file_div.animate({
+        left: '-18%'
+    });
+    var download_icon = download_file_div.find('> span > i');
     var download_icon_flag = false;
     download_icon.click(function () {
         if (download_icon_flag) {
-            $('.download_file_div').animate({
+            download_file_div.animate({
                 left: '-18%'
             }, 1000, "swing");
             download_icon.rotate({animateTo: 0});
         } else {
-            $('.download_file_div').animate({
+            download_file_div.animate({
                 left: '0'
             }, 1000, "swing");
             download_icon.rotate({animateTo: -180});

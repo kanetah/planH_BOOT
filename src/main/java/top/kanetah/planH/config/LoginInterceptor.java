@@ -1,9 +1,11 @@
 package top.kanetah.planH.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import top.kanetah.planH.service.CheckMobileService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,12 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Value(value = "${kanetah.planH.userCodePrefix}")
     private String userCodePrefix;
+    private final CheckMobileService checkMobileService;
+
+    @Autowired
+    public LoginInterceptor(CheckMobileService checkMobileService) {
+        this.checkMobileService = checkMobileService;
+    }
 
     @Override
     public void postHandle(
@@ -22,6 +30,12 @@ public class LoginInterceptor implements HandlerInterceptor {
             Object handler,
             ModelAndView modelAndView
     ) throws Exception {
-        response.addCookie(new Cookie("userCodePrefix", userCodePrefix));
+        response.addCookie(new Cookie(
+                "userCodePrefix", userCodePrefix
+        ));
+        response.addCookie(new Cookie(
+                "checkMobile",
+                String.valueOf(checkMobileService.check(request))
+        ));
     }
 }
