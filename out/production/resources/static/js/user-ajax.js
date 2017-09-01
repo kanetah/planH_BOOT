@@ -51,10 +51,11 @@ $(document).ready(function () {
 
     $.addSubmit = function (form_data, task_id, label) {
 
-        var arrow = $('.right-list-arrow');
-        if(arrow.css('right') !== '-5%') {
-            arrow.click();
-        }
+        var right_list_icon = $('.right-list > span > i');
+        var right_list = $('.right-list');
+        alert(right_list.css('right'));
+        if(right_list.css('right') !== '0px')
+            right_list_icon.click();
 
         var template = $('.submit-template').clone(true);
         template.removeClass('submit-template');
@@ -86,4 +87,16 @@ $(document).ready(function () {
             }
         });
     };
+
+    $.ajaxPlanH({
+        const_url: '/download/fileNames/get',
+        success: function (data) {
+            var download_box = $('.download-box');
+            $.each(data, function (index) {
+                download_box.append(
+                    '<a href="/download/' + data[index] + '">' + data[index] + '</a>'
+                );
+            });
+        }
+    });
 });

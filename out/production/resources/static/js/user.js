@@ -47,7 +47,7 @@ $(document).ready(function () {
             task_data[$._info_fields[4]['field']]
         );
         var now = new Date();
-        if(now > deadline)
+        if (now > deadline)
             label.before("<span class='label label-default'>已截止</span>");
 
         template.find('.submit_div > .submit-button')
@@ -95,28 +95,37 @@ $(document).ready(function () {
         loadingFlag = val;
     };
 
-    var arrow = $('.right-list-arrow');
-    arrow.animate({
-        right: 0,
-        opacity: 0.5
-    }, 1000, "swing");
-    arrow.click(function () {
-        $('.right-list').animate({
-            right: 0
-        }, 1000, "swing");
-        arrow.animate({
-            right: '-5%',
-            opacity: 0.0
-        }, 1000, "swing");
+    var right_list_icon = $('.right-list > span > i');
+    var right_list_icon_flag = false;
+    right_list_icon.click(function () {
+        if (right_list_icon_flag) {
+            $('.right-list').animate({
+                right: '-18%'
+            }, 1000, "swing");
+            right_list_icon.rotate({animateTo: 0});
+        } else {
+            $('.right-list').animate({
+                right: '0'
+            }, 1000, "swing");
+            right_list_icon.rotate({animateTo: 180});
+        }
+        right_list_icon_flag = !right_list_icon_flag;
     });
 
-    $('.right-list > span > i').click(function () {
-        $('.right-list').animate({
-            right: '-20%'
-        }, 1000, "swing");
-        arrow.animate({
-            right: 0,
-            opacity: 0.5
-        }, 1500, "swing");
+    var download_icon = $('.download_file_div > span > i');
+    var download_icon_flag = false;
+    download_icon.click(function () {
+        if (download_icon_flag) {
+            $('.download_file_div').animate({
+                left: '-18%'
+            }, 1000, "swing");
+            download_icon.rotate({animateTo: 0});
+        } else {
+            $('.download_file_div').animate({
+                left: '0'
+            }, 1000, "swing");
+            download_icon.rotate({animateTo: -180});
+        }
+        download_icon_flag = !download_icon_flag
     });
 });

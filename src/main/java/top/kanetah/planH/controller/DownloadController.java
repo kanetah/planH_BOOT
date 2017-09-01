@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,27 +26,48 @@ public class DownloadController implements InitializingBean {
     @Value(value = "${kanetah.planH.downloadFilePropertiesPath}")
     private Resource downloadFilePropertiesResource;
 
-    @Override
     @SuppressWarnings("unchecked")
+    @Override
     public void afterPropertiesSet() throws Exception {
         Map jsonData =
-                new ObjectMapper().readValue(downloadFilePropertiesResource.getFile(), Map.class);
-        System.out.println("POI__________________________________________________________________");
+                new ObjectMapper().readValue(
+                        downloadFilePropertiesResource.getFile(),
+                        Map.class
+                );
         jsonData.forEach((k, v) -> {
-            System.out.println(k);
-            System.out.println(v);
+            String value = v.toString();
+            value = value.substring(1, value.length() - 1);
+            String[] values = value.split(", ");
+            for (String fileName : values)
+                pathMap.put(fileName, k + fileName);
         });
     }
 
-    @RequestMapping("/{fileName}")
-    public ResponseEntity<byte[]> download() throws IOException {
-        String path = "D:\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\springMVC\\WEB-INF\\upload\\图片10（定价后）.xlsx";
-        File file = new File(path);
+    @RequestMapping("/{fileName:.+}")
+    public ResponseEntity<byte[]> download(
+            @PathVariable(value = "fileName") String fileName
+    ) throws IOException {
         HttpHeaders headers = new HttpHeaders();
-        String fileName = new String("你好.xlsx".getBytes("UTF-8"), "iso-8859-1");//为了解决中文名称乱码问题
-        headers.setContentDispositionFormData("attachment", fileName);
+        headers.setContentDispositionFormData(
+                "attachment",
+                new String(
+                        fileName.getBytes("UTF-8"),
+                        "iso-8859-1"
+                )
+        );
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        return new ResponseEntity<>(FileUtils.readFileToByteArray(file),
-                headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                FileUtils.readFileToByteArray(
+                        new File(pathMap.get(fileName))
+                ),
+                headers,
+                HttpStatus.CREATED
+        );
+    }
+
+    @ResponseBody
+    @RequestMapping("/fileNames/get")
+    public Set<String> getFileNames() {
+        return pathMap.keySet();
     }
 }

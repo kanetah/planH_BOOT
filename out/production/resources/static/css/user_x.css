@@ -6,12 +6,17 @@
     background-color: #0d47a1;
 }
 
+nav {
+    z-index: 4;
+}
+
 #username:before {
     content: "hi, ";
 }
 
 .wrapper {
     text-align: center;
+    z-index: 1;
 }
 
 .task {
@@ -19,6 +24,7 @@
     background-color: white;
     width: 50%;
     height: 300px;
+    z-index: 2;
 }
 
 .task_id {
@@ -79,7 +85,7 @@
 
 .submitFileName {
     position: absolute;
-    bottom: 40%;
+    top: 45%;
     right: 0;
     width: 30%;
     text-align: center;
@@ -133,7 +139,7 @@
     opacity: 0.0;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    z-index: 99;
+    z-index: 1;
     cursor: pointer;
 }
 
@@ -145,18 +151,18 @@
 .right-list {
     position: fixed;
     top: 170px;
-    right: -20%;
+    right: -18%;
     width: 20%;
-    height: 70%;
+    height: 60%;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    z-index: 100;
+    z-index: 3;
     background: white;
     box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 .right-list > span > i {
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 3px;
     cursor: pointer;
@@ -185,7 +191,13 @@
 }
 
 .loading-box-title {
-    float: right;
+    position: absolute;
+    right: 10px;
+}
+
+.download-box-title {
+    position: absolute;
+    left: 10px;
 }
 
 .submit {
@@ -211,6 +223,51 @@
 
 .submit-template > button {
     float: right;
+}
+
+.download_file_div {
+    position: fixed;
+    top: 170px;
+    left: -18%;
+    width: 20%;
+    height: 60%;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    z-index: 3;
+    background: white;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.download_file_div > span > i {
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    cursor: pointer;
+}
+
+.download_file_div > .download-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 90%;
+    background-color: whitesmoke;
+}
+
+.download_file_div > .download-box > a {
+    display: block;
+    width: 80%;
+    margin: auto;
+    color: #3e97eb;
+    text-align: center;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    font-weight: 300;
+}
+
+.download_file_div > .download-box > a:hover {
+    background-color: lightgray;
+    cursor: pointer;
 }
 
 .copyright {

@@ -61,6 +61,7 @@ $(document).ready(function () {
                 $.global.path_prefix_for_role = '/user/' + $.cookie('userCode');
                 body.append('<script src="js/user.js"><\/script>');
                 body.append('<script src="js/user-ajax.js"><\/script>');
+                body.append('<script src="js/vendor/jquery.rotate.min.js"><\/script>');
             } else
                 alert('Role Error')
         }
