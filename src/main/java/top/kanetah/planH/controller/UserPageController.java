@@ -19,7 +19,6 @@ public class UserPageController {
         Cookie cookie = new Cookie("userCode", userCode);
         cookie.setPath("/");
         response.addCookie(cookie);
-
         return "user_x";
     }
 }

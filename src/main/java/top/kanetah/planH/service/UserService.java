@@ -106,8 +106,9 @@ public class UserService {
         return ajaxList;
     }
 
-    public Map<String, Object> submitTask(long userCode, Long taskId, MultipartFile file)
-            throws IOException {
+    public void submitTask(
+            long userCode, Long taskId, MultipartFile file
+    ) throws IOException {
 
         Optional<Task> optional = repositoryService.taskRepository.findById(taskId);
         assert optional.isPresent();
@@ -133,10 +134,6 @@ public class UserService {
 
         Submit submit = new Submit(user, task, originalFilename, new Date());
         repositoryService.submitRepository.save(submit);
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("status", "patched");
-        return map;
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,

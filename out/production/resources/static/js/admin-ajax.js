@@ -9,7 +9,7 @@ $(document).ready(function () {
                 content: $('#content').val(),
                 deadline: $('#date').val()
             },
-            success: function (data) {
+            success: function () {
                 $('#subject').val("");
                 $('#title').val("");
                 $('#content').val("");

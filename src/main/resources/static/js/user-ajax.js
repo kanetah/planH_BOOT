@@ -2,8 +2,8 @@ $(document).ready(function () {
 
     $.ajaxPlanH({
         url: '/username',
-        success: function (data) {
-            $('#username').html(data.username);
+        success: function (username) {
+            $('#username').html(username);
         }
     });
 

@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user/{userCode}")
@@ -43,18 +41,15 @@ public class UserController {
             value = "/task/patch/{taskId}",
             method = RequestMethod.POST
     )
-    public Map<String, Object> submitTask(
+    public String submitTask(
             @PathVariable(value = "userCode") String userCode,
             @RequestPart(value = "file") MultipartFile file,
             @PathVariable(value = "taskId") String taskId
     ) throws IOException {
-        System.out.println("file: " + file.getName());
-        return
-                userService.submitTask(
-                        Long.valueOf(userCode),
-                        Long.valueOf(taskId),
-                        file
-                );
+        userService.submitTask(
+                Long.valueOf(userCode), Long.valueOf(taskId), file
+        );
+        return "patched";
     }
 
     @ResponseBody
@@ -62,14 +57,9 @@ public class UserController {
             value = "/username",
             method = RequestMethod.POST
     )
-    public Map<String, Object> readUsername(
+    public String readUsername(
             @PathVariable(value = "userCode") String userCode
     ) {
-        Map<String, Object> map = new HashMap<>();
-        map.put(
-                "username",
-                userService.getUserName(Long.valueOf(userCode))
-        );
-        return map;
+        return userService.getUserName(Long.valueOf(userCode));
     }
 }

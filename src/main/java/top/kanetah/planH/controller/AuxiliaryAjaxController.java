@@ -27,13 +27,8 @@ public class AuxiliaryAjaxController {
 
     @ResponseBody
     @RequestMapping(value = "/role/get")
-    public Map<String, Object> getRole() {
-
-        Map<String, Object> map = new HashMap<>();
-        List<String> roles = roleViewService.getRole();
-        roles.forEach(r ->
-                map.put("role", r));
-        return map;
+    public List<String> getRole() {
+        return roleViewService.getRole();
     }
 
     @SuppressWarnings("unchecked")
@@ -43,11 +38,11 @@ public class AuxiliaryAjaxController {
 
         Class clazz = Info.forName(infoClassPackageName + ".TaskInfo");
         Field[] fields = clazz.getDeclaredFields();
-        HashMap[] maps = new HashMap[fields.length];
-        for (int i = 0; i < maps.length; i++) {
-            maps[i] = new HashMap<String, String>();
-            maps[i].put("field", fields[i].getName());
+        HashMap[] fieldMap = new HashMap[fields.length];
+        for (int i = 0; i < fieldMap.length; i++) {
+            fieldMap[i] = new HashMap<String, String>();
+            fieldMap[i].put("field", fields[i].getName());
         }
-        return maps;
+        return fieldMap;
     }
 }

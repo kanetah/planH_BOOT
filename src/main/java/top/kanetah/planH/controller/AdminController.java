@@ -8,18 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/admin")
 public class AdminController {
-
-    private final Map<String, Object> map = new HashMap<>();
-
-    {
-        map.put("status", "created");
-    }
 
     private final AdminService adminService;
 
@@ -33,14 +25,14 @@ public class AdminController {
             value = "/task/create",
             method = RequestMethod.POST
     )
-    public Map<String, Object> createTask(
+    public String createTask(
             @RequestParam(value = "subject") String subject,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "content") String content,
             @RequestParam(value = "deadline") String deadline
     ) {
         adminService.createTask(new Task(subject, title, content, deadline));
-        return map;
+        return "created";
     }
 
     @ResponseBody
@@ -48,12 +40,12 @@ public class AdminController {
             value = "/user/create",
             method = RequestMethod.POST
     )
-    public Map<String, Object> createUser(
+    public String createUser(
             @RequestParam(value = "code") long code,
             @RequestParam(value = "name") String name
     ) {
         adminService.createUser(new User(code, name));
-        return map;
+        return "created";
     }
 
     @ResponseBody
@@ -61,11 +53,11 @@ public class AdminController {
             value = "/user/batch",
             method = RequestMethod.POST
     )
-    public Map<String, Object> batchCreateUser(
+    public String batchCreateUser(
             @RequestPart(value = "file") MultipartFile file
     ) throws IOException {
         adminService.batchCreateUser(file);
-        return map;
+        return "succeed";
     }
 
     @ResponseBody
@@ -73,9 +65,9 @@ public class AdminController {
             value = "/reset",
             method = RequestMethod.GET
     )
-    public Map<String, Object> resetAdmin(
+    public String resetAdmin(
     ) {
         adminService.resetAdmin();
-        return map;
+        return "succeed";
     }
 }

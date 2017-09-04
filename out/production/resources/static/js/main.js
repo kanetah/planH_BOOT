@@ -49,9 +49,9 @@ $(document).ready(function () {
 
     $.ajaxPlanH({
         const_url: '/role/get',
-        success: function (data) {
+        success: function (roles) {
             var body = $.global.body;
-            $.global.role = data.role;
+            $.global.role = roles[0];
 
             if ($.global.role === 'ADMIN') {
                 $.global.path_prefix_for_role = '/admin';
