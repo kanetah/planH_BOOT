@@ -25,6 +25,8 @@ public class DownloadController implements InitializingBean {
     private Map<String, String> pathMap = new HashMap<>();
     @Value(value = "${kanetah.planH.downloadFilePropertiesPath}")
     private Resource downloadFilePropertiesResource;
+    @Value(value = "${kanetah.planH.downloadFileDirectories}")
+    private String downloadFileDirectories;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -57,9 +59,10 @@ public class DownloadController implements InitializingBean {
         );
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return new ResponseEntity<>(
-                FileUtils.readFileToByteArray(
-                        new File(pathMap.get(fileName))
-                ),
+                FileUtils.readFileToByteArray(new File(
+//                        pathMap.get(fileName)
+                        downloadFileDirectories + "/" + fileName
+                )),
                 headers,
                 HttpStatus.CREATED
         );
@@ -67,7 +70,17 @@ public class DownloadController implements InitializingBean {
 
     @ResponseBody
     @RequestMapping("/fileNames/get")
-    public Set<String> getFileNames() {
-        return pathMap.keySet();
+    public List<String> getFileNames() {
+//        return pathMap.keySet();
+        return getFileList(downloadFileDirectories);
+    }
+
+    private List<String> getFileList(String strPath) {
+        List<String> fileNames = new ArrayList<>();
+        File[] files = new File(strPath).listFiles();
+        if (files != null)
+            for (File file : files)
+                fileNames.add(file.getName());
+        return fileNames;
     }
 }
