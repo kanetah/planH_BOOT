@@ -32,7 +32,7 @@ public class AdminController {
             @RequestParam(value = "deadline") String deadline
     ) {
         adminService.createTask(new Task(subject, title, content, deadline));
-        return "created";
+        return "[\"created\"]";
     }
 
     @ResponseBody
@@ -45,7 +45,7 @@ public class AdminController {
             @RequestParam(value = "name") String name
     ) {
         adminService.createUser(new User(code, name));
-        return "created";
+        return "[\"created\"]";
     }
 
     @ResponseBody
@@ -57,7 +57,7 @@ public class AdminController {
             @RequestPart(value = "file") MultipartFile file
     ) throws IOException {
         adminService.batchCreateUser(file);
-        return "succeed";
+        return "[\"succeed\"]";
     }
 
     @ResponseBody
@@ -68,6 +68,6 @@ public class AdminController {
     public String resetAdmin(
     ) {
         adminService.resetAdmin();
-        return "succeed";
+        return "[\"succeed\"]";
     }
 }

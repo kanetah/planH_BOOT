@@ -49,7 +49,7 @@ public class UserController {
         userService.submitTask(
                 Long.valueOf(userCode), Long.valueOf(taskId), file
         );
-        return "patched";
+        return "[\"patched\"]";
     }
 
     @ResponseBody
