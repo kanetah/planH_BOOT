@@ -60,6 +60,6 @@ public class UserController {
     public String readUsername(
             @PathVariable(value = "userCode") String userCode
     ) {
-        return userService.getUserName(Long.valueOf(userCode));
+        return "[\"" + userService.getUserName(Long.valueOf(userCode)) + "\"]";
     }
 }

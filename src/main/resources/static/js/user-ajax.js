@@ -3,7 +3,7 @@ $(document).ready(function () {
     $.ajaxPlanH({
         url: '/username',
         success: function (username) {
-            $('#username').html(username);
+            $('#username').html(username[0]);
         }
     });
 
@@ -57,13 +57,11 @@ $(document).ready(function () {
         })
     });
 
-
     $.addSubmit = function (form_data, task_id, label) {
 
         var right_list_icon = $('.right-list > span > i');
         var right_list = $('.right-list');
-        alert(right_list.css('right'));
-        if(right_list.css('right') !== '0px')
+        if (right_list.css('right') !== '0px')
             right_list_icon.click();
 
         var template = $('.submit-template').clone(true);
@@ -71,16 +69,26 @@ $(document).ready(function () {
         $('.loading-box').append(template);
         template.find('.loading-id').html(task_id);
         var progress_bar = template.find('> .progress > .progress-bar');
+        var per;
 
         $.ajaxPlanH({
             url: '/task/patch/' + task_id,
             data: new FormData(form_data[0]),
             cache: false,
             beforeSend: function () {
-                progress_bar.css('width', '30%');
+                progress_bar.css('width', '0');
+            },
+            xhr: function () {
+                var xhr = $.ajaxSettings.xhr();
+                if (xhr.upload) {
+                    xhr.upload.addEventListener("progress", function (evt) {
+                        per = Math.floor(100 * evt.loaded / evt.total);
+                        progress_bar.css("width", per + "%");
+                    }, false);
+                    return xhr;
+                }
             },
             success: function () {
-                progress_bar.css('width', '100%');
                 label.removeClass('label-danger');
                 label.addClass('label-info');
                 label.html('已提交');
@@ -103,7 +111,9 @@ $(document).ready(function () {
             var download_box = $('.download-box');
             $.each(data, function (index) {
                 download_box.append(
-                    '<a href="/download/' + data[index] + '">' + data[index] + '</a>'
+                    '<a href="/download/' + data[index] + '">'
+                    + data[index] +
+                    '</a>'
                 );
             });
         }
