@@ -5,6 +5,7 @@
       "subject",
       "title",
       "content",
+      "fileFormat",
       "deadline"
     ],
     "top.kanetah.planH.entity.relationship.Submit": [

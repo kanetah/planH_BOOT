@@ -15,11 +15,11 @@ $(document).ready(function () {
         template.css('opacity', '0');
         wrapper.append(template);
 
-        template.find('.task_id > span').html(task_data[$._info_fields[0]['field']]);
-        template.find('.subject > li > a').append(task_data[$._info_fields[1]['field']]);
-        template.find('.title').html(task_data[$._info_fields[2]['field']]);
-        template.find('.content > p').html(task_data[$._info_fields[3]['field']]);
-        template.find('.deadline > .date').html(task_data[$._info_fields[4]['field']].substr(0, 10));
+        template.find('.task_id > span').html(task_data['id']);
+        template.find('.subject > li > a').append(task_data['subject']);
+        template.find('.title').html(task_data['title']);
+        template.find('.content > p').html(task_data['content']);
+        template.find('.deadline > .date').html(task_data['deadline'].substr(0, 10));
         var label = template.find('.deadline > .label');
         template.find('.submitFileName > form > [type = "file"]')
             .on('change', function () {
@@ -32,9 +32,9 @@ $(document).ready(function () {
                     );
             });
         if (
-            task_data[$._info_fields[6]['field']] === undefined ||
-            task_data[$._info_fields[6]['field']] === null ||
-            task_data[$._info_fields[6]['field']] === ""
+            task_data['submitFileName'] === undefined ||
+            task_data['submitFileName'] === null ||
+            task_data['submitFileName'] === ""
         ) {
             label.addClass('label-danger');
             label.html('未提交');
@@ -42,21 +42,27 @@ $(document).ready(function () {
             label.addClass('label-info');
             label.html('已提交');
             var file = template.find('.submitFileName > a');
-            file.html(task_data[$._info_fields[6]['field']]);
+            file.html(task_data['submitFileName']);
         }
         var deadline = new Date(
-            task_data[$._info_fields[4]['field']]
+            task_data['deadline']
         );
         var now = new Date();
         if (now > deadline)
             label.before("<span class='label label-default'>已截止</span>");
+
+        if (task_data['fileFormat'] !== undefined &&
+            task_data['fileFormat'] !== null &&
+            task_data['fileFormat'] !== "")
+            template.find('.submitFileName > form > [type = "file"]')
+                .attr('accept', task_data['fileFormat']);
 
         template.find('.submit_div > .submit-button')
             .bind("click", function (event) {
                 var uploadForm = template.find('.submitFileName > form');
                 $.addSubmit(
                     uploadForm,
-                    task_data[$._info_fields[0]['field']],
+                    task_data['id'],
                     label
                 );
                 event.stopPropagation();

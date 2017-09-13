@@ -10,7 +10,8 @@ import org.springframework.web.servlet.config.annotation.*;
 import javax.servlet.MultipartConfigElement;
 
 @Configuration
-public class MvcConfig implements WebMvcConfigurer {
+public class
+MvcConfig implements WebMvcConfigurer {
 
     private final LoginInterceptor loginInterceptor;
 

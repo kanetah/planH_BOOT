@@ -7,12 +7,12 @@ $(document).ready(function () {
         }
     });
 
-    $.ajaxPlanH({
-        const_url: '/info/task',
-        success: function (info_fields) {
-            $._info_fields = info_fields;
-        }
-    });
+    // $.ajaxPlanH({
+    //     const_url: '/info/task',
+    //     success: function (info_fields) {
+    //         $._info_fields = info_fields;
+    //     }
+    // });
 
     $.task_index = 0;
 

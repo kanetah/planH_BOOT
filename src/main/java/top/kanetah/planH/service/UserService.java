@@ -46,9 +46,9 @@ public class UserService {
         repositoryService.submitRepository
                 .findAllByUser_UserCode(userCode).forEach(submit -> {
             Submit oldSubmit = submitMap.get(submit.getTask().getTaskId());
-            if (oldSubmit != null)
-                if (oldSubmit.getSubmitDate().compareTo(submit.getSubmitDate()) > 0)
-                    return;
+            if (oldSubmit != null
+                    && oldSubmit.getSubmitDate().compareTo(submit.getSubmitDate()) > 0)
+                return;
             submitMap.put(
                     submit.getTask().getTaskId(),
                     submit
@@ -74,11 +74,11 @@ public class UserService {
         }
 
         List<Task> tasks = BuffMap.get(userCode);
-        for (int i = from; i < to; ++i) {
+        for (int i = from; i < to; ++i)
             try {
                 Task task = tasks.get(i);
                 Submit submit = submitMap.get(task.getTaskId());
-                if (submit == null) submit = new Submit();
+                if (submit == null) submit = Submit.emptySubmit();
                 taskInfoList.add(
                         info.byOrigin(
                                 task,
@@ -88,7 +88,6 @@ public class UserService {
             } catch (IndexOutOfBoundsException e) {
                 break;
             }
-        }
 
         List<Map<String, Object>> ajaxList = new ArrayList<>();
         Object[] taskInfo = new Object[1];

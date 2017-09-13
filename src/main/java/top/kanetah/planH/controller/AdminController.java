@@ -29,9 +29,10 @@ public class AdminController {
             @RequestParam(value = "subject") String subject,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "content") String content,
+            @RequestParam(value = "format") String format,
             @RequestParam(value = "deadline") String deadline
     ) {
-        adminService.createTask(new Task(subject, title, content, deadline));
+        adminService.createTask(new Task(subject, title, content, format, deadline));
         return "[\"created\"]";
     }
 

@@ -1,10 +1,13 @@
 package top.kanetah.planH.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 import top.kanetah.planH.entity.relationship.SubordinateUser;
 import top.kanetah.planH.entity.node.*;
@@ -12,28 +15,51 @@ import top.kanetah.planH.entity.relationship.Authority;
 import top.kanetah.planH.entity.relationship.SubordinateTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.kanetah.planH.info.InfoImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class AdminService {
+public class AdminService implements InitializingBean {
 
     private final RepositoryService repositoryService;
-    @Value(value = "${kanetah.planH.userCodePrefix}")
-    private String codePrefix;
-    @Value(value = "${kanetah.planH.userCodeMark}")
-    private String codeMark;
-    @Value(value = "${kanetah.planH.userNameMark}")
-    private String nameMark;
     @Value(value = "${kanetah.planH.admin.password}")
     private String adminPassword;
+    @Value(value = "${kanetah.planH.admin.poi.config}")
+    private Resource poiConfigResource;
+
+    private String userCodePrefix;
+    private String userCodeMark;
+    private String userNameMark;
 
     @Autowired
     public AdminService(RepositoryService repositoryService) {
         this.repositoryService = repositoryService;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
+        Class<? extends AdminService> clazz = AdminService.this.getClass();
+        new ObjectMapper().readValue(
+                InfoImpl.inputStreamToFile(
+                        poiConfigResource.getInputStream()
+                ),
+                Map.class
+        ).forEach((k, v) -> {
+            try {
+                Field field = clazz.getDeclaredField(k.toString());
+                field.setAccessible(true);
+                field.set(AdminService.this, v);
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public void createTask(Task task) {
@@ -77,10 +103,10 @@ public class AdminService {
         HSSFRow row = sheet.getRow(1);
         final Map<String, Integer> index = new HashMap<>();
         row.forEach(r -> {
-            if (r.getStringCellValue().equals(codeMark))
-                index.put(codeMark, r.getColumnIndex());
-            if (r.getStringCellValue().equals(nameMark))
-                index.put(nameMark, r.getColumnIndex());
+            if (r.getStringCellValue().equals(userCodeMark))
+                index.put(userCodeMark, r.getColumnIndex());
+            if (r.getStringCellValue().equals(userNameMark))
+                index.put(userNameMark, r.getColumnIndex());
         });
 
         repositoryService.userRepository.deleteAll();
@@ -88,10 +114,17 @@ public class AdminService {
 
         for (int i = 2; i <= sheet.getLastRowNum(); ++i) {
             row = sheet.getRow(i);
-            String code = row.getCell(index.get(codeMark)).getStringCellValue()
-                    .substring(codePrefix.length());
-            String name = row.getCell(index.get(nameMark)).getStringCellValue();
-            createUser(new User(Long.valueOf(code), name));
+            createUser(new User(
+                    Long.valueOf(
+                            row.getCell(index.get(userCodeMark)).getStringCellValue()
+                                    .substring(userCodePrefix.length())
+                    ),
+                    row.getCell(index.get(userNameMark)).getStringCellValue()
+            ));
         }
+    }
+
+    public String getUserCodePrefix() {
+        return userCodePrefix;
     }
 }

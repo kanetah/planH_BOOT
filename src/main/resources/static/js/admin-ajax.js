@@ -7,12 +7,14 @@ $(document).ready(function () {
                 subject: $('#subject').val(),
                 title: $('#title').val(),
                 content: $('#content').val(),
+                format: $('#format').val(),
                 deadline: $('#date').val()
             },
             success: function () {
                 $('#subject').val("");
                 $('#title').val("");
                 $('#content').val("");
+                $('#format').val("");
                 $('#date').val("");
             }
         })

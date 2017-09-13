@@ -17,16 +17,23 @@ public class Task extends BaseEntity {
     private String title;
     private String content;
     private Date deadline;
+    private String fileFormat;
     @Relationship(type = "USER_SUBMIT_TASK", direction = Relationship.UNDIRECTED)
     private ArrayList<Submit> submits = new ArrayList<>();
 
     public Task() {
     }
 
-    public Task(String subject, String title, String content, String deadline) {
+    public Task(
+            String subject,
+            String title,
+            String content,
+            String fileFormat,
+            String deadline) {
         this.subject = subject;
         this.title = title;
         this.content = content;
+        this.fileFormat = fileFormat;
         String[] d = deadline.split("[.\\\\/-]");
         this.deadline = new GregorianCalendar(
                 Integer.valueOf(d[0]),
@@ -50,6 +57,10 @@ public class Task extends BaseEntity {
 
     public String getContent() {
         return content;
+    }
+
+    public String getFileFormat() {
+        return fileFormat;
     }
 
     public Date getDeadline() {

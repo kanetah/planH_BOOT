@@ -1,10 +1,11 @@
 package top.kanetah.planH.config;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import top.kanetah.planH.service.AdminService;
 import top.kanetah.planH.service.CheckMobileService;
 
 import javax.servlet.http.Cookie;
@@ -12,15 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor {
+public class LoginInterceptor implements HandlerInterceptor, InitializingBean {
 
-    @Value(value = "${kanetah.planH.userCodePrefix}")
     private String userCodePrefix;
+    private final AdminService adminService;
     private final CheckMobileService checkMobileService;
 
     @Autowired
-    public LoginInterceptor(CheckMobileService checkMobileService) {
+    public LoginInterceptor(
+            AdminService adminService,
+            CheckMobileService checkMobileService
+    ) {
+        this.adminService = adminService;
         this.checkMobileService = checkMobileService;
+    }
+
+    @Override
+    public void afterPropertiesSet(
+    ) throws Exception {
+        userCodePrefix = adminService.getUserCodePrefix();
     }
 
     @Override
