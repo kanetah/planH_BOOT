@@ -1,35 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74ef58f9-fa90-4d02-b374-af45f0254ed3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/properties/PoiConfig.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/download/FileProperties.json" afterPath="" />
+    <list default="true" id="74ef58f9-fa90-4d02-b374-af45f0254ed3" name="Default" comment="update file format control.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.0.2/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.0.2/fileHashes/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.0.2/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.0.2/fileHashes/fileHashes.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.0.2/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.0.2/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/application.properties" afterPath="$PROJECT_DIR$/out/production/resources/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/css/login.css" afterPath="$PROJECT_DIR$/out/production/resources/static/css/login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/js/admin-ajax.js" afterPath="$PROJECT_DIR$/out/production/resources/static/js/admin-ajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/js/user-ajax.js" afterPath="$PROJECT_DIR$/out/production/resources/static/js/user-ajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/static/js/user.js" afterPath="$PROJECT_DIR$/out/production/resources/static/js/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/templates/admin.html" afterPath="$PROJECT_DIR$/out/production/resources/templates/admin.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/resources/templates/user_x.html" afterPath="$PROJECT_DIR$/out/production/resources/templates/user_x.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/config/LoginInterceptor.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/config/LoginInterceptor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/config/MvcConfig.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/config/MvcConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/AdminController.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/AdminController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/DownloadController.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/DownloadController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/node/Task.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/node/Task.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/relationship/Submit.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/relationship/Submit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/AdminService.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/AdminService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/info/InfoEntity.json" afterPath="$PROJECT_DIR$/src/main/resources/info/InfoEntity.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/css/login.css" afterPath="$PROJECT_DIR$/src/main/resources/static/css/login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/admin-ajax.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/admin-ajax.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/css/user_x.css" afterPath="$PROJECT_DIR$/src/main/resources/static/css/user_x.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/user.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/user_x.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/user_x.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -77,24 +59,69 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="AdminService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/AdminService.java">
+      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="52" column="25" lean-forward="false" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+            <state relative-caret-position="527">
+              <caret line="128" column="33" lean-forward="true" selection-start-line="128" selection-start-column="33" selection-end-line="128" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="67" column="18" lean-forward="true" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user-ajax.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="103" column="40" lean-forward="true" selection-start-line="103" selection-start-column="40" selection-end-line="103" selection-end-column="40" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1505482528097" expanded="true" signature="1270:1276" ph="&amp;nbsp;" />
+                <marker date="1505482528097" expanded="true" signature="1276:1282" ph="&amp;nbsp;" />
+                <marker date="1505482528097" expanded="true" signature="1285:1291" ph="&amp;nbsp;" />
+                <marker date="1505482528097" expanded="true" signature="1291:1297" ph="&amp;nbsp;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user.js">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="53" column="52" lean-forward="true" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
+            <state relative-caret-position="720">
+              <caret line="44" column="9" lean-forward="true" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_x.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/user_x.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="213" column="24" lean-forward="true" selection-start-line="213" selection-start-column="24" selection-end-line="213" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_x.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user_x.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="143" column="32" lean-forward="false" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="32" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -117,7 +144,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>header-filter</find>
       <find>navbar-color</find>
       <find>tasks</find>
       <find>Typography</find>
@@ -134,7 +160,6 @@
       <find>$.widget</find>
       <find>on</find>
       <find>url</find>
-      <find>addSubmit</find>
       <find>$.addSubmit</find>
       <find>server</find>
       <find>0.0.0.0</find>
@@ -147,6 +172,8 @@
       <find>time</find>
       <find>alert</find>
       <find>field</find>
+      <find>addSubmit</find>
+      <find>.sub</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;&quot;&quot;InfoAttributeTemplate&quot;&quot;&quot;</replace>
@@ -506,9 +533,7 @@
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/CheckMobile.java" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/CheckMobileService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/login.js" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/css/user_x.css" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/AuxiliaryAjaxController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/main.js" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/UserPageController.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/UserController.java" />
@@ -517,12 +542,8 @@
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/node/Task.java" />
         <option value="$PROJECT_DIR$/src/main/resources/info/InfoEntity.json" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/admin-ajax.js" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/user_x.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/user.js" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/relationship/Submit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/login.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/DownloadController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/properties/PoiConfig.json" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/PlanHApplication.java" />
@@ -530,6 +551,12 @@
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/config/LoginInterceptor.java" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/AdminService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/user.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/user_x.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/user_x.css" />
+        <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/main.js" />
       </list>
     </option>
   </component>
@@ -576,7 +603,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -785,9 +815,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1075,7 +1102,9 @@
       <workItem from="1505221950766" duration="5123000" />
       <workItem from="1505266538876" duration="42000" />
       <workItem from="1505266595780" duration="5376000" />
-      <workItem from="1505307842345" duration="22000" />
+      <workItem from="1505307842345" duration="245000" />
+      <workItem from="1505452032292" duration="1353000" />
+      <workItem from="1505479319689" duration="4586000" />
     </task>
     <task id="LOCAL-00001" summary="fix spring mvc return ajax">
       <created>1502284874744</created>
@@ -1364,7 +1393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504705000156</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="update file format control.">
+      <created>1505307901052</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1505307901052</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1382,7 +1418,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="392461000" />
+    <option name="totallyTimeSpent" value="398623000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1399,6 +1435,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265074" sideWeight="0.49784017" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287827" sideWeight="0.49568033" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1407,10 +1444,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4675768" sideWeight="0.49784017" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32536975" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32536975" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2899568" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2688985" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1424,7 +1461,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287827" sideWeight="0.49568033" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1436,7 +1472,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="try to use bootstrap fileupload" />
     <MESSAGE value="fix user page js" />
     <MESSAGE value="fake progress" />
     <MESSAGE value="face to info interface" />
@@ -1461,7 +1496,8 @@
     <MESSAGE value="progress bar can show real-time progress" />
     <MESSAGE value="auto read files on dir." />
     <MESSAGE value="debug: return json string on rest controller." />
-    <option name="LAST_COMMIT_MESSAGE" value="debug: return json string on rest controller." />
+    <MESSAGE value="update file format control." />
+    <option name="LAST_COMMIT_MESSAGE" value="update file format control." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1580,24 +1616,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/user_x.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/repository/AuthorityRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="51" column="35" lean-forward="true" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -1665,13 +1687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user_x.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="121" column="33" lean-forward="true" selection-start-line="121" selection-start-column="33" selection-end-line="121" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -1706,14 +1721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="205" column="38" lean-forward="true" selection-start-line="205" selection-start-column="38" selection-end-line="205" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="86" column="18" lean-forward="true" selection-start-line="86" selection-start-column="18" selection-end-line="86" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1778,7 +1785,7 @@
         <state relative-caret-position="144">
           <caret line="4" column="64" lean-forward="false" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1788,17 +1795,10 @@
         <state relative-caret-position="576">
           <caret line="37" column="55" lean-forward="false" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1639#1640#0" expanded="true" />
-            <element signature="e#1698#1699#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1639#1640#0" expanded="false" />
+            <element signature="e#1698#1699#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1373">
-          <caret line="108" column="21" lean-forward="false" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1822,7 +1822,7 @@
         <state relative-caret-position="-36">
           <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1837,19 +1837,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/AdminService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
+        <state relative-caret-position="1044">
           <caret line="52" column="25" lean-forward="false" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="53" column="52" lean-forward="true" selection-start-line="53" selection-start-column="52" selection-end-line="53" selection-end-column="52" />
+        <state relative-caret-position="436">
+          <caret line="67" column="18" lean-forward="true" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="128" column="33" lean-forward="true" selection-start-line="128" selection-start-column="33" selection-end-line="128" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/user-ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="103" column="40" lean-forward="true" selection-start-line="103" selection-start-column="40" selection-end-line="103" selection-end-column="40" />
+          <folding>
+            <marker date="1505482528097" expanded="true" signature="1270:1276" ph="&amp;nbsp;" />
+            <marker date="1505482528097" expanded="true" signature="1276:1282" ph="&amp;nbsp;" />
+            <marker date="1505482528097" expanded="true" signature="1285:1291" ph="&amp;nbsp;" />
+            <marker date="1505482528097" expanded="true" signature="1291:1297" ph="&amp;nbsp;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="44" column="9" lean-forward="true" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/user_x.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="213" column="24" lean-forward="true" selection-start-line="213" selection-start-column="24" selection-end-line="213" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user_x.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="143" column="32" lean-forward="false" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="32" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

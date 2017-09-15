@@ -63,6 +63,7 @@ $(document).ready(function () {
                 $.addSubmit(
                     uploadForm,
                     task_data['id'],
+                    task_data['title'],
                     label
                 );
                 event.stopPropagation();

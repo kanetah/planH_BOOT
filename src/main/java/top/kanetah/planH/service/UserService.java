@@ -123,7 +123,7 @@ public class UserService {
         assert originalFilename != null;
         targetFile = new File(
                 path,
-                task.getTitle() + " " + userCode +
+                task.getTitle() + " " + userCode + " " + user.getUserName() +
                         originalFilename.substring(originalFilename.lastIndexOf('.'))
         );
         if (!targetFile.exists())
