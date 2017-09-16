@@ -6,6 +6,7 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
+import top.kanetah.planH.controller.LoginInterceptor;
 
 import javax.servlet.MultipartConfigElement;
 
@@ -32,7 +33,7 @@ MvcConfig implements WebMvcConfigurer {
             ViewControllerRegistry registry
     ) {
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/admin/").setViewName("admin");
+        registry.addViewController("/admin/").setViewName("admin_x");
         registry.addRedirectViewController(
                 "/css/bootstrap.css.map",
                 "/css/bootstrap.min.css.map"

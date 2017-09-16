@@ -15,17 +15,19 @@ import top.kanetah.planH.entity.relationship.Authority;
 import top.kanetah.planH.entity.relationship.SubordinateTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.kanetah.planH.info.Info;
 import top.kanetah.planH.info.InfoImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class AdminService implements InitializingBean {
 
+
+    private final Info info;
     private final RepositoryService repositoryService;
     @Value(value = "${kanetah.planH.admin.password}")
     private String adminPassword;
@@ -37,7 +39,11 @@ public class AdminService implements InitializingBean {
     private String userNameMark;
 
     @Autowired
-    public AdminService(RepositoryService repositoryService) {
+    public AdminService(
+            Info info,
+            RepositoryService repositoryService
+    ) {
+        this.info = info;
         this.repositoryService = repositoryService;
     }
 
@@ -126,5 +132,12 @@ public class AdminService implements InitializingBean {
 
     public String getUserCodePrefix() {
         return userCodePrefix;
+    }
+
+    public List<Object> getAllTask() {
+        List<Object> tasks = new ArrayList<>();
+        repositoryService.taskRepository.findAll().forEach(task ->
+                tasks.add(info.byOrigin(task)));
+        return tasks;
     }
 }

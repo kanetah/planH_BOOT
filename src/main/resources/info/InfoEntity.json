@@ -12,5 +12,15 @@
       "submitDate",
       "submitFileName"
     ]
+  },
+  "TaskForAdmin": {
+    "top.kanetah.planH.entity.node.Task": [
+      "id",
+      "subject",
+      "title",
+      "content",
+      "deadline",
+      "fileFormat"
+    ]
   }
 }

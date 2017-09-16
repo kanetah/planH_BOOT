@@ -1,4 +1,4 @@
-package top.kanetah.planH.config;
+package top.kanetah.planH.controller;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

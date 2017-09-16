@@ -43,10 +43,6 @@ public class Task extends BaseEntity {
         ).getTime();
     }
 
-    public Long getTaskId() {
-        return id;
-    }
-
     public String getSubject() {
         return subject;
     }

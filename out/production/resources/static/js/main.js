@@ -6,7 +6,6 @@ $(document).ready(function () {
     window.jQuery || document.getElementById("body").appendChild(document.createTextNode('<script src="js/vendor/jquery.min.js"><\/script>'));
     $.global.body = $('body');
     $.global.body.append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
-    $.global.body.append('<script src="js/vendor/bootstrap.min.js"></script>');
 
     $.ajaxPlanH = function (args) {
 
@@ -29,7 +28,9 @@ $(document).ready(function () {
         if (args.error === undefined && args.complete === undefined)
             args.error = function (XMLHttpRequest, textStatus, errorThrown) {
                 alert(
-                    "XMLHttpRequest: " + XMLHttpRequest + "\n" +
+                    "未预见的ajax请求错误，请联系管理员\n" +
+                    "XMLHttpRequestStatus: " + XMLHttpRequest.status + "\n" +
+                    "XMLHttpRequestReadyStatus: " + XMLHttpRequest.readyState + "\n" +
                     "textStatus: " + textStatus + "\n" +
                     "errorThrown: " + errorThrown
                 )

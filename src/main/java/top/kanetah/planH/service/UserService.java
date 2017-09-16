@@ -28,7 +28,8 @@ public class UserService {
     @Autowired
     public UserService(
             RepositoryService repositoryService,
-            InfoImpl info) {
+            InfoImpl info
+    ) {
         this.repositoryService = repositoryService;
         this.info = info;
     }
@@ -45,12 +46,12 @@ public class UserService {
         Map<Long, Submit> submitMap = new HashMap<>();
         repositoryService.submitRepository
                 .findAllByUser_UserCode(userCode).forEach(submit -> {
-            Submit oldSubmit = submitMap.get(submit.getTask().getTaskId());
+            Submit oldSubmit = submitMap.get(submit.getTask().getId());
             if (oldSubmit != null
                     && oldSubmit.getSubmitDate().compareTo(submit.getSubmitDate()) > 0)
                 return;
             submitMap.put(
-                    submit.getTask().getTaskId(),
+                    submit.getTask().getId(),
                     submit
             );
         });
@@ -61,7 +62,7 @@ public class UserService {
             repositoryService.taskRepository
                     .findAll().iterator()
                     .forEachRemaining(task -> {
-                        if (submitMap.get(task.getTaskId()) == null)
+                        if (submitMap.get(task.getId()) == null)
                             taskStack.push(task);
                         else
                             submitted.add(task);
@@ -77,7 +78,7 @@ public class UserService {
         for (int i = from; i < to; ++i)
             try {
                 Task task = tasks.get(i);
-                Submit submit = submitMap.get(task.getTaskId());
+                Submit submit = submitMap.get(task.getId());
                 if (submit == null) submit = Submit.emptySubmit();
                 taskInfoList.add(
                         info.byOrigin(

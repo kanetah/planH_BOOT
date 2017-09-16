@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/admin")
@@ -18,6 +21,16 @@ public class AdminController {
     @Autowired
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/task/get",
+            method = RequestMethod.POST
+    )
+    public Object[] getAllTask(
+    ){
+        return adminService.getAllTask().toArray();
     }
 
     @ResponseBody

@@ -57,7 +57,7 @@ $(document).ready(function () {
         })
     });
 
-    $.addSubmit = function (form_data, task_id, label) {
+    $.addSubmit = function (form_data, task_id, task_title, label) {
 
         var right_list_icon = $('.right-list > span > i');
         var right_list = $('.right-list');
@@ -67,7 +67,8 @@ $(document).ready(function () {
         var template = $('.submit-template').clone(true);
         template.removeClass('submit-template');
         $('.loading-box').append(template);
-        template.find('.loading-id').html(task_id);
+        var title = template.find('.loading-id');
+        title.html(task_title);
         var progress_bar = template.find('> .progress > .progress-bar');
         var per;
 
@@ -92,12 +93,15 @@ $(document).ready(function () {
                 label.removeClass('label-danger');
                 label.addClass('label-info');
                 label.html('已提交');
+                progress_bar.removeClass('progress-bar-striped');
+                progress_bar.text('完成');
             },
             error: function () {
                 progress_bar.css('background-color', 'red');
                 label.removeClass('label-info');
                 label.addClass('label-danger');
                 label.html('提交失败');
+                progress_bar.text('失败');
             },
             complete: function () {
                 progress_bar.removeClass('active');
