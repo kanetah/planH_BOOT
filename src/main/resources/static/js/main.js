@@ -26,13 +26,11 @@ $(document).ready(function () {
         if (args.dataType === undefined)
             args.dataType = "json";
         if (args.error === undefined && args.complete === undefined)
-            args.error = function (XMLHttpRequest, textStatus, errorThrown) {
+            args.error = function (XMLHttpRequest) {
                 alert(
                     "未预见的ajax请求错误，请联系管理员\n" +
                     "XMLHttpRequestStatus: " + XMLHttpRequest.status + "\n" +
-                    "XMLHttpRequestReadyStatus: " + XMLHttpRequest.readyState + "\n" +
-                    "textStatus: " + textStatus + "\n" +
-                    "errorThrown: " + errorThrown
+                    "XMLHttpRequestReadyStatus: " + XMLHttpRequest.readyState
                 )
             };
 

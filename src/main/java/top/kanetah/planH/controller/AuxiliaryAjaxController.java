@@ -1,12 +1,11 @@
 package top.kanetah.planH.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import top.kanetah.planH.info.Info;
 import top.kanetah.planH.service.RoleViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -44,5 +43,11 @@ public class AuxiliaryAjaxController {
             fieldMap[i].put("field", fields[i].getName());
         }
         return fieldMap;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/shutdown", method = RequestMethod.POST)
+    public void shutdown(){
+        Runtime.getRuntime().exit(0);
     }
 }

@@ -15,61 +15,101 @@ $(document).ready(function () {
                     'fileFormat'
                 ];
                 $.each(ths, function (i) {
-                    var  new_td = document.createElement("td");
+                    var new_td = document.createElement("td");
                     new_td.innerHTML = elem[ths[i]];
                     new_tr.append(new_td);
+                    $(new_tr).attr(ths[i], elem[ths[i]]);
+                });
+                $(new_tr).bind('click', function (event) {
+                    var modal = $('#update_task_Modal');
+                    var task_id = $(this).attr('id');
+                    var body = modal.find('div > div > .modal-body');
+                    body.find('#update_id').html(task_id);
+                    var inputs = body.find('div');
+                    inputs.find('#update_subject').val($(this).attr('subject'));
+                    inputs.find('#update_title').val($(this).attr('title'));
+                    inputs.find('#update_content').val($(this).attr('content'));
+                    inputs.find('#update_format').val($(this).attr('fileFormat'));
+                    inputs.find('#update_date').val($(this).attr('deadline'));
+                    modal.modal('show');
+                    event.stopPropagation();
                 });
                 task_table.append(new_tr);
             });
         }
     });
 
-    // $('#task').click(function () {
-    //     $.ajaxPlanH({
-    //         url: '/task/create',
-    //         data: {
-    //             subject: $('#subject').val(),
-    //             title: $('#title').val(),
-    //             content: $('#content').val(),
-    //             format: $('#format').val(),
-    //             deadline: $('#date').val()
-    //         },
-    //         success: function () {
-    //             $('#subject').val("");
-    //             $('#title').val("");
-    //             $('#content').val("");
-    //             $('#format').val("");
-    //             $('#date').val("");
-    //         }
-    //     })
-    // });
-    //
-    // $('#user').click(function () {
-    //     $.ajaxPlanH({
-    //         url: '/user/create',
-    //         data: {
-    //             code: $('#code').val(),
-    //             name: $('#name').val()
-    //         },
-    //         success: function () {
-    //             $('#code').val("");
-    //             $('#name').val("");
-    //         }
-    //     })
-    // });
-    //
-    // $('#batch_user').click(function () {
-    //     var form_data = $('#batch_user_form');
-    //     $.ajaxPlanH({
-    //         url: '/user/batch',
-    //         data: new FormData(form_data[0]),
-    //         cache: false,
-    //         success: function () {
-    //             alert('成功');
-    //         },
-    //         error: function () {
-    //             alert('失败');
-    //         }
-    //     });
-    // });
+    $('#create_task').click(function () {
+        var inputs = $('#create_task_Modal').find('div > div > #addTask > div');
+        $.ajaxPlanH({
+            url: '/task/create',
+            data: {
+                subject: inputs.find('#subject').val(),
+                title: inputs.find('#title').val(),
+                content: inputs.find('#content').val(),
+                format: inputs.find('#format').val(),
+                deadline: inputs.find('#date').val()
+            },
+            success: function () {
+                location.reload(true);
+            }
+        });
+    });
+
+    $('#update_task').click(function () {
+        var task_id = $('#update_id').html();
+        var inputs = $('#update_task_Modal').find('div > div > .modal-body > div');
+        $.ajaxPlanH({
+            url: '/task/update',
+            data: {
+                id: task_id,
+                subject: inputs.find('#update_subject').val(),
+                title: inputs.find('#update_title').val(),
+                content: inputs.find('#update_content').val(),
+                format: inputs.find('#update_format').val(),
+                deadline: inputs.find('#update_date').val()
+            },
+            success: function () {
+                location.reload(true);
+            }
+        });
+    });
+
+    $('#create_user').click(function () {
+        $.ajaxPlanH({
+            url: '/user/create',
+            data: {
+                code: $('#code').val(),
+                name: $('#name').val()
+            },
+            success: function () {
+                $('#cancel_create_user').trigger('click');
+            }
+        })
+    });
+
+    $('#batch_user').click(function () {
+        var form_data = $('#batch_user_form');
+        $.ajaxPlanH({
+            url: '/user/batch',
+            data: new FormData(form_data[0]),
+            cache: false,
+            success: function () {
+                alert('成功');
+            },
+            error: function () {
+                alert('失败');
+            }
+        });
+    });
+
+    $('#shutdown').click(function () {
+        $.ajaxPlanH({
+            const_url: '/shutdown',
+            error: function () {
+            }
+        });
+        $('.navbar-brand').append('（服务已停止）');
+        $('#clear_shutdown').trigger('click');
+    });
 });

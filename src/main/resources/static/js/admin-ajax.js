@@ -102,4 +102,14 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#shutdown').click(function () {
+        $.ajaxPlanH({
+            const_url: '/shutdown',
+            error: function () {
+            }
+        });
+        $('.navbar-brand').append('（服务已停止）');
+        $('#clear_shutdown').trigger('click');
+    });
 });
