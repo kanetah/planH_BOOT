@@ -47,6 +47,7 @@ main{
 #remember_div {
     color: white;
     float: right;
+    padding: 5px;
 }
 
 #remember_div > label {
