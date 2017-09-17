@@ -29,7 +29,8 @@ public class Task extends BaseEntity {
             String title,
             String content,
             String fileFormat,
-            String deadline) {
+            String deadline
+    ) {
         this.subject = subject;
         this.title = title;
         this.content = content;
@@ -65,5 +66,31 @@ public class Task extends BaseEntity {
 
     public ArrayList<Submit> getSubmits() {
         return submits;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setDeadline(String deadline) {
+        String[] d = deadline.split("[.\\\\/-]");
+        this.deadline = new GregorianCalendar(
+                Integer.valueOf(d[0]),
+                Integer.valueOf(d[1]) - 1,
+                Integer.valueOf(d[2]) + 1,
+                7, 59, 59
+        ).getTime();
+    }
+
+    public void setFileFormat(String fileFormat) {
+        this.fileFormat = fileFormat;
     }
 }

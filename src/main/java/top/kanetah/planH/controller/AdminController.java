@@ -51,6 +51,32 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(
+            value = "/task/update",
+            method = RequestMethod.POST
+    )
+    public String updateTask(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "subject") String subject,
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "content") String content,
+            @RequestParam(value = "format") String format,
+            @RequestParam(value = "deadline") String deadline
+    ) {
+        if(deadline.contains("T"))
+            deadline = deadline.substring(0, deadline.indexOf("T"));
+        adminService.updateTask(
+                Long.valueOf(id),
+                subject,
+                title,
+                content,
+                format,
+                deadline
+        );
+        return "[\"updated\"]";
+    }
+
+    @ResponseBody
+    @RequestMapping(
             value = "/user/create",
             method = RequestMethod.POST
     )

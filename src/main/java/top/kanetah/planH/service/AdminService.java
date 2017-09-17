@@ -75,6 +75,26 @@ public class AdminService implements InitializingBean {
         repositoryService.subordinateTaskRepository.save(subordinateTask);
     }
 
+    public void updateTask(
+            Long id,
+            String subject,
+            String title,
+            String content,
+            String fileFormat,
+            String deadline
+    ) {
+
+        Optional<Task> optional = repositoryService.taskRepository.findById(id);
+        assert optional.isPresent();
+        Task task = optional.get();
+        task.setSubject(subject);
+        task.setTitle(title);
+        task.setContent(content);
+        task.setFileFormat(fileFormat);
+        task.setDeadline(deadline);
+        repositoryService.taskRepository.save(task);
+    }
+
     public void createUser(User user) {
 
         UserRoot userRoot = repositoryService.userRootRepository.find();
