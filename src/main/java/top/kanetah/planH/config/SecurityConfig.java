@@ -2,7 +2,6 @@ package top.kanetah.planH.config;
 
 import top.kanetah.planH.service.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,7 +11,6 @@ import org.springframework.security.web.authentication.rememberme.InMemoryTokenR
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan("top.kanetah.planH.service")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserLoginService userLoginService;

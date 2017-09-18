@@ -1,4 +1,4 @@
-package top.kanetah.planH.controller;
+package top.kanetah.planH.interceptor;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor, InitializingBean {
+public class PlanHLoginInterceptor implements HandlerInterceptor, InitializingBean {
 
     private String userCodePrefix;
     private final AdminService adminService;
     private final CheckMobileService checkMobileService;
 
     @Autowired
-    public LoginInterceptor(
+    public PlanHLoginInterceptor(
             AdminService adminService,
             CheckMobileService checkMobileService
     ) {

@@ -87,4 +87,8 @@ public class Task extends BaseEntity {
     public void setFileFormat(String fileFormat) {
         this.fileFormat = fileFormat;
     }
+
+    public Date getDeadlineOnJVM() {
+        return new Date(deadline.getTime() - 8 * 60 * 60 * 1000);
+    }
 }

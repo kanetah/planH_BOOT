@@ -6,18 +6,17 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
-import top.kanetah.planH.controller.LoginInterceptor;
+import top.kanetah.planH.interceptor.PlanHLoginInterceptor;
 
 import javax.servlet.MultipartConfigElement;
 
 @Configuration
-public class
-MvcConfig implements WebMvcConfigurer {
+public class MvcConfig implements WebMvcConfigurer {
 
-    private final LoginInterceptor loginInterceptor;
+    private final PlanHLoginInterceptor loginInterceptor;
 
     @Autowired
-    public MvcConfig(LoginInterceptor loginInterceptor) {
+    public MvcConfig(PlanHLoginInterceptor loginInterceptor) {
         this.loginInterceptor = loginInterceptor;
     }
 
