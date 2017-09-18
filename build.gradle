@@ -38,13 +38,17 @@ repositories {
 
 dependencies {
 
+    compile('aspectj:aspectjrt:1.8.9')
+    compile('aspectj:aspectjtools:1.8.9')
+
+    compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-data-neo4j')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-data-rest')
 
-    compile('net.sourceforge.nekohtml:nekohtml:1.9.22')
     compile('org.apache.poi:poi:3.16')
+    compile('net.sourceforge.nekohtml:nekohtml:1.9.22')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')

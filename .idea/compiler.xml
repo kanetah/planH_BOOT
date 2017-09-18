@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AjcSettings">
+    <option name="ajcPath" value="C:/Program Files/Java/aspectjtools-1.8.10.jar" />
+  </component>
   <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="ajc" />
     <bytecodeTargetLevel>
       <module name="planH_BOOT_main" target="1.8" />
       <module name="planH_BOOT_test" target="1.8" />
