@@ -30,20 +30,20 @@ public class AuxiliaryAjaxController {
         return roleViewService.getRole();
     }
 
-    @SuppressWarnings("unchecked")
-    @ResponseBody
-    @RequestMapping(value = "/info/task")
-    public Map[] getTaskInfo() {
-
-        Class clazz = Info.forName(infoClassPackageName + ".TaskInfo");
-        Field[] fields = clazz.getDeclaredFields();
-        HashMap[] fieldMap = new HashMap[fields.length];
-        for (int i = 0; i < fieldMap.length; i++) {
-            fieldMap[i] = new HashMap<String, String>();
-            fieldMap[i].put("field", fields[i].getName());
-        }
-        return fieldMap;
-    }
+//    @SuppressWarnings("unchecked")
+//    @ResponseBody
+//    @RequestMapping(value = "/info/task")
+//    public Map[] getTaskInfo() {
+//
+//        Class clazz = Info.forName(infoClassPackageName + ".TaskInfo");
+//        Field[] fields = clazz.getDeclaredFields();
+//        HashMap[] fieldMap = new HashMap[fields.length];
+//        for (int i = 0; i < fieldMap.length; i++) {
+//            fieldMap[i] = new HashMap<String, String>();
+//            fieldMap[i].put("field", fields[i].getName());
+//        }
+//        return fieldMap;
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/shutdown", method = RequestMethod.POST)

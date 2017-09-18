@@ -52,6 +52,9 @@ $(document).ready(function () {
     };
     drag($("main"));
 
-    if ($.cookie("checkMobile") === "true")
+    if ($.cookie("checkMobile") === "true") {
+        $('#content').css('width', '100%');
+        $('form').css('width', '90%');
         hideUserInput();
+    }
 });

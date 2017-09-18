@@ -35,13 +35,7 @@ public class Task extends BaseEntity {
         this.title = title;
         this.content = content;
         this.fileFormat = fileFormat;
-        String[] d = deadline.split("[.\\\\/-]");
-        this.deadline = new GregorianCalendar(
-                Integer.valueOf(d[0]),
-                Integer.valueOf(d[1]) - 1,
-                Integer.valueOf(d[2]) + 1,
-                7, 59, 59
-        ).getTime();
+        setDeadline(deadline);
     }
 
     public String getSubject() {

@@ -5,3 +5,7 @@
 #update_id:before {
     content: "task_id：";
 }
+
+.navbar-header {
+    cursor: default;
+}
