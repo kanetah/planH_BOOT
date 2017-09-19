@@ -46,6 +46,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-data-rest')
+    compile('org.springframework.boot:spring-boot-starter-mail')
 
     compile('org.apache.poi:poi:3.16')
     compile('net.sourceforge.nekohtml:nekohtml:1.9.22')

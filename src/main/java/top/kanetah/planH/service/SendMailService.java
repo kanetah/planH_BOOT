@@ -1,16 +1,31 @@
 package top.kanetah.planH.service;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.tools.TreeMultiValueMap;
 
+import javax.mail.internet.MimeMessage;
 import java.util.*;
 
 @Service
 public class SendMailService implements InitializingBean {
 
     private static TreeMultiValueMap<Date, Long> dateMap = new TreeMultiValueMap<>();
+    private final RepositoryService repositoryService;
+    private final JavaMailSenderImpl mailSender;
+
+    @Autowired
+    public SendMailService(
+            RepositoryService repositoryService,
+            JavaMailSenderImpl mailSender
+    ) {
+        this.repositoryService = repositoryService;
+        this.mailSender = mailSender;
+    }
 
     public static void setTimer(Task task) {
         if (new Date().before(task.getDeadlineOnJVM()))
@@ -50,6 +65,20 @@ public class SendMailService implements InitializingBean {
     }
 
     private void sendMail(Long taskId) {
-        System.out.println("id: " + taskId);
+        try {
+            System.out.println("id: " + taskId);
+            Optional<Task> optional = repositoryService.taskRepository.findById(taskId);
+            assert optional.isPresent();
+            Task task = optional.get();
+
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo("2205485120@qq.com");
+            helper.setSubject("test2");
+            helper.setText("logger test");
+            mailSender.send(message);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
