@@ -21,7 +21,6 @@ public class UserLoginService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         Authority authority = authorityRepository.findByUser_UserName(username);
         if(authority == null)
             throw new UsernameNotFoundException(username);

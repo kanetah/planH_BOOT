@@ -9,8 +9,6 @@ import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.repository.TaskRepository;
 import top.kanetah.planH.service.SendMailService;
 
-import java.util.Date;
-
 @Component
 public aspect TaskDeadlineAspect implements InitializingBean {
 
@@ -28,14 +26,14 @@ public aspect TaskDeadlineAspect implements InitializingBean {
         );
     }
 
-    pointcut changeTaskDeadline(Date deadline):
-            set(Date top.kanetah.planH.entity.node.Task.deadline) && args(deadline);
+    pointcut changeTaskDeadline():
+            set(java.util.Date top.kanetah.planH.entity.node.Task.deadline);
 
-    after(Date deadline): changeTaskDeadline(deadline) {
+    after(): changeTaskDeadline() {
         Task task = (Task) thisJoinPoint.getTarget();
         logger.info(
-                "Task[id=" + task.getId() + "] deadline was changed," +
-                        " set a new send mail timer on " + task.getDeadlineOnJVM() + ".");
-        SendMailService.setTimer(task);
+                "Task[id=" + task.getId() + "] deadline was changed, " +
+                        "set a new timer on " + task.getDeadlineOnJVM() + " for send mail.");
+        SendMailService.setTimer(task, task.getId());
     }
 }

@@ -95,7 +95,6 @@ class DynamicEnumFactory {
     private static void setFailSafeFieldValue(
             Field field, Object target, Object value
     ) throws NoSuchFieldException, IllegalAccessException {
-
         field.setAccessible(true);
 
         Field modifiersField = Field.class.getDeclaredField("modifiers");
@@ -120,7 +119,6 @@ class DynamicEnumFactory {
     private static void blankField(
             Class<?> enumClass, String fieldName
     ) throws NoSuchFieldException, IllegalAccessException {
-
         for (Field field : Class.class.getDeclaredFields()) {
             if (field.getName().contains(fieldName)) {
                 AccessibleObject.setAccessible(new Field[]{field}, true);
@@ -183,7 +181,6 @@ class DynamicEnumFactory {
             Class<?>[] additionalTypes,
             Object[] additionalValues
     ) throws NoSuchMethodException, InvocationTargetException, InstantiationException {
-
         Object[] parms = new Object[additionalValues.length + 2];
         parms[0] = value;
         parms[1] = ordinal;

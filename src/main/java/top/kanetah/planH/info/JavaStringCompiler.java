@@ -95,7 +95,6 @@ public class JavaStringCompiler {
      * @return 被加载类的Class对象
      */
     Class<?> loadClass(String name, Map<String, byte[]> classBytes) {
-
         try (MemoryClassLoader classLoader = new MemoryClassLoader(classBytes)) {
             return classLoader.loadClass(name);
         } catch (IOException | ClassNotFoundException e) {

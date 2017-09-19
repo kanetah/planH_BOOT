@@ -28,8 +28,7 @@ public class AdminController {
             value = "/task/get",
             method = RequestMethod.POST
     )
-    public Object[] getAllTask(
-    ){
+    public Object[] getAllTask(){
         return adminService.getAllTask().toArray();
     }
 
@@ -105,8 +104,7 @@ public class AdminController {
             value = "/reset",
             method = RequestMethod.GET
     )
-    public String resetAdmin(
-    ) {
+    public String resetAdmin() {
         adminService.resetAdmin();
         return "[\"succeed\"]";
     }

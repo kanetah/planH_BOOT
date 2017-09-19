@@ -41,7 +41,6 @@ public class UserService {
     }
 
     public List<Map<String, Object>> getTask(int from, int to, long userCode) {
-
         List<Object> taskInfoList = new ArrayList<>();
         Map<Long, Submit> submitMap = new HashMap<>();
         repositoryService.submitRepository
@@ -109,7 +108,6 @@ public class UserService {
     public void submitTask(
             long userCode, Long taskId, MultipartFile file
     ) throws IOException {
-
         Optional<Task> optional = repositoryService.taskRepository.findById(taskId);
         assert optional.isPresent();
         Task task = optional.get();

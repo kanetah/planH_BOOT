@@ -16,7 +16,7 @@ import top.kanetah.planH.entity.relationship.SubordinateTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.kanetah.planH.info.Info;
-import top.kanetah.planH.info.InfoImpl;
+import top.kanetah.planH.tools.FileTool;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +25,6 @@ import java.util.*;
 
 @Service
 public class AdminService implements InitializingBean {
-
 
     private final Info info;
     private final RepositoryService repositoryService;
@@ -50,10 +49,9 @@ public class AdminService implements InitializingBean {
     @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
-
         Class<? extends AdminService> clazz = AdminService.this.getClass();
         new ObjectMapper().readValue(
-                InfoImpl.inputStreamToFile(
+                FileTool.inputStreamToFile(
                         poiConfigResource.getInputStream()
                 ),
                 Map.class
@@ -69,7 +67,6 @@ public class AdminService implements InitializingBean {
     }
 
     public void createTask(Task task) {
-
         TaskRoot taskRoot = repositoryService.taskRootRepository.find();
         SubordinateTask subordinateTask = new SubordinateTask(taskRoot, task);
         repositoryService.subordinateTaskRepository.save(subordinateTask);
@@ -83,7 +80,6 @@ public class AdminService implements InitializingBean {
             String fileFormat,
             String deadline
     ) {
-
         Optional<Task> optional = repositoryService.taskRepository.findById(id);
         assert optional.isPresent();
         Task task = optional.get();
@@ -96,7 +92,6 @@ public class AdminService implements InitializingBean {
     }
 
     public void createUser(User user) {
-
         UserRoot userRoot = repositoryService.userRootRepository.find();
         SubordinateUser subordinateUser = new SubordinateUser(userRoot, user);
         repositoryService.subordinateUserRepository.save(subordinateUser);
@@ -108,7 +103,6 @@ public class AdminService implements InitializingBean {
     }
 
     public void resetAdmin() {
-
         User admin = new User(Long.valueOf(adminPassword), "admin");
         UserRoot userRoot = repositoryService.userRootRepository.find();
         SubordinateUser subordinateUser = new SubordinateUser(userRoot, admin);
@@ -121,7 +115,6 @@ public class AdminService implements InitializingBean {
     }
 
     public void batchCreateUser(MultipartFile file) throws IOException {
-
         InputStream inputStream = file.getInputStream();
         POIFSFileSystem fs = new POIFSFileSystem(inputStream);
         HSSFWorkbook workbook = new HSSFWorkbook(fs);

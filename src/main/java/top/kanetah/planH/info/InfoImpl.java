@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
+import top.kanetah.planH.tools.FileTool;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -56,13 +57,13 @@ public class InfoImpl implements Info, InitializingBean {
     public void afterPropertiesSet() throws Exception {
 
         File infoEntityJsonFile =
-                inputStreamToFile(infoEntityJsonResource.getInputStream());
+                FileTool.inputStreamToFile(infoEntityJsonResource.getInputStream());
         File infoEntityFrameTemplateFile =
-                inputStreamToFile(infoEntityFrameTemplateResource.getInputStream());
+                FileTool.inputStreamToFile(infoEntityFrameTemplateResource.getInputStream());
         File infoEntityFieldTemplateFile =
-                inputStreamToFile(infoEntityFieldTemplateResource.getInputStream());
+                FileTool.inputStreamToFile(infoEntityFieldTemplateResource.getInputStream());
         File infoEntityMethodTemplateFile =
-                inputStreamToFile(infoEntityMethodTemplateResource.getInputStream());
+                FileTool.inputStreamToFile(infoEntityMethodTemplateResource.getInputStream());
         // 指定报表类内容的配置是一个json文件，通过jackson处理
         Map jsonData =
                 new ObjectMapper().readValue(infoEntityJsonFile, Map.class);
@@ -179,7 +180,7 @@ public class InfoImpl implements Info, InitializingBean {
 
         /* 开始加载枚举类 */
         File infoAttributeTemplateFile =
-                inputStreamToFile(infoAttributeTemplateResource.getInputStream());
+                FileTool.inputStreamToFile(infoAttributeTemplateResource.getInputStream());
         Reader reader = new FileReader(infoAttributeTemplateFile);
         String contentString = FileCopyUtils.copyToString(reader);
 
@@ -260,26 +261,5 @@ public class InfoImpl implements Info, InitializingBean {
             }
         }
         return field;
-    }
-
-    /**
-     * 将输入流转换为（临时）文件
-     * @param ins 输入流
-     */
-    public static File inputStreamToFile(InputStream ins) {
-        try {
-            File file = File.createTempFile("planHTemplate",".tmp");
-            OutputStream os = new FileOutputStream(file);
-            int bytesRead;
-            byte[] buffer = new byte[8192];
-            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-            os.close();
-            ins.close();
-            return file;
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
     }
 }
