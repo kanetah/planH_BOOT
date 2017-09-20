@@ -49,7 +49,7 @@ public class AdminService implements InitializingBean {
     @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
-        Class<? extends AdminService> clazz = AdminService.this.getClass();
+        Class<? extends AdminService> clazz = AdminService.class;
         new ObjectMapper().readValue(
                 FileTool.inputStreamToFile(
                         poiConfigResource.getInputStream()

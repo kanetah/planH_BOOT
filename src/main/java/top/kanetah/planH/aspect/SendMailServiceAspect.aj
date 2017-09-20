@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Properties;
@@ -20,12 +21,17 @@ public aspect SendMailServiceAspect {
 
     public SendMailServiceAspect() {
         try {
-            Properties prop = new Properties();
-            InputStream in = this.getClass().getClassLoader()
-                    .getResourceAsStream("application.properties");
-            prop.load(in);
-            mailAddress = prop.getProperty("spring.mail.username");
-            in.close();
+            InputStream in = null;
+            try {
+                Properties prop = new Properties();
+                in = this.getClass().getClassLoader()
+                        .getResourceAsStream("application.properties");
+                prop.load(in);
+                mailAddress = prop.getProperty("spring.mail.username");
+            } finally {
+                if (in != null)
+                    in.close();
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -49,9 +55,9 @@ public aspect SendMailServiceAspect {
 
     after(MimeMessage message): sendMessage(message) {
         try {
-            JavaMailSenderImpl mailSender = (JavaMailSenderImpl)thisJoinPoint.getTarget();
+            JavaMailSenderImpl mailSender = (JavaMailSenderImpl) thisJoinPoint.getTarget();
             logger.info("Send e-mail '" + message.getSubject() +
-                    "' to '" + Arrays.deepToString(message.getReplyTo()) + "', host: '" +
+                    "' to '" + Arrays.deepToString(message.getReplyTo()) + "', smtp server host: '" +
                     mailSender.getHost() + ":" + mailSender.getPort() + "'."
             );
         } catch (MessagingException e) {

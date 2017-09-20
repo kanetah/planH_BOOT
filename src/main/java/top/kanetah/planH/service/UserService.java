@@ -114,7 +114,7 @@ public class UserService {
         User user = repositoryService.userRepository.findByUserCode(userCode);
 
         String originalFilename = file.getOriginalFilename();
-        String path = storePath + "/" + task.getSubject() + "/" + taskId + "_" + task.getTitle();
+        String path = storePath + "/" + task.getSubject() + "/" + task.getTitle();
         File targetFile = new File(path);
         if (!targetFile.exists())
             if (!targetFile.mkdirs())

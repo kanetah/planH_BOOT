@@ -1,0 +1,32 @@
+[
+  {
+    "subject":"Java Web程序设计",
+    "teacher":"葛江铃",
+    "target":"2205485120@qq.com"
+  },
+  {
+    "subject":"移动云计算服务端技术",
+    "teacher":"董庆伟",
+    "target":"2205485120@qq.com"
+  },
+  {
+    "subject":"面向对象的系统分析与设计",
+    "teacher":"张素娟",
+    "target":"2205485120@qq.com"
+  },
+  {
+    "subject":"软件项目管理",
+    "teacher":"刘斌",
+    "target":"2205485120@qq.com"
+  },
+  {
+    "subject":"专业英语",
+    "teacher":"陈梅芬",
+    "target":"2205485120@qq.com"
+  },
+  {
+    "subject":"软件工程导论",
+    "teacher":"张振军",
+    "target":"2205485120@qq.com"
+  }
+]

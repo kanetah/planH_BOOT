@@ -39,6 +39,17 @@ $(document).ready(function () {
         }
     });
 
+    $.ajaxPlanH({
+        const_url: "/subject/names",
+        success: function (date) {
+            $.each(date, function (idx, elem) {
+                $('#update_subject').append(
+                    '<option>' + elem + '</option>'
+                );
+            });
+        }
+    });
+
     $('#create_task').click(function () {
         var inputs = $('#create_task_Modal').find('div > div > #addTask > div');
         $.ajaxPlanH({

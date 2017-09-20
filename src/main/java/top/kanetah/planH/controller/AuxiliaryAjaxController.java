@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import top.kanetah.planH.service.RoleViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import top.kanetah.planH.service.SendMailService;
 
 import java.util.List;
 
@@ -13,16 +14,27 @@ public class AuxiliaryAjaxController {
     @Value(value = "${kanetah.planH.infoClassPackageName}")
     private String infoClassPackageName;
     private final RoleViewService roleViewService;
+    private final SendMailService sendMailService;
 
     @Autowired
-    public AuxiliaryAjaxController(RoleViewService roleViewService) {
+    public AuxiliaryAjaxController(
+            RoleViewService roleViewService,
+            SendMailService sendMailService
+    ) {
         this.roleViewService = roleViewService;
+        this.sendMailService = sendMailService;
     }
 
     @ResponseBody
     @RequestMapping(value = "/role/get")
     public List<String> getRole() {
         return roleViewService.getRole();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/subject/names")
+    public Object[] getSubjectNames() {
+        return sendMailService.getSubjectNames();
     }
 
     @ResponseBody

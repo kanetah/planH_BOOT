@@ -1,15 +1,12 @@
 package top.kanetah.planH.tools;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class FileTool {
 
     public static File inputStreamToFile(InputStream ins) {
         try {
-            File file = File.createTempFile("planHTemplate",".tmp");
+            File file = File.createTempFile("planHTemplate", ".tmp");
             OutputStream os = new FileOutputStream(file);
             int bytesRead;
             byte[] buffer = new byte[8192];
