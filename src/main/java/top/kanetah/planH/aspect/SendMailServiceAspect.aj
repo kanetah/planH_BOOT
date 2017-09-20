@@ -42,9 +42,10 @@ public aspect SendMailServiceAspect {
 
     before(String to): setMessageTo(to) {
         try {
+            logger.info("Into a join point for set the e-mail message from address.");
             MimeMessageHelper helper = (MimeMessageHelper) thisJoinPoint.getTarget();
             helper.setFrom(mailAddress);
-            logger.info("Before send a e-mail to '" + to + "', set mail form '" + mailAddress + "'.");
+            logger.info("Before send the e-mail to '" + to + "', set mail form '" + mailAddress + "'.");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
