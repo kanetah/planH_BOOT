@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74ef58f9-fa90-4d02-b374-af45f0254ed3" name="Default" comment="aspect maybe instability...">
+    <list default="true" id="74ef58f9-fa90-4d02-b374-af45f0254ed3" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/email.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/static/css/admin.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/planH_BOOT_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/planH_BOOT_main.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/planH_BOOT_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/planH_BOOT_test.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/aspect/SendMailServiceAspect.aj" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/aspect/SendMailServiceAspect.aj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/SendMailService.java" afterPath="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/SendMailService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -49,12 +58,12 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+    <leaf>
       <file leaf-file-name="SendMailService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/SendMailService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="98" column="19" lean-forward="false" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="19" />
+            <state relative-caret-position="97">
+              <caret line="64" column="55" lean-forward="true" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,14 +71,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SendMailServiceAspect.aj" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/aspect/SendMailServiceAspect.aj">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="650">
+              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -83,11 +100,11 @@
         <option value="JavaScript File" />
         <option value="package-info" />
         <option value="JavaFXApplication" />
-        <option value="HTML File" />
         <option value="CSS File" />
         <option value="Interface" />
         <option value="Aspect" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -330,7 +347,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4517257187595" />
+        <entry key="$PROJECT_DIR$" value="4517436004322" />
         <entry key="$PROJECT_DIR$/build.gradle" value="1022950383" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="761105753" />
       </map>
@@ -455,7 +472,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/user.js" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/user_x.css" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/user_x.html" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/vendor/jquery.min.js" />
@@ -491,9 +507,7 @@
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/info/DynamicEnumFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/AdminController.java" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/aspect/TaskDeadlineAspect.aj" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/resources/properties/subjectInfos.json" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/AdminService.java" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/Subject.java" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/UserService.java" />
@@ -505,6 +519,9 @@
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/tools/FileTool.java" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/tools/CompactAlgorithm.java" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/aspect/SendMailServiceAspect.aj" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/email.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/SendMailService.java" />
       </list>
     </option>
@@ -552,6 +569,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -811,7 +829,6 @@
       <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1060,14 +1077,8 @@
       <workItem from="1505796179871" duration="9471000" />
       <workItem from="1505823008248" duration="3226000" />
       <workItem from="1505828240682" duration="6470000" />
-      <workItem from="1505908124133" duration="12448000" />
-    </task>
-    <task id="LOCAL-00004" summary="multipart and ajax&#10;now can submit file">
-      <created>1502352109547</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1502352109547</updated>
+      <workItem from="1505908124133" duration="12773000" />
+      <workItem from="1506002437400" duration="3530000" />
     </task>
     <task id="LOCAL-00005" summary="get --&gt; fetch">
       <created>1502354338874</created>
@@ -1405,7 +1416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1505919941196</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="aspect maybe instability...">
+      <created>1505921222923</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1505921222923</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1423,7 +1441,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="487541000" />
+    <option name="totallyTimeSpent" value="491396000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1458,9 +1476,8 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4675768" sideWeight="0.49784017" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32536975" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29319656" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28077754" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -1469,6 +1486,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992035" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1549,55 +1567,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/relationship/SubordinateUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/relationship/SubordinateTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-142">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/relationship/Authority.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/node/UserRoot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/node/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/node/TaskRoot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/entity/node/Role.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/controller/AdminController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
@@ -1681,7 +1650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="29" column="53" lean-forward="true" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1689,7 +1657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="19" column="56" lean-forward="true" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1729,7 +1696,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="2886" column="17" lean-forward="false" selection-start-line="2886" selection-start-column="17" selection-end-line="2886" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1737,7 +1703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="33">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1758,11 +1723,12 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.967479674796748" x="688.5" y="124.51260504201679" />
+          <settings layout="Hierarchic Group" zoom="0.967479674796748" x="689.0" y="125.0" />
           <SelectedNodes />
           <Categories>
             <Category>Show filesets as groups</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
@@ -1778,7 +1744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1802,7 +1767,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
           <caret line="1025" column="5" lean-forward="true" selection-start-line="1025" selection-start-column="5" selection-end-line="1025" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1810,15 +1774,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user_x.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1826,7 +1781,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1842,7 +1796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="650">
           <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1850,7 +1803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
           <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1874,7 +1826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1882,7 +1833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="428">
           <caret line="64" column="13" lean-forward="true" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1890,7 +1840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1899,11 +1848,11 @@
         <state relative-caret-position="-1693">
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#578#579#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-            <element signature="e#1394#1395#0" expanded="true" />
-            <element signature="e#1444#1445#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#578#579#0" expanded="false" />
+            <element signature="e#620#621#0" expanded="false" />
+            <element signature="e#1394#1395#0" expanded="false" />
+            <element signature="e#1444#1445#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1912,15 +1861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="601">
           <caret line="118" column="33" lean-forward="true" selection-start-line="118" selection-start-column="33" selection-end-line="118" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1149">
-          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1928,40 +1868,111 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user_x.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-495">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/main_x.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/aspect/TaskDeadlineAspect.aj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
+        <state relative-caret-position="650">
           <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="48" column="64" lean-forward="true" selection-start-line="48" selection-start-column="64" selection-end-line="48" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/aspect/SendMailServiceAspect.aj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
+        <state relative-caret-position="1122">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="2" column="6" lean-forward="true" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/email.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.0.0.RC4/dfbc2481a9cb942102900b6e7bd28eca1a627a8d/spring-beans-5.0.0.RC4-sources.jar!/org/springframework/beans/factory/BeanFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="139" column="11" lean-forward="false" selection-start-line="139" selection-start-column="11" selection-end-line="139" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/5.0.0.RC4/ad41a2c8747f0039006c1b0ec91daa3179c43fa0/spring-web-5.0.0.RC4-sources.jar!/org/springframework/web/context/ContextLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="549" column="40" lean-forward="false" selection-start-line="549" selection-start-column="40" selection-end-line="549" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/top/kanetah/planH/service/SendMailService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="98" column="19" lean-forward="false" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="19" />
+        <state relative-caret-position="97">
+          <caret line="64" column="55" lean-forward="true" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

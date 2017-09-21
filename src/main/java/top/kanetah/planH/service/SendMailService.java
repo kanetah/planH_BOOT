@@ -8,6 +8,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import top.kanetah.planH.pojo.Subject;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.tools.CompactAlgorithm;
@@ -26,6 +30,8 @@ public class SendMailService implements InitializingBean {
     private static TreeMultiValueMap<Date, Long> dateMap = new TreeMultiValueMap<>();
     private final RepositoryService repositoryService;
     private final JavaMailSenderImpl mailSender;
+    //    private final FreeMarkerConfigurer freeMarkerConfigurer;
+    private SpringTemplateEngine thymeleaf;
     @Value(value = "${kanetah.planH.subject.info}")
     private Resource subjectInfoResource;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
@@ -36,9 +42,11 @@ public class SendMailService implements InitializingBean {
     public SendMailService(
             RepositoryService repositoryService,
             JavaMailSenderImpl mailSender
+//            FreeMarkerConfigurer freeMarkerConfigurer
     ) {
         this.repositoryService = repositoryService;
         this.mailSender = mailSender;
+//        this.freeMarkerConfigurer = freeMarkerConfigurer;
     }
 
     public static void setTimer(Task task) {
@@ -54,6 +62,10 @@ public class SendMailService implements InitializingBean {
     @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
+        WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
+        assert wac != null;
+        thymeleaf = (SpringTemplateEngine) wac.getBean("templateEngine");
+
         Class<? extends Subject> clazz = Subject.class;
         for (Map map : new ObjectMapper().readValue(
                 FileTool.inputStreamToFile(
@@ -112,7 +124,7 @@ public class SendMailService implements InitializingBean {
             helper.setTo(subject.getTarget());
             helper.setSubject("作业提交：" + task.getTitle() + "_15移春2班");
             helper.addAttachment(submitZip.getName(), submitZip);
-            helper.setText("请见附件");
+            helper.setText(emailText(task));
             mailSender.send(message);
             if (!submitZip.delete())
                 throw new Exception("Can not delete zip file: '" + submitZip.getName() + "'.");
@@ -126,6 +138,14 @@ public class SendMailService implements InitializingBean {
         return new CompactAlgorithm(
                 srcPath + ".zip"
         ).zipFiles(srcPath);
+    }
+
+    private String emailText(Task task) {
+//            Map<String, Object> model = new HashedMap<>();
+//            Template template = freeMarkerConfigurer.getConfiguration().getTemplate("email.html");
+//            return FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+        Context context = new Context();
+        return thymeleaf.process("email.html", context);
     }
 
     public Object[] getSubjectNames() {
