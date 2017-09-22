@@ -37,6 +37,7 @@ public class SendMailService implements InitializingBean {
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
     private Map<String, Subject> subjectMap = new HashMap<>();
+    private List<String> subjectNames = new ArrayList<>();
 
     @Autowired
     public SendMailService(
@@ -79,6 +80,7 @@ public class SendMailService implements InitializingBean {
                 }
             });
             subjectMap.put(subject.getSubject(), subject);
+            subjectNames.add(subject.getSubject());
         }
 
         new Thread(() -> {
@@ -160,6 +162,6 @@ public class SendMailService implements InitializingBean {
     }
 
     public Object[] getSubjectNames() {
-        return subjectMap.keySet().toArray();
+        return subjectNames.toArray();
     }
 }

@@ -28,7 +28,7 @@ public class AdminController {
             value = "/task/get",
             method = RequestMethod.POST
     )
-    public Object[] getAllTask(){
+    public Object[] getAllTask() {
         return adminService.getAllTask().toArray();
     }
 
@@ -41,10 +41,11 @@ public class AdminController {
             @RequestParam(value = "subject") String subject,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "content") String content,
+            @RequestParam(value = "type") String type,
             @RequestParam(value = "format") String format,
             @RequestParam(value = "deadline") String deadline
     ) {
-        adminService.createTask(new Task(subject, title, content, format, deadline));
+        adminService.createTask(new Task(subject, title, content, type, format, deadline));
         return "[\"created\"]";
     }
 
@@ -58,16 +59,18 @@ public class AdminController {
             @RequestParam(value = "subject") String subject,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "content") String content,
+            @RequestParam(value = "type") String type,
             @RequestParam(value = "format") String format,
             @RequestParam(value = "deadline") String deadline
-    ) {
-        if(deadline.contains("T"))
+    ) { // FIXME: 2017/9/22
+        if (deadline.contains("T"))
             deadline = deadline.substring(0, deadline.indexOf("T"));
         adminService.updateTask(
                 Long.valueOf(id),
                 subject,
                 title,
                 content,
+                type,
                 format,
                 deadline
         );

@@ -20,7 +20,8 @@
       "title",
       "content",
       "deadline",
-      "fileFormat"
+      "fileFormat",
+      "saveFormat"
     ]
   }
 }

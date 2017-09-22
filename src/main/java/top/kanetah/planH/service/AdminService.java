@@ -77,7 +77,8 @@ public class AdminService implements InitializingBean {
             String subject,
             String title,
             String content,
-            String fileFormat,
+            String type,
+            String format,
             String deadline
     ) {
         Optional<Task> optional = repositoryService.taskRepository.findById(id);
@@ -86,7 +87,8 @@ public class AdminService implements InitializingBean {
         task.setSubject(subject);
         task.setTitle(title);
         task.setContent(content);
-        task.setFileFormat(fileFormat);
+        task.setFileFormat(type);
+        task.setSaveFormat(format);
         task.setDeadline(deadline);
         repositoryService.taskRepository.save(task);
     }

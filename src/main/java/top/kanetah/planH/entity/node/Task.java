@@ -18,6 +18,7 @@ public class Task extends BaseEntity {
     private String content;
     private Date deadline;
     private String fileFormat;
+    private String saveFormat;
     @Relationship(type = "USER_SUBMIT_TASK", direction = Relationship.UNDIRECTED)
     private ArrayList<Submit> submits = new ArrayList<>();
 
@@ -29,12 +30,14 @@ public class Task extends BaseEntity {
             String title,
             String content,
             String fileFormat,
+            String saveFormat,
             String deadline
     ) {
         this.subject = subject;
         this.title = title;
         this.content = content;
         this.fileFormat = fileFormat;
+        this.saveFormat = saveFormat;
         setDeadline(deadline);
     }
 
@@ -52,6 +55,10 @@ public class Task extends BaseEntity {
 
     public String getFileFormat() {
         return fileFormat;
+    }
+
+    public String getSaveFormat() {
+        return saveFormat;
     }
 
     public Date getDeadline() {
@@ -86,6 +93,10 @@ public class Task extends BaseEntity {
 
     public void setFileFormat(String fileFormat) {
         this.fileFormat = fileFormat;
+    }
+
+    public void setSaveFormat(String saveFormat) {
+        this.saveFormat = saveFormat;
     }
 
     public Date getDeadlineOnJVM() {

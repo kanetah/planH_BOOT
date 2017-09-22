@@ -67,11 +67,12 @@
             <thead>
             <tr>
                 <th>id</th>
-                <th>subject</th>
-                <th>title</th>
-                <th>content</th>
-                <th>deadline</th>
-                <th>file format</th>
+                <th>题目</th>
+                <th>标题</th>
+                <th>内容</th>
+                <th>格式</th>
+                <th>类型</th>
+                <th>期限</th>
             </tr>
             </thead>
         </table>
@@ -93,12 +94,6 @@
                 <div class="input-group">
                     <span class="input-group-addon">科目</span>
                     <select class="form-control" id="subject">
-                        <option>Java Web程序设计</option>
-                        <option>移动云计算服务端技术</option>
-                        <option>面向对象的系统分析与设计</option>
-                        <option>软件项目管理</option>
-                        <option>专业英语</option>
-                        <option>软件工程导论</option>
                     </select>
                 </div>
 
@@ -110,6 +105,11 @@
                 <div class="input-group">
                     <span class="input-group-addon">内容</span>
                     <textarea class="form-control" id="content"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">类型</span>
+                    <input class="form-control" id="type">
                 </div>
 
                 <div class="input-group">
@@ -158,6 +158,11 @@
                 <div class="input-group">
                     <span class="input-group-addon">内容</span>
                     <textarea class="form-control" id="update_content"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">类型</span>
+                    <input class="form-control" id="update_type">
                 </div>
 
                 <div class="input-group">

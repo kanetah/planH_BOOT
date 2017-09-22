@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import top.kanetah.planH.pojo.SaveFormat;
 
 import java.io.File;
 import java.io.IOException;
@@ -122,7 +123,7 @@ public class UserService {
         assert originalFilename != null;
         targetFile = new File(
                 path,
-                task.getTitle() + " " + userCode + " " + user.getUserName() +
+                SaveFormat.format(task, user) +
                         originalFilename.substring(originalFilename.lastIndexOf('.'))
         );
         if (!targetFile.exists())
