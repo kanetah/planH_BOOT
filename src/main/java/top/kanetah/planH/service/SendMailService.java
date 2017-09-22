@@ -8,10 +8,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+import top.kanetah.planH.entity.node.User;
+import top.kanetah.planH.entity.relationship.Submit;
 import top.kanetah.planH.pojo.Subject;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.tools.CompactAlgorithm;
@@ -27,11 +27,11 @@ import java.util.*;
 @Service
 public class SendMailService implements InitializingBean {
 
+    private static final int A_HOUR = 60 * 60 * 1000;
     private static TreeMultiValueMap<Date, Long> dateMap = new TreeMultiValueMap<>();
     private final RepositoryService repositoryService;
     private final JavaMailSenderImpl mailSender;
-    //    private final FreeMarkerConfigurer freeMarkerConfigurer;
-    private SpringTemplateEngine thymeleaf;
+    private final SpringTemplateEngine thymeleaf;
     @Value(value = "${kanetah.planH.subject.info}")
     private Resource subjectInfoResource;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
@@ -41,12 +41,12 @@ public class SendMailService implements InitializingBean {
     @Autowired
     public SendMailService(
             RepositoryService repositoryService,
-            JavaMailSenderImpl mailSender
-//            FreeMarkerConfigurer freeMarkerConfigurer
+            JavaMailSenderImpl mailSender,
+            SpringTemplateEngine thymeleaf
     ) {
         this.repositoryService = repositoryService;
         this.mailSender = mailSender;
-//        this.freeMarkerConfigurer = freeMarkerConfigurer;
+        this.thymeleaf = thymeleaf;
     }
 
     public static void setTimer(Task task) {
@@ -62,11 +62,6 @@ public class SendMailService implements InitializingBean {
     @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
-        WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
-        assert wac != null;
-        thymeleaf = (SpringTemplateEngine) wac.getBean("templateEngine");
-
-        Class<? extends Subject> clazz = Subject.class;
         for (Map map : new ObjectMapper().readValue(
                 FileTool.inputStreamToFile(
                         subjectInfoResource.getInputStream()
@@ -76,7 +71,7 @@ public class SendMailService implements InitializingBean {
             Subject subject = new Subject();
             map.forEach((k, v) -> {
                 try {
-                    Field field = clazz.getDeclaredField(k.toString());
+                    Field field = Subject.class.getDeclaredField(k.toString());
                     field.setAccessible(true);
                     field.set(subject, v);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
@@ -90,18 +85,16 @@ public class SendMailService implements InitializingBean {
             Exception exception;
             while (true) {
                 try {
-                    if (dateMap.size() > 0) {
+                    if (!dateMap.isEmpty()) {
                         Date nextDate = dateMap.firstKey();
                         long sleepTime = nextDate.getTime() - new Date().getTime();
-                        if (sleepTime < 0)
-                            sleepTime = 0;
-                        Thread.sleep(sleepTime + 60 * 60 * 1000);
+                        Thread.sleep((sleepTime < 0 ? 0 : sleepTime) + A_HOUR);
                         dateMap.getValues(nextDate).forEach(
                                 SendMailService.this::sendMail
                         );
                         dateMap.remove(nextDate);
                     } else
-                        Thread.sleep(3 * 60 * 60 * 1000);
+                        Thread.sleep(3 * A_HOUR);
                 } catch (Exception e) {
                     exception = e;
                     break;
@@ -109,6 +102,10 @@ public class SendMailService implements InitializingBean {
             }
             throw new RuntimeException(exception);
         }).start();
+
+//        System.out.println(emailText(
+//                repositoryService.taskRepository.findById(36L).get()
+//        ));
     }
 
     private void sendMail(Long taskId) {
@@ -124,7 +121,7 @@ public class SendMailService implements InitializingBean {
             helper.setTo(subject.getTarget());
             helper.setSubject("作业提交：" + task.getTitle() + "_15移春2班");
             helper.addAttachment(submitZip.getName(), submitZip);
-            helper.setText(emailText(task));
+            helper.setText(emailText(task), true);
             mailSender.send(message);
             if (!submitZip.delete())
                 throw new Exception("Can not delete zip file: '" + submitZip.getName() + "'.");
@@ -141,10 +138,24 @@ public class SendMailService implements InitializingBean {
     }
 
     private String emailText(Task task) {
-//            Map<String, Object> model = new HashedMap<>();
-//            Template template = freeMarkerConfigurer.getConfiguration().getTemplate("email.html");
-//            return FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
         Context context = new Context();
+        context.setVariable("teacherName", subjectMap.get(task.getSubject()).getTeacher());
+        context.setVariable("taskTitle", task.getTitle());
+        List<Submit> submits = new LinkedList<>();
+        repositoryService.submitRepository.findAllByTask_Id(task.getId()).forEach(submits::add);
+        List<User> Submitted = new LinkedList<>();
+        submits.forEach(submit -> Submitted.add(submit.getUser()));
+        int flagSize = 20;
+        context.setVariable("flagSize", flagSize);
+        if (submits.size() >= flagSize) {
+            List<User> notSubmitted = new LinkedList<>();
+            repositoryService.userRepository.findAll().forEach(notSubmitted::add);
+            notSubmitted.removeAll(Submitted);
+            context.setVariable("users", notSubmitted);
+        } else
+            context.setVariable("users", Submitted);
+        context.setVariable("submitSize", submits.size());
+        context.setVariable("userCount", repositoryService.userRepository.count());
         return thymeleaf.process("email.html", context);
     }
 
