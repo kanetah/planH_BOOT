@@ -20,4 +20,15 @@ public class FileTool {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
+
+    public static boolean deleteAll(File file) {
+        if (!file.isDirectory())
+            return file.delete();
+        File[] files = file.listFiles();
+        if (files != null)
+            for (File f : files)
+                if (!deleteAll(f))
+                    return false;
+        return file.delete();
+    }
 }

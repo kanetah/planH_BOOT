@@ -14,7 +14,7 @@ import top.kanetah.planH.entity.node.Role;
 import top.kanetah.planH.entity.node.User;
 import top.kanetah.planH.pojo.Subject;
 import top.kanetah.planH.entity.node.Task;
-import top.kanetah.planH.tools.CompactAlgorithm;
+import top.kanetah.planH.tools.CompactTool;
 import top.kanetah.planH.tools.FileTool;
 import top.kanetah.planH.tools.RegexTool;
 import top.kanetah.planH.tools.TreeMultiValueMap;
@@ -140,9 +140,9 @@ public class SendMailService implements InitializingBean {
 
     private File createTaskZipFile(Task task) {
         String srcPath = storePath + "/" + task.getSubject() + "/" + task.getTitle();
-        return new CompactAlgorithm(
+        return new CompactTool(
                 srcPath + ".zip"
-        ).zipFiles(srcPath);
+        ).zip(srcPath);
     }
 
     private String emailText(Task task) {

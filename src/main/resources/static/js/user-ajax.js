@@ -88,13 +88,12 @@ $(document).ready(function () {
                 progress_bar.removeClass('progress-bar-striped');
                 progress_bar.text('完成');
             },
-            error: function (xhr, textStatus, errorThrown) {
+            error: function (xhr) {
                 progress_bar.css('background-color', 'red');
                 label.removeClass('label-info');
                 label.addClass('label-danger');
                 label.html('提交失败');
                 progress_bar.text(xhr.responseJSON.message);
-                // alert("| " + JSON.stringify(xhr) + " |");// + xhr.responseText.message);
             },
             complete: function () {
                 progress_bar.removeClass('active');
