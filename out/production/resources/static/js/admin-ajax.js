@@ -11,8 +11,9 @@ $(document).ready(function () {
                     'subject',
                     'title',
                     'content',
-                    'deadline',
-                    'fileFormat'
+                    'saveFormat',
+                    'fileFormat',
+                    'deadline'
                 ];
                 $.each(ths, function (i) {
                     var new_td = document.createElement("td");
@@ -29,7 +30,8 @@ $(document).ready(function () {
                     inputs.find('#update_subject').val($(this).attr('subject'));
                     inputs.find('#update_title').val($(this).attr('title'));
                     inputs.find('#update_content').val($(this).attr('content'));
-                    inputs.find('#update_format').val($(this).attr('fileFormat'));
+                    inputs.find('#update_type').val($(this).attr('fileFormat'));
+                    inputs.find('#update_format').val($(this).attr('saveFormat'));
                     inputs.find('#update_date').val($(this).attr('deadline'));
                     modal.modal('show');
                     event.stopPropagation();
@@ -46,6 +48,9 @@ $(document).ready(function () {
                 $('#update_subject').append(
                     '<option>' + elem + '</option>'
                 );
+                $('#subject').append(
+                    '<option>' + elem + '</option>'
+                );
             });
         }
     });
@@ -58,6 +63,7 @@ $(document).ready(function () {
                 subject: inputs.find('#subject').val(),
                 title: inputs.find('#title').val(),
                 content: inputs.find('#content').val(),
+                type: inputs.find('#type').val(),
                 format: inputs.find('#format').val(),
                 deadline: inputs.find('#date').val()
             },
@@ -77,6 +83,7 @@ $(document).ready(function () {
                 subject: inputs.find('#update_subject').val(),
                 title: inputs.find('#update_title').val(),
                 content: inputs.find('#update_content').val(),
+                type: inputs.find('#update_type').val(),
                 format: inputs.find('#update_format').val(),
                 deadline: inputs.find('#update_date').val()
             },

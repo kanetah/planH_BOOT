@@ -91,6 +91,7 @@ public class AdminService implements InitializingBean {
         task.setSaveFormat(format);
         task.setDeadline(deadline);
         repositoryService.taskRepository.save(task);
+        SendMailService.setTimer(task, task.getId());
     }
 
     public void createUser(User user) {

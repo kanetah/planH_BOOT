@@ -19,7 +19,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group 'top.kanetah'
-version '0.4.1.T'
+version '0.4.2'
 
 description = """SDN4 University"""
 
@@ -37,17 +37,11 @@ repositories {
 }
 
 dependencies {
-
-    compile('aspectj:aspectjrt:1.8.9')
-    compile('aspectj:aspectjtools:1.8.9')
-
-    compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-data-neo4j')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-data-rest')
     compile('org.springframework.boot:spring-boot-starter-mail')
-//    compile('org.springframework.boot:spring-boot-starter-freemarker')
 
     compile('org.apache.poi:poi:3.16')
     compile('net.sourceforge.nekohtml:nekohtml:1.9.22')

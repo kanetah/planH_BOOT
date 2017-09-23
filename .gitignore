@@ -6,6 +6,5 @@
 *.pfx
 
 ### NetBeans ###
-build/
 out/
 src/test/

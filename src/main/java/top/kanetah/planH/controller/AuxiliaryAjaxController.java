@@ -38,6 +38,12 @@ public class AuxiliaryAjaxController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/timers")
+    public Object[] getTimers() {
+        return sendMailService.getTimers();
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/shutdown", method = RequestMethod.POST)
     public void shutdown(){
         Runtime.getRuntime().exit(0);

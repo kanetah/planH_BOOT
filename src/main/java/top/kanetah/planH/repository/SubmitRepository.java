@@ -1,5 +1,6 @@
 package top.kanetah.planH.repository;
 
+import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.entity.relationship.Submit;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -10,5 +11,5 @@ public interface SubmitRepository
 
     Iterable<Submit> findAllByUser_UserCode(long userCode);
 
-    Iterable<Submit> findAllByTask_Id(Long id);
+    Iterable<Submit> findAllByTask(Task task);
 }

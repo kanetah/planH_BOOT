@@ -62,7 +62,7 @@ public class AdminController {
             @RequestParam(value = "type") String type,
             @RequestParam(value = "format") String format,
             @RequestParam(value = "deadline") String deadline
-    ) { // FIXME: 2017/9/22
+    ) {
         if (deadline.contains("T"))
             deadline = deadline.substring(0, deadline.indexOf("T"));
         adminService.updateTask(

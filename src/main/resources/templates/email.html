@@ -21,8 +21,16 @@
             text-decoration: none;
         }
 
+        table {
+            margin: auto;
+        }
+
         .userCode:before {
             content: "1521192";
+        }
+
+        sub {
+            float: right;
         }
     </style>
 </head>
@@ -51,10 +59,10 @@
         <span th:text="${userCount}-${submitSize}"></span>
         人未交。
     </p>
-    <p th:if="${submitSize}>=${flagSize}">未交名单如下：</p>
+    <p th:if="${submitSize}>=${flagSize}"><b>未交名单</b>如下：</p>
     <p th:unless="${submitSize}>=${flagSize}">因提交人数少于
         <span th:text="${flagSize}"></span>
-        人，故列出提交名单，如下：
+        人，故列出<b>提交名单</b>，如下：
     </p>
     <table>
         <tr>
@@ -66,6 +74,7 @@
             <td th:text="${user.userName}"></td>
         </tr>
     </table>
+    <sub>如果有任何问题，可直接回复本邮件。</sub>
 </main>
 </body>
 </html>

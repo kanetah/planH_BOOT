@@ -10,14 +10,14 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+import top.kanetah.planH.entity.node.Role;
 import top.kanetah.planH.entity.node.User;
-import top.kanetah.planH.entity.relationship.Submit;
 import top.kanetah.planH.pojo.Subject;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.tools.CompactAlgorithm;
 import top.kanetah.planH.tools.FileTool;
+import top.kanetah.planH.tools.RegexTool;
 import top.kanetah.planH.tools.TreeMultiValueMap;
-
 
 import javax.mail.internet.MimeMessage;
 import java.io.File;
@@ -36,8 +36,11 @@ public class SendMailService implements InitializingBean {
     private Resource subjectInfoResource;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
+    @Value(value = "${spring.mail.username}")
+    private String mailUsername;
     private Map<String, Subject> subjectMap = new HashMap<>();
     private List<String> subjectNames = new ArrayList<>();
+    private static List<Date> timerList = new ArrayList<>();
 
     @Autowired
     public SendMailService(
@@ -50,12 +53,14 @@ public class SendMailService implements InitializingBean {
         this.thymeleaf = thymeleaf;
     }
 
-    public static void setTimer(Task task) {
-        if (new Date().before(task.getDeadlineOnJVM()))
+    private static void setTimer(Task task) {
+        if (new Date().before(task.getDeadlineOnJVM())) {
             dateMap.add(task.getDeadlineOnJVM(), task.getId());
+            timerList.add(task.getDeadline());
+        }
     }
 
-    public static void setTimer(Task task, Long removeId) {
+    static void setTimer(Task task, Long removeId) {
         dateMap.removeValue(removeId);
         setTimer(task);
     }
@@ -63,6 +68,10 @@ public class SendMailService implements InitializingBean {
     @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
+        repositoryService.taskRepository.findAll().forEach(
+                SendMailService::setTimer
+        );
+
         for (Map map : new ObjectMapper().readValue(
                 FileTool.inputStreamToFile(
                         subjectInfoResource.getInputStream()
@@ -104,10 +113,6 @@ public class SendMailService implements InitializingBean {
             }
             throw new RuntimeException(exception);
         }).start();
-
-//        System.out.println(emailText(
-//                repositoryService.taskRepository.findById(36L).get()
-//        ));
     }
 
     private void sendMail(Long taskId) {
@@ -120,6 +125,7 @@ public class SendMailService implements InitializingBean {
 
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom(mailUsername);
             helper.setTo(subject.getTarget());
             helper.setSubject("作业提交：" + task.getTitle() + "_15移春2班");
             helper.addAttachment(submitZip.getName(), submitZip);
@@ -143,25 +149,38 @@ public class SendMailService implements InitializingBean {
         Context context = new Context();
         context.setVariable("teacherName", subjectMap.get(task.getSubject()).getTeacher());
         context.setVariable("taskTitle", task.getTitle());
-        List<Submit> submits = new LinkedList<>();
-        repositoryService.submitRepository.findAllByTask_Id(task.getId()).forEach(submits::add);
-        List<User> Submitted = new LinkedList<>();
-        submits.forEach(submit -> Submitted.add(submit.getUser()));
+        String[] fileNames = new File(
+                storePath + "/" + task.getSubject() + "/" + task.getTitle()
+        ).list();
+        assert fileNames != null;
+        context.setVariable("submitSize", fileNames.length);
+        List<User> users = new ArrayList<>();
+        repositoryService.authorityRepository.findAll().forEach(authority -> {
+            if (authority.getRole().getRoleName().equals(Role.ROLE_USER))
+                users.add(authority.getUser());
+        });
+        context.setVariable("userCount", users.size());
+        List<User> submitted = new ArrayList<>();
+        for (String fileName : fileNames)
+            submitted.add(repositoryService.userRepository.findByUserCode(
+                    Long.valueOf("2" + RegexTool.lastRegex(
+                            fileName.replace(task.getTitle(), ""), "\\d{2}"
+                    ))
+            ));
         int flagSize = 20;
         context.setVariable("flagSize", flagSize);
-        if (submits.size() >= flagSize) {
-            List<User> notSubmitted = new LinkedList<>();
-            repositoryService.userRepository.findAll().forEach(notSubmitted::add);
-            notSubmitted.removeAll(Submitted);
-            context.setVariable("users", notSubmitted);
-        } else
-            context.setVariable("users", Submitted);
-        context.setVariable("submitSize", submits.size());
-        context.setVariable("userCount", repositoryService.userRepository.count());
+        context.setVariable(
+                "users",
+                submitted.size() >= flagSize ? users.removeAll(submitted) : submitted
+        );
         return thymeleaf.process("email.html", context);
     }
 
     public Object[] getSubjectNames() {
         return subjectNames.toArray();
+    }
+
+    public Object[] getTimers(){
+        return timerList.toArray();
     }
 }
