@@ -10,7 +10,6 @@ $(document).ready(function () {
     $.task_index = 0;
 
     $('#task').click(function () {
-
         var icon = $('#task').find('> i');
         if ($.task_index === null)
             return;
@@ -89,12 +88,13 @@ $(document).ready(function () {
                 progress_bar.removeClass('progress-bar-striped');
                 progress_bar.text('完成');
             },
-            error: function () {
+            error: function (xhr, textStatus, errorThrown) {
                 progress_bar.css('background-color', 'red');
                 label.removeClass('label-info');
                 label.addClass('label-danger');
                 label.html('提交失败');
-                progress_bar.text('失败');
+                progress_bar.text(xhr.responseJSON.message);
+                // alert("| " + JSON.stringify(xhr) + " |");// + xhr.responseText.message);
             },
             complete: function () {
                 progress_bar.removeClass('active');

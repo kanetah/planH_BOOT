@@ -109,34 +109,42 @@ public class UserService {
     public void submitTask(
             long userCode, Long taskId, MultipartFile file
     ) throws IOException {
-        Optional<Task> optional = repositoryService.taskRepository.findById(taskId);
-        assert optional.isPresent();
-        Task task = optional.get();
-        User user = repositoryService.userRepository.findByUserCode(userCode);
+        throw new FileTypeException();
+//        Optional<Task> optional = repositoryService.taskRepository.findById(taskId);
+//        assert optional.isPresent();
+//        Task task = optional.get();
+//        User user = repositoryService.userRepository.findByUserCode(userCode);
+//
+//        String originalFilename = file.getOriginalFilename();
+//        String path = storePath + "/" + task.getSubject() + "/" + task.getTitle();
+//        File targetFile = new File(path);
+//        if (!targetFile.exists())
+//            if (!targetFile.mkdirs())
+//                throw new CreateFileException();
+//        assert originalFilename != null;
+//        targetFile = new File(
+//                path,
+//                SaveFormat.format(task, user) +
+//                        originalFilename.substring(originalFilename.lastIndexOf('.'))
+//        );
+//        if (!targetFile.exists())
+//            if (!targetFile.createNewFile())
+//                throw new CreateFileException();
+//        file.transferTo(targetFile);
+//
+//        Submit submit = new Submit(user, task, originalFilename, new Date());
+//        repositoryService.submitRepository.save(submit);
 
-        String originalFilename = file.getOriginalFilename();
-        String path = storePath + "/" + task.getSubject() + "/" + task.getTitle();
-        File targetFile = new File(path);
-        if (!targetFile.exists())
-            if (!targetFile.mkdirs())
-                throw new CreateFileException();
-        assert originalFilename != null;
-        targetFile = new File(
-                path,
-                SaveFormat.format(task, user) +
-                        originalFilename.substring(originalFilename.lastIndexOf('.'))
-        );
-        if (!targetFile.exists())
-            if (!targetFile.createNewFile())
-                throw new CreateFileException();
-        file.transferTo(targetFile);
 
-        Submit submit = new Submit(user, task, originalFilename, new Date());
-        repositoryService.submitRepository.save(submit);
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-            reason = "can not create new file")
+            reason = "服务端无法新建文件")
     private class CreateFileException extends RuntimeException {
+    }
+
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
+            reason = "文件类型错误")
+    private class FileTypeException extends RuntimeException {
     }
 }
