@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe()
                 .tokenRepository(new InMemoryTokenRepositoryImpl())
-                .tokenValiditySeconds(2419200)
+                .tokenValiditySeconds(10368000)
                 .key("planH_Key")
 
                 .and()

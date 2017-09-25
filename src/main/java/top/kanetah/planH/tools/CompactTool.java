@@ -36,7 +36,7 @@ public class CompactTool {
                     File[] list = srcFile.listFiles();
                     assert list != null;
                     for (File aList : list)
-                        compress(aList, out, "");
+                        compress(aList, out, srcFile.getName() + File.separator);
                 }
             } finally {
                 if (out != null)
@@ -70,7 +70,6 @@ public class CompactTool {
                 int len;
                 in = new FileInputStream(srcFile);
                 out.putNextEntry(new ZipEntry(basedir + srcFile.getName()));
-
                 while ((len = in.read(buf)) > 0)
                     out.write(buf, 0, len);
             } finally {

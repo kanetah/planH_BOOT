@@ -30,6 +30,7 @@ public class SendMailService implements InitializingBean {
     private static final int A_HOUR = 60 * 60 * 1000;
     private static TreeMultiValueMap<Date, Long> dateMap = new TreeMultiValueMap<>();
     private final RepositoryService repositoryService;
+    private final AdminService adminService;
     private final JavaMailSenderImpl mailSender;
     private final SpringTemplateEngine thymeleaf;
     @Value(value = "${kanetah.planH.subject.info}")
@@ -45,10 +46,12 @@ public class SendMailService implements InitializingBean {
     @Autowired
     public SendMailService(
             RepositoryService repositoryService,
+            AdminService adminService,
             JavaMailSenderImpl mailSender,
             SpringTemplateEngine thymeleaf
     ) {
         this.repositoryService = repositoryService;
+        this.adminService = adminService;
         this.mailSender = mailSender;
         this.thymeleaf = thymeleaf;
     }
@@ -113,6 +116,8 @@ public class SendMailService implements InitializingBean {
             }
             throw new RuntimeException(exception);
         }).start();
+
+        sendMail(36L);
     }
 
     private void sendMail(Long taskId) {
@@ -154,10 +159,10 @@ public class SendMailService implements InitializingBean {
         ).list();
         assert fileNames != null;
         context.setVariable("submitSize", fileNames.length);
-        List<User> users = new ArrayList<>();
+        Map<Long, User> users = new HashMap<>();
         repositoryService.authorityRepository.findAll().forEach(authority -> {
             if (authority.getRole().getRoleName().equals(Role.ROLE_USER))
-                users.add(authority.getUser());
+                users.put(authority.getUser().getUserCode(), authority.getUser());
         });
         context.setVariable("userCount", users.size());
         List<User> submitted = new ArrayList<>();
@@ -169,9 +174,13 @@ public class SendMailService implements InitializingBean {
             ));
         int flagSize = 20;
         context.setVariable("flagSize", flagSize);
+        context.setVariable("codePrefix", adminService.getUserCodePrefix());
+        submitted.forEach(u ->
+                users.remove(u.getUserCode()));
+        users.forEach((k, v) -> System.out.println(v));
         context.setVariable(
                 "users",
-                submitted.size() >= flagSize ? users.removeAll(submitted) : submitted
+                fileNames.length >= flagSize ? users.values() : submitted
         );
         return thymeleaf.process("email.html", context);
     }
@@ -180,7 +189,7 @@ public class SendMailService implements InitializingBean {
         return subjectNames.toArray();
     }
 
-    public Object[] getTimers(){
+    public Object[] getTimers() {
         return timerList.toArray();
     }
 }

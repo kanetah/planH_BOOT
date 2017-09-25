@@ -25,10 +25,6 @@
             margin: auto;
         }
 
-        .userCode:before {
-            content: "1521192";
-        }
-
         sub {
             float: right;
         }
@@ -43,9 +39,10 @@
         <a href="https://kanetah.top:8443">
             PlanH 平台
         </a>
-        自动发送的邮件，用于提交15级移春2班
+        自动发送的邮件，用于提交厦理软15级移春2班
         <span id="taskTitle" th:text="${taskTitle}">
-    </span>的作业文件。
+    </span>
+        的作业文件。
     </p>
     <p>
         作业文件的压缩包<b>请见附件</b>，以下是本次作业的提交情况：
@@ -59,21 +56,26 @@
         <span th:text="${userCount}-${submitSize}"></span>
         人未交。
     </p>
-    <p th:if="${submitSize}>=${flagSize}"><b>未交名单</b>如下：</p>
-    <p th:unless="${submitSize}>=${flagSize}">因提交人数少于
-        <span th:text="${flagSize}"></span>
-        人，故列出<b>提交名单</b>，如下：
-    </p>
-    <table>
-        <tr>
-            <th>学号</th>
-            <th>姓名</th>
-        </tr>
-        <tr th:each="user:${users}">
-            <td class="userCode" th:text="${user.userCode}"></td>
-            <td th:text="${user.userName}"></td>
-        </tr>
-    </table>
+    <div th:if="${userCount}==${submitSize}">
+        <p>所有人都提交了。</p>
+    </div>
+    <div th:unless="${userCount}==${submitSize}">
+        <p th:if="${submitSize}>=${flagSize}"><b>未交名单</b>如下：</p>
+        <p th:unless="${submitSize}>=${flagSize}">因提交人数少于
+            <span th:text="${flagSize}"></span>
+            人，故列出<b>提交名单</b>，如下：
+        </p>
+        <table>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+            </tr>
+            <tr th:each="user:${users}">
+                <td class="userCode" th:text="${codePrefix}+''+${user.userCode}"></td>
+                <td th:text="${user.userName}"></td>
+            </tr>
+        </table>
+    </div>
     <sub>如果有任何问题，可直接回复本邮件。</sub>
 </main>
 </body>
