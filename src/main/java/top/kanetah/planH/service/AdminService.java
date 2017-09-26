@@ -16,8 +16,10 @@ import top.kanetah.planH.entity.relationship.SubordinateTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.kanetah.planH.info.Info;
+import top.kanetah.planH.pojo.SubmitFileInfo;
 import top.kanetah.planH.tools.FileTool;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -32,6 +34,8 @@ public class AdminService implements InitializingBean {
     private String adminPassword;
     @Value(value = "${kanetah.planH.admin.poi.config}")
     private Resource poiConfigResource;
+    @Value(value = "${kanetah.planH.userPatchFileStorePath}")
+    private String storePath;
 
     private String userCodePrefix;
     private String userCodeMark;
@@ -155,5 +159,23 @@ public class AdminService implements InitializingBean {
         repositoryService.taskRepository.findAll().forEach(task ->
                 tasks.add(info.byOrigin(task)));
         return tasks;
+    }
+
+    public List<SubmitFileInfo> getSubmitFileInfos(Long id) {
+        Optional<Task> optional = repositoryService.taskRepository.findById(id);
+        assert optional.isPresent();
+        Task task = optional.get();
+        File storeDir = new File(storePath + "/" + task.getSubject() + "/" + task.getTitle());
+        assert storeDir.isDirectory();
+        File[] files = storeDir.listFiles();
+        assert files != null;
+        List<SubmitFileInfo> info = new ArrayList<>();
+        for (File file : files) {
+            SubmitFileInfo i = new SubmitFileInfo();
+            i.fileName = file.getName();
+            i.submitDate = new Date(file.lastModified());
+            info.add(i);
+        }
+        return info;
     }
 }

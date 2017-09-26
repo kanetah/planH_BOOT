@@ -34,6 +34,17 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(
+            value = "/task/submit",
+            method = RequestMethod.POST
+    )
+    public Object[] getSubmitInfo(
+            @RequestParam(value = "taskId") String taskId
+    ) {
+        return adminService.getSubmitFileInfos(Long.valueOf(taskId)).toArray();
+    }
+
+    @ResponseBody
+    @RequestMapping(
             value = "/task/create",
             method = RequestMethod.POST
     )

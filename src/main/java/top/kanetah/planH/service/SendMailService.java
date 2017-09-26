@@ -116,8 +116,6 @@ public class SendMailService implements InitializingBean {
             }
             throw new RuntimeException(exception);
         }).start();
-
-        sendMail(36L);
     }
 
     private void sendMail(Long taskId) {

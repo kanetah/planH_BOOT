@@ -34,6 +34,7 @@ $(document).ready(function () {
                     inputs.find('#update_format').val($(this).attr('saveFormat'));
                     inputs.find('#update_date').val($(this).attr('deadline'));
                     modal.modal('show');
+                    updateSubmitTable(task_id);
                     event.stopPropagation();
                 });
                 task_table.append(new_tr);
@@ -41,10 +42,37 @@ $(document).ready(function () {
         }
     });
 
+    function updateSubmitTable(id) {
+        $.ajaxPlanH({
+            url: "/task/submit",
+            data: {
+                taskId: id
+            },
+            success: function (data) {
+                var submitTable = $('#submit_table');
+                $('tr').remove('.submit_table_tr');
+                $.each(data, function (idx, elem) {
+                    var new_tr = document.createElement("tr");
+                    $(new_tr).attr('class', 'submit_table_tr');
+                    var new_td = document.createElement("td");
+                    new_td.innerHTML = idx + 1;
+                    new_tr.append(new_td);
+                    new_td = document.createElement("td");
+                    new_td.innerHTML = elem['fileName'];
+                    new_tr.append(new_td);
+                    new_td = document.createElement("td");
+                    new_td.innerHTML = elem['submitDate'];
+                    new_tr.append(new_td);
+                    submitTable.append(new_tr);
+                });
+            }
+        })
+    }
+
     $.ajaxPlanH({
         const_url: "/subject/names",
-        success: function (date) {
-            $.each(date, function (idx, elem) {
+        success: function (data) {
+            $.each(data, function (idx, elem) {
                 $('#update_subject').append(
                     '<option>' + elem + '</option>'
                 );

@@ -39,8 +39,9 @@ nav {
 .task_id {
     color: #90a4ae;
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 0;
+    left: 3px;
+    display: none;
 }
 
 .subject {
@@ -50,18 +51,19 @@ nav {
 }
 
 .title {
+    margin-top: 20px;
     font-size: x-large;
     font-weight: bold;
     position: absolute;
-    top: 3%;
-    left: 10%;
+    top: 0;
+    left: 5%;
 }
 
 .content {
     width: 60%;
     height: 50%;
     position: absolute;
-    top: 25%;
+    top: 22%;
     left: 10%;
     border-radius: 5px;
     text-align: left;
@@ -72,11 +74,11 @@ nav {
 }
 
 .content:hover {
-    box-shadow: 0 16px 26px -10px rgba(169, 169, 169, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(169, 169, 169, 0.2);
+    box-shadow: 0 16px 26px -10px rgba(169, 169, 169, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(169, 169, 169, 0.2);
 }
 
 .content > p {
-    margin: 5px;
+    margin: 10px;
     text-indent: 1.5em;
     word-wrap: break-word
 }
