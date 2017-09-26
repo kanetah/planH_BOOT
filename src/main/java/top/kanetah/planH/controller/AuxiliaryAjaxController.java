@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import top.kanetah.planH.service.SendMailService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -33,7 +34,7 @@ public class AuxiliaryAjaxController {
 
     @ResponseBody
     @RequestMapping(value = "/subject/names")
-    public Object[] getSubjectNames() {
+    public Object[] getSubjectNames() throws IOException {
         return sendMailService.getSubjectNames();
     }
 

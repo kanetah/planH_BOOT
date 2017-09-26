@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -15,12 +14,12 @@ import top.kanetah.planH.entity.node.User;
 import top.kanetah.planH.pojo.Subject;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.tools.CompactTool;
-import top.kanetah.planH.tools.FileTool;
 import top.kanetah.planH.tools.RegexTool;
 import top.kanetah.planH.tools.TreeMultiValueMap;
 
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -33,14 +32,13 @@ public class SendMailService implements InitializingBean {
     private final AdminService adminService;
     private final JavaMailSenderImpl mailSender;
     private final SpringTemplateEngine thymeleaf;
-    @Value(value = "${kanetah.planH.subject.info}")
-    private Resource subjectInfoResource;
+    @Value(value = "${kanetah.planH.subject.infoPath}")
+    private String subjectInfoPath;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
     @Value(value = "${spring.mail.username}")
     private String mailUsername;
     private Map<String, Subject> subjectMap = new HashMap<>();
-    private List<String> subjectNames = new ArrayList<>();
     private static List<Date> timerList = new ArrayList<>();
 
     @Autowired
@@ -68,32 +66,11 @@ public class SendMailService implements InitializingBean {
         setTimer(task);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
         repositoryService.taskRepository.findAll().forEach(
                 SendMailService::setTimer
         );
-
-        for (Map map : new ObjectMapper().readValue(
-                FileTool.inputStreamToFile(
-                        subjectInfoResource.getInputStream()
-                ),
-                Map[].class
-        )) {
-            Subject subject = new Subject();
-            map.forEach((k, v) -> {
-                try {
-                    Field field = Subject.class.getDeclaredField(k.toString());
-                    field.setAccessible(true);
-                    field.set(subject, v);
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            subjectMap.put(subject.getSubject(), subject);
-            subjectNames.add(subject.getSubject());
-        }
 
         new Thread(() -> {
             Exception exception;
@@ -118,8 +95,30 @@ public class SendMailService implements InitializingBean {
         }).start();
     }
 
+    @SuppressWarnings("unchecked")
+    private void beforeSendMail() throws IOException {
+        for (Map map : new ObjectMapper().readValue(
+                new File(subjectInfoPath),
+                Map[].class
+        )) {
+            Subject subject = new Subject();
+            map.forEach((k, v) -> {
+                try {
+                    Field field = Subject.class.getDeclaredField(k.toString());
+                    field.setAccessible(true);
+                    field.set(subject, v);
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            subjectMap.put(subject.getSubject(), subject);
+        }
+    }
+
     private void sendMail(Long taskId) {
         try {
+            beforeSendMail();
+
             Optional<Task> optional = repositoryService.taskRepository.findById(taskId);
             assert optional.isPresent();
             Task task = optional.get();
@@ -183,7 +182,12 @@ public class SendMailService implements InitializingBean {
         return thymeleaf.process("email.html", context);
     }
 
-    public Object[] getSubjectNames() {
+    public Object[] getSubjectNames() throws IOException {
+        List<Object> subjectNames = new ArrayList<>();
+        for (Map map : new ObjectMapper().readValue(
+                new File(subjectInfoPath),
+                Map[].class
+        )) subjectNames.add(map.get("subject"));
         return subjectNames.toArray();
     }
 
