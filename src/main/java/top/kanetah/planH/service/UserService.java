@@ -3,19 +3,13 @@ package top.kanetah.planH.service;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.entity.node.User;
 import top.kanetah.planH.entity.relationship.Submit;
+import top.kanetah.planH.fileSaveProcessor.SubjectTaskFileSaveProcessor;
 import top.kanetah.planH.info.Info;
 import top.kanetah.planH.info.InfoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
-import top.kanetah.planH.pojo.SaveFormat;
-import top.kanetah.planH.tools.CompactTool;
-import top.kanetah.planH.tools.FileTool;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -24,17 +18,18 @@ public class UserService {
 
     private final RepositoryService repositoryService;
     private final Info info;
-    @Value(value = "${kanetah.planH.userPatchFileStorePath}")
-    private String storePath;
+    private final SubjectTaskFileSaveProcessor saveProcessor;
     private Map<Long, List<Task>> BuffMap = new HashMap<>();
 
     @Autowired
     public UserService(
             RepositoryService repositoryService,
-            InfoImpl info
+            InfoImpl info,
+            SubjectTaskFileSaveProcessor saveProcessor
     ) {
         this.repositoryService = repositoryService;
         this.info = info;
+        this.saveProcessor = saveProcessor;
     }
 
     public String getUserName(long userCode) {
@@ -115,74 +110,8 @@ public class UserService {
         assert optional.isPresent();
         Task task = optional.get();
         User user = repositoryService.userRepository.findByUserCode(userCode);
-
-        String originalFilename = file.getOriginalFilename();
-        assert originalFilename != null;
-        String fileType = originalFilename.substring(originalFilename.indexOf("."));
-        if (!task.getFileFormat().contains(fileType))
-            throw new FileTypeException();
-        String path = storePath + "/" + task.getSubject() + "/" + task.getTitle();
-        File target = new File(path);
-        if (!target.exists())
-            if (!target.mkdirs())
-                throw new FileException();
-        path += "/" + SaveFormat.format(task, user);
-        target = new File(path + fileType);
-        if (!target.exists())
-            if (!target.createNewFile())
-                throw new FileException();
-        file.transferTo(target);
-
-        Submit submit = new Submit(user, task, originalFilename, new Date());
+        saveProcessor.saveFile(user, task, file);
+        Submit submit = new Submit(user, task, file.getOriginalFilename(), new Date());
         repositoryService.submitRepository.save(submit);
-
-        String descDir = path + "/";
-        switch (fileType) {
-            case ".zip":
-                CompactTool.unZip(target, descDir);
-                afterDecompression(path);
-                if (!target.delete())
-                    throw new FileException();
-                break;
-            case ".rar":
-                CompactTool.unRar(target, descDir);
-                afterDecompression(path);
-                if (!target.delete())
-                    throw new FileException();
-                break;
-        }
-    }
-
-    private void afterDecompression(String descDir) {
-        File[] files = new File(descDir).listFiles();
-        if (files == null)
-            throw new CompactFileException();
-        else if (files.length == 1 && files[0].isDirectory()) {
-            File dir = files[0];
-            files = dir.listFiles();
-            if (files == null)
-                throw new CompactFileException();
-            for (File f : files)
-                if (!f.renameTo(new File(descDir + "/" + f.getName()))
-                        && !FileTool.deleteAll(f))
-                    throw new FileException();
-            if (!dir.delete())
-                throw new FileException();
-        }
-    }
-
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-            reason = "服务端无法处理文件")
-    private class FileException extends RuntimeException {
-    }
-
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-            reason = "文件类型错误")
-    private class FileTypeException extends RuntimeException {
-    }
-
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-            reason = "无效的压缩文件")
-    private class CompactFileException extends RuntimeException {
     }
 }

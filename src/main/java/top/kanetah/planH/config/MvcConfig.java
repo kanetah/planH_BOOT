@@ -2,8 +2,6 @@ package top.kanetah.planH.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,11 +17,9 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Autowired
     public MvcConfig(
-            PlanHLoginInterceptor loginInterceptor,
-            TomcatServletWebServerFactory tomcatServletWebServerFactory
+            PlanHLoginInterceptor loginInterceptor
     ) {
         this.loginInterceptor = loginInterceptor;
-        tomcatServletWebServerFactory.addErrorPages(new ErrorPage("/error"));
     }
 
     @Override
@@ -39,7 +35,6 @@ public class MvcConfig implements WebMvcConfigurer {
     ) {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/admin/").setViewName("admin_x");
-        registry.addViewController("/error").setViewName("error");
     }
 
     @Override
@@ -61,25 +56,4 @@ public class MvcConfig implements WebMvcConfigurer {
         factory.setMaxRequestSize("1056MB");
         return factory.createMultipartConfig();
     }
-
-//    @Bean
-//    public EmbeddedServletContainerCustomizer embeddedServletContainerCustomizer() {
-//        return new EmbeddedServletContainerCustomizer() {
-//            @Override
-//            public void customize(ConfigurableEmbeddedServletContainer container) {
-//                container.setSessionTimeout(1, TimeUnit.MINUTES);
-//            }
-//        };
-//    }
-//    @Bean
-//    public ConfigurableEmbeddedServletContainer containerCustomizer() {
-//
-//        return (container -> {
-//            ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/401.html");
-//            ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404.html");
-//            ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500.html");
-//
-//            container.addErrorPages(error401Page, error404Page, error500Page);
-//        });
-//    }
 }

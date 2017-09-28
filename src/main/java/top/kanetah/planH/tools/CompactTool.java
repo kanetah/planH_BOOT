@@ -93,42 +93,46 @@ public class CompactTool {
             compress(file, out, basedir + dir.getName() + "/");
     }
 
-    public static void unZip(File zipFile, String descDir) throws IOException {
-        ZipFile zip = new ZipFile(zipFile, Charset.forName("utf-8"));
-        String name = zip.getName().substring(
-                zip.getName().lastIndexOf('\\') + 1, zip.getName().lastIndexOf('.'));
+    public static void unZip(File zipFile, String descDir) {
+        try {
+            ZipFile zip = new ZipFile(zipFile, Charset.forName("utf-8"));
+            String name = zip.getName().substring(
+                    zip.getName().lastIndexOf('\\') + 1, zip.getName().lastIndexOf('.'));
 
-        File pathFile = new File(descDir + name);
-        if (!pathFile.exists())
-            if (!pathFile.mkdirs())
-                throw new RuntimeException("can not mkdirs.");
-
-        for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); ) {
-            ZipEntry entry = entries.nextElement();
-            String zipEntryName = entry.getName();
-            InputStream in = zip.getInputStream(entry);
-            String outPath = (descDir + name + "/" + zipEntryName)
-                    .replaceAll("\\*", "/");
-
-            File file = new File(outPath.substring(0, outPath.lastIndexOf('/')));
-            if (!file.exists())
-                if (!file.mkdirs())
+            File pathFile = new File(descDir + name);
+            if (!pathFile.exists())
+                if (!pathFile.mkdirs())
                     throw new RuntimeException("can not mkdirs.");
-            if (new File(outPath).isDirectory())
-                continue;
 
-            FileOutputStream out = new FileOutputStream(outPath);
-            byte[] buf1 = new byte[1024];
-            for (int len; (len = in.read(buf1)) > 0; )
-                out.write(buf1, 0, len);
-            in.close();
-            out.close();
+            for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); ) {
+                ZipEntry entry = entries.nextElement();
+                String zipEntryName = entry.getName();
+                InputStream in = zip.getInputStream(entry);
+                String outPath = (descDir + name + "/" + zipEntryName)
+                        .replaceAll("\\*", "/");
+
+                File file = new File(outPath.substring(0, outPath.lastIndexOf('/')));
+                if (!file.exists())
+                    if (!file.mkdirs())
+                        throw new RuntimeException("can not mkdirs.");
+                if (new File(outPath).isDirectory())
+                    continue;
+
+                FileOutputStream out = new FileOutputStream(outPath);
+                byte[] buf1 = new byte[1024];
+                for (int len; (len = in.read(buf1)) > 0; )
+                    out.write(buf1, 0, len);
+                in.close();
+                out.close();
+            }
+            zip.close();
+        }catch (IOException e){
+            throw new RuntimeException(e);
         }
-        zip.close();
     }
 
-    public static void unRar(File srcRarFile, String dstDirectoryPath) {
-        File descDir = new File(dstDirectoryPath);
+    public static void unRar(File srcRarFile, String descPath) {
+        File descDir = new File(descPath);
         if (!descDir.exists())
             if (!descDir.mkdirs())
                 throw new RuntimeException("can not mkdirs.");
@@ -139,11 +143,11 @@ public class CompactTool {
             while (fh != null) {
                 String fileName = fh.getFileNameW().isEmpty() ? fh.getFileNameString() : fh.getFileNameW();
                 if (fh.isDirectory()) {
-                    File fol = new File(dstDirectoryPath + File.separator + fileName);
+                    File fol = new File(descPath + File.separator + fileName);
                     if (!fol.mkdirs())
                         throw new RuntimeException("can not mkdirs.");
                 } else {
-                    File out = new File(dstDirectoryPath + File.separator + fileName.trim());
+                    File out = new File(descPath + File.separator + fileName.trim());
                     if (!out.exists()) {
                         if (!out.getParentFile().exists())
                             if (!out.getParentFile().mkdirs())
