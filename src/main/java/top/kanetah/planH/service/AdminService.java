@@ -83,7 +83,8 @@ public class AdminService implements InitializingBean {
             String content,
             String type,
             String format,
-            String deadline
+            String deadline,
+            String saveProcessor
     ) {
         Optional<Task> optional = repositoryService.taskRepository.findById(id);
         assert optional.isPresent();
@@ -94,6 +95,7 @@ public class AdminService implements InitializingBean {
         task.setFileFormat(type);
         task.setSaveFormat(format);
         task.setDeadline(deadline);
+        task.setSaveProcessor(saveProcessor);
         repositoryService.taskRepository.save(task);
         SendMailService.setTimer(task, task.getId());
     }
@@ -161,21 +163,21 @@ public class AdminService implements InitializingBean {
         return tasks;
     }
 
-    public List<SubmitFileInfo> getSubmitFileInfos(Long id) {
+    public List<SubmitFileInfo> getSubmitFileInfo(Long id) {
         Optional<Task> optional = repositoryService.taskRepository.findById(id);
         assert optional.isPresent();
         Task task = optional.get();
         File storeDir = new File(storePath + "/" + task.getSubject() + "/" + task.getTitle());
         assert storeDir.isDirectory();
         File[] files = storeDir.listFiles();
-        assert files != null;
         List<SubmitFileInfo> info = new ArrayList<>();
-        for (File file : files) {
-            SubmitFileInfo i = new SubmitFileInfo();
-            i.fileName = file.getName();
-            i.submitDate = new Date(file.lastModified());
-            info.add(i);
-        }
+        if (files != null)
+            for (File file : files) {
+                SubmitFileInfo i = new SubmitFileInfo();
+                i.fileName = file.getName();
+                i.submitDate = new Date(file.lastModified());
+                info.add(i);
+            }
         return info;
     }
 }

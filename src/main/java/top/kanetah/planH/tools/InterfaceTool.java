@@ -14,8 +14,8 @@ import java.util.jar.JarFile;
 public class InterfaceTool {
 
     @SuppressWarnings("unchecked")
-    public static List<Class> getAllClassByInterface(Class c) {
-        List<Class> returnClassList = null;
+    public static List<Class<Object>> getAllClassByInterface(Class c) {
+        List<Class<Object>> returnClassList = null;
         if (c.isInterface()) {
             String packageName = c.getPackage().getName();
             List<Class<?>> allClass = getClasses(packageName);

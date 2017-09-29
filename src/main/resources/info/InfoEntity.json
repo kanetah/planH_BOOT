@@ -21,7 +21,8 @@
       "content",
       "deadline",
       "fileFormat",
-      "saveFormat"
+      "saveFormat",
+      "saveProcessor"
     ]
   }
 }

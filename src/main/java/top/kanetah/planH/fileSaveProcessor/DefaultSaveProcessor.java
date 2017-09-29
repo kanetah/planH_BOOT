@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Component
+@SupportSaveType("最外层文件名格式化存储处理器")
 public class DefaultSaveProcessor implements SubjectTaskFileSaveProcessor {
 
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
@@ -32,7 +33,7 @@ public class DefaultSaveProcessor implements SubjectTaskFileSaveProcessor {
         if (!target.exists())
             if (!target.mkdirs())
                 throw new FileException();
-        path += "/" + SaveFormat.format(task, user);
+        path += "/" + SaveFormat.format(task, user, file);
         target = new File(path + fileType);
         if (!target.exists())
             if (!target.createNewFile())

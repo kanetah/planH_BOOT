@@ -13,6 +13,7 @@ $(document).ready(function () {
                     'content',
                     'saveFormat',
                     'fileFormat',
+                    'saveProcessor',
                     'deadline'
                 ];
                 $.each(ths, function (i) {
@@ -33,6 +34,7 @@ $(document).ready(function () {
                     inputs.find('#update_type').val($(this).attr('fileFormat'));
                     inputs.find('#update_format').val($(this).attr('saveFormat'));
                     inputs.find('#update_date').val($(this).attr('deadline'));
+                    inputs.find('#update_processor').val($(this).attr('saveProcessor'));
                     modal.modal('show');
                     updateSubmitTable(task_id);
                     event.stopPropagation();
@@ -83,6 +85,20 @@ $(document).ready(function () {
         }
     });
 
+    $.ajaxPlanH({
+        const_url: "/processor/values",
+        success: function (data) {
+            $.each(data, function (idx, elem) {
+                $('#update_processor').append(
+                    '<option>' + elem + '</option>'
+                );
+                $('#processor').append(
+                    '<option>' + elem + '</option>'
+                );
+            });
+        }
+    });
+
     $('#create_task').click(function () {
         var inputs = $('#create_task_Modal').find('div > div > #addTask > div');
         $.ajaxPlanH({
@@ -93,7 +109,8 @@ $(document).ready(function () {
                 content: inputs.find('#content').val(),
                 type: inputs.find('#type').val(),
                 format: inputs.find('#format').val(),
-                deadline: inputs.find('#date').val()
+                deadline: inputs.find('#date').val(),
+                processor: inputs.find('#processor').val()
             },
             success: function () {
                 location.reload(true);
@@ -113,7 +130,8 @@ $(document).ready(function () {
                 content: inputs.find('#update_content').val(),
                 type: inputs.find('#update_type').val(),
                 format: inputs.find('#update_format').val(),
-                deadline: inputs.find('#update_date').val()
+                deadline: inputs.find('#update_date').val(),
+                processor: inputs.find('#update_processor').val()
             },
             success: function () {
                 location.reload(true);

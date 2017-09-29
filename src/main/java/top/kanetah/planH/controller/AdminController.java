@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/admin")
@@ -40,7 +37,7 @@ public class AdminController {
     public Object[] getSubmitInfo(
             @RequestParam(value = "taskId") String taskId
     ) {
-        return adminService.getSubmitFileInfos(Long.valueOf(taskId)).toArray();
+        return adminService.getSubmitFileInfo(Long.valueOf(taskId)).toArray();
     }
 
     @ResponseBody
@@ -54,9 +51,12 @@ public class AdminController {
             @RequestParam(value = "content") String content,
             @RequestParam(value = "type") String type,
             @RequestParam(value = "format") String format,
-            @RequestParam(value = "deadline") String deadline
+            @RequestParam(value = "deadline") String deadline,
+            @RequestParam(value = "processor") String saveProcessor
     ) {
-        adminService.createTask(new Task(subject, title, content, type, format, deadline));
+        adminService.createTask(new Task(
+                subject, title, content, type, format, deadline, saveProcessor
+        ));
         return "[\"created\"]";
     }
 
@@ -72,7 +72,8 @@ public class AdminController {
             @RequestParam(value = "content") String content,
             @RequestParam(value = "type") String type,
             @RequestParam(value = "format") String format,
-            @RequestParam(value = "deadline") String deadline
+            @RequestParam(value = "deadline") String deadline,
+            @RequestParam(value = "processor") String saveProcessor
     ) {
         if (deadline.contains("T"))
             deadline = deadline.substring(0, deadline.indexOf("T"));
@@ -83,7 +84,8 @@ public class AdminController {
                 content,
                 type,
                 format,
-                deadline
+                deadline,
+                saveProcessor
         );
         return "[\"updated\"]";
     }

@@ -6,7 +6,6 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -19,6 +18,7 @@ public class Task extends BaseEntity {
     private Date deadline;
     private String fileFormat;
     private String saveFormat;
+    private String saveProcessor;
     @Relationship(type = "USER_SUBMIT_TASK", direction = Relationship.UNDIRECTED)
     private ArrayList<Submit> submits = new ArrayList<>();
 
@@ -31,13 +31,15 @@ public class Task extends BaseEntity {
             String content,
             String fileFormat,
             String saveFormat,
-            String deadline
+            String deadline,
+            String saveProcessor
     ) {
         this.subject = subject;
         this.title = title;
         this.content = content;
         this.fileFormat = fileFormat;
         this.saveFormat = saveFormat;
+        this.saveProcessor = saveProcessor;
         setDeadline(deadline);
     }
 
@@ -63,6 +65,10 @@ public class Task extends BaseEntity {
 
     public Date getDeadline() {
         return deadline;
+    }
+
+    public String getSaveProcessor() {
+        return saveProcessor;
     }
 
     public ArrayList<Submit> getSubmits() {
@@ -97,6 +103,10 @@ public class Task extends BaseEntity {
 
     public void setSaveFormat(String saveFormat) {
         this.saveFormat = saveFormat;
+    }
+
+    public void setSaveProcessor(String saveProcessor) {
+        this.saveProcessor = saveProcessor;
     }
 
     public Date getDeadlineOnJVM() {
