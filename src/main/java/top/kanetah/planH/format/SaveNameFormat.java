@@ -1,10 +1,10 @@
-package top.kanetah.planH.pojo;
+package top.kanetah.planH.format;
 
 import org.springframework.web.multipart.MultipartFile;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.entity.node.User;
 
-public enum SaveFormat {
+public enum SaveNameFormat {
     code,
     code2,
     name,

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.entity.node.User;
 import top.kanetah.planH.entity.relationship.Submit;
-import top.kanetah.planH.fileSaveProcessor.SubjectTaskFileSaveProcessor;
-import top.kanetah.planH.fileSaveProcessor.SupportSaveType;
+import top.kanetah.planH.format.FormatSaveProcessor;
+import top.kanetah.planH.format.FormatType;
 import top.kanetah.planH.info.Info;
 import top.kanetah.planH.info.InfoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class UserService extends ApplicationObjectSupport {
     private final Info info;
     private Map<Long, List<Task>> BuffMap = new HashMap<>();
     private List<Class<Object>> processorInterfaces = InterfaceTool.getAllClassByInterface(
-            SubjectTaskFileSaveProcessor.class
+            FormatSaveProcessor.class
     );
 
     @Autowired
@@ -118,13 +118,13 @@ public class UserService extends ApplicationObjectSupport {
         User user = repositoryService.userRepository.findByUserCode(userCode);
         int i;
         for (i = 0; i < processorInterfaces.size(); ++i)
-            if (processorInterfaces.get(i).getAnnotation(SupportSaveType.class).value()
+            if (processorInterfaces.get(i).getAnnotation(FormatType.class).value()
                     .equals(task.getSaveProcessor()))
                 try {
                     ApplicationContext context = super.getApplicationContext();
                     assert context != null;
-                    SubjectTaskFileSaveProcessor saveProcessor =
-                            (SubjectTaskFileSaveProcessor) context.getBean(processorInterfaces.get(i));
+                    FormatSaveProcessor saveProcessor =
+                            (FormatSaveProcessor) context.getBean(processorInterfaces.get(i));
                     saveProcessor.saveFile(user, task, file);
                     break;
                 } catch (Exception e) {
@@ -140,12 +140,12 @@ public class UserService extends ApplicationObjectSupport {
         Object[] values = new Object[processorInterfaces.size()];
         for (int i = 0; i < values.length; i++)
             values[i] = processorInterfaces.get(i).
-                    getAnnotation(SupportSaveType.class).value();
+                    getAnnotation(FormatType.class).value();
         return values;
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-            reason = "文件存储处理器错误")
+            reason = "没有找到文件存储处理器")
     private class ProcessorException extends RuntimeException {
     }
 }

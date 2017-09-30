@@ -95,7 +95,7 @@ public class CompactTool {
 
     public static void unZip(File zipFile, String descDir) {
         try {
-            ZipFile zip = new ZipFile(zipFile, Charset.forName("utf-8"));
+            ZipFile zip = new ZipFile(zipFile, Charset.forName("GBK"));
             String name = zip.getName().substring(
                     zip.getName().lastIndexOf('\\') + 1, zip.getName().lastIndexOf('.'));
 
@@ -126,7 +126,7 @@ public class CompactTool {
                 out.close();
             }
             zip.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
