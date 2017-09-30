@@ -1,9 +1,6 @@
 package top.kanetah.planH.service;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ApplicationObjectSupport;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.entity.node.User;
 import top.kanetah.planH.entity.relationship.Submit;
@@ -14,6 +11,7 @@ import top.kanetah.planH.info.InfoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import top.kanetah.planH.tools.FormatSaveProcessorTool;
 import top.kanetah.planH.tools.InterfaceTool;
 
 import java.io.IOException;
@@ -116,23 +114,9 @@ public class UserService extends ApplicationObjectSupport {
         assert optional.isPresent();
         Task task = optional.get();
         User user = repositoryService.userRepository.findByUserCode(userCode);
-        int i;
-        for (i = 0; i < processorInterfaces.size(); ++i)
-            if (processorInterfaces.get(i).getAnnotation(FormatType.class).value()
-                    .equals(task.getSaveProcessor()))
-                try {
-                    ApplicationContext context = super.getApplicationContext();
-                    assert context != null;
-                    FormatSaveProcessor saveProcessor =
-                            (FormatSaveProcessor) context.getBean(processorInterfaces.get(i));
-                    saveProcessor.saveFile(user, task, file);
-                    break;
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-        if (i == processorInterfaces.size())
-            throw new ProcessorException();
-        Submit submit = new Submit(user, task, file.getOriginalFilename(), new Date());
+        String saveFileName = new FormatSaveProcessorTool().findProcessorByTask(task)
+                .saveFile(user, task, file);
+        Submit submit = new Submit(user, task, file.getOriginalFilename(), saveFileName, new Date());
         repositoryService.submitRepository.save(submit);
     }
 
@@ -142,10 +126,5 @@ public class UserService extends ApplicationObjectSupport {
             values[i] = processorInterfaces.get(i).
                     getAnnotation(FormatType.class).value();
         return values;
-    }
-
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,
-            reason = "没有找到文件存储处理器")
-    private class ProcessorException extends RuntimeException {
     }
 }

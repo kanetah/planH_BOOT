@@ -14,6 +14,7 @@ import top.kanetah.planH.entity.node.User;
 import top.kanetah.planH.pojo.Subject;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.tools.CompactTool;
+import top.kanetah.planH.tools.FormatSaveProcessorTool;
 import top.kanetah.planH.tools.RegexTool;
 import top.kanetah.planH.pojo.TreeMultiValueMap;
 
@@ -151,9 +152,8 @@ public class SendMailService implements InitializingBean {
         Context context = new Context();
         context.setVariable("teacherName", subjectMap.get(task.getSubject()).getTeacher());
         context.setVariable("taskTitle", task.getTitle());
-        String[] fileNames = new File(
-                storePath + "/" + task.getSubject() + "/" + task.getTitle()
-        ).list();
+        File submitDir = new File(storePath + "/" + task.getSubject() + "/" + task.getTitle());
+        String[] fileNames = submitDir.list();
         assert fileNames != null;
         context.setVariable("submitSize", fileNames.length);
         Map<Long, User> users = new HashMap<>();
@@ -163,22 +163,39 @@ public class SendMailService implements InitializingBean {
         });
         context.setVariable("userCount", users.size());
         List<User> submitted = new ArrayList<>();
-        for (String fileName : fileNames)
-            submitted.add(repositoryService.userRepository.findByUserCode(
-                    Long.valueOf("2" + RegexTool.lastRegex(
-                            fileName.replace(task.getTitle(), ""), "\\d{2}"
-                    ))
-            ));
+        if (new FormatSaveProcessorTool().findProcessorByTask(task).fileUserWhenSendMail())
+            for (String fileName : fileNames)
+                submitted.add(repositoryService.userRepository.findByUserCode(
+                        Long.valueOf("2" + RegexTool.lastRegex(
+                                fileName.replace(task.getTitle(), ""), "\\d{2}"
+                        ))
+                ));
         int flagSize = 20;
         context.setVariable("flagSize", flagSize);
         context.setVariable("codePrefix", adminService.getUserCodePrefix());
         submitted.forEach(u ->
                 users.remove(u.getUserCode()));
         users.forEach((k, v) -> System.out.println(v));
-        context.setVariable(
-                "users",
-                fileNames.length >= flagSize ? users.values() : submitted
-        );
+        List<Cell> tableCells = new ArrayList<>();
+        if (submitted.size() == 0) {
+            context.setVariable("t1", "提交文件");
+            context.setVariable("t2", "大小");
+            File[] submitFiles = submitDir.listFiles();
+            assert submitFiles != null;
+            for (File elem : submitFiles)
+                tableCells.add(new Cell(
+                        elem.getName(), elem.getTotalSpace() + "B"
+                ));
+        } else {
+            context.setVariable("t1", "学号");
+            context.setVariable("t2", "姓名");
+            (fileNames.length >= flagSize ? users.values() : submitted).forEach(user ->
+                    tableCells.add(new Cell(
+                            String.valueOf(user.getUserCode()),
+                            user.getUserName()
+                    )));
+        }
+        context.setVariable("table", tableCells);
         return thymeleaf.process("email.html", context);
     }
 
@@ -187,11 +204,21 @@ public class SendMailService implements InitializingBean {
         for (Map map : new ObjectMapper().readValue(
                 new File(subjectInfoPath),
                 Map[].class
-        )) subjectNames.add(map.get("subject"));
+        ))
+            subjectNames.add(map.get("subject"));
         return subjectNames.toArray();
     }
 
     public Object[] getTimers() {
         return timerList.toArray();
+    }
+
+    private class Cell {
+        String c1, c2;
+
+        Cell(String c1, String c2) {
+            this.c1 = c1;
+            this.c2 = c2;
+        }
     }
 }

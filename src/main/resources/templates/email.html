@@ -67,12 +67,12 @@
         </p>
         <table>
             <tr>
-                <th>学号</th>
-                <th>姓名</th>
+                <th th:text="${t1}"></th>
+                <th th:text="${t2}"></th>
             </tr>
-            <tr th:each="user:${users}">
-                <td class="userCode" th:text="${codePrefix}+''+${user.userCode}"></td>
-                <td th:text="${user.userName}"></td>
+            <tr th:each="elem:${table}">
+                <td class="userCode" th:text="${codePrefix}+''+${elem.c1}"></td>
+                <td th:text="${elem.c2}"></td>
             </tr>
         </table>
     </div>

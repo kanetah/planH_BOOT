@@ -7,5 +7,6 @@ import top.kanetah.planH.entity.node.User;
 import java.io.IOException;
 
 public interface FormatSaveProcessor {
-    void saveFile(User user, Task task, MultipartFile file) throws IOException;
+    String saveFile(User user, Task task, MultipartFile file) throws IOException;
+    Boolean fileUserWhenSendMail();
 }

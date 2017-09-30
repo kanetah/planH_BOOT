@@ -21,6 +21,7 @@ public class Submit extends BaseRelationshipEntity {
     private Task task;
     private Date submitDate;
     private String submitFileName;
+    private String saveFileName;
 
     private static Submit emptySubmitObject;
     static {
@@ -30,10 +31,11 @@ public class Submit extends BaseRelationshipEntity {
     public Submit() {
     }
 
-    public Submit(User user, Task task, String submitFileName, Date submitDate) {
+    public Submit(User user, Task task, String submitFileName, String saveFileName, Date submitDate) {
         this.user = user;
         this.task = task;
         this.submitFileName = submitFileName;
+        this.saveFileName = saveFileName;
         this.submitDate = submitDate;
     }
 
@@ -63,5 +65,9 @@ public class Submit extends BaseRelationshipEntity {
 
     public String getSubmitFileName() {
         return submitFileName;
+    }
+
+    public String getSaveFileName() {
+        return saveFileName;
     }
 }

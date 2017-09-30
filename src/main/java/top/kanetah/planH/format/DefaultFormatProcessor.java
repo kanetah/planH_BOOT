@@ -17,7 +17,7 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
     private String storePath;
 
     @Override
-    public void saveFile(
+    public String saveFile(
             User user, Task task, MultipartFile file
     ) throws IOException {
         String originalFilename = file.getOriginalFilename();
@@ -37,5 +37,11 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
                 throw new FileException();
         file.transferTo(target);
         CompactFileProcessor.handleCompactFile(target, path, fileType);
+        return target.getName();
+    }
+
+    @Override
+    public Boolean fileUserWhenSendMail() {
+        return true;
     }
 }

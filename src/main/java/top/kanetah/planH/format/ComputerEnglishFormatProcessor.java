@@ -18,10 +18,10 @@ public class ComputerEnglishFormatProcessor implements FormatSaveProcessor {
     private String storePath;
 
     @Override
-    public void saveFile(User user, Task task, MultipartFile file) throws IOException {
+    public String saveFile(User user, Task task, MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         assert originalFilename != null;
-        if(!Pattern.compile("G\\d{1,2}-U\\d{1,2}-[BbCc]\\.((zip)|(rar)|(ZIP)|(RAR))")
+        if(!Pattern.compile("^G\\d{1,2}-U\\d{1,2}-[BbCc]\\.((zip)|(rar)|(ZIP)|(RAR))$")
                 .matcher(originalFilename).matches())
             throw new FileNameException();
         String fileType = originalFilename.substring(originalFilename.indexOf("."));
@@ -55,5 +55,11 @@ public class ComputerEnglishFormatProcessor implements FormatSaveProcessor {
         String summaryType = summaryName.substring(summaryName.indexOf('.'));
         if (!summary.renameTo(new File(path + "/" + originalFilename + summaryType)))
             throw new FileException();
+        return target.getName();
+    }
+
+    @Override
+    public Boolean fileUserWhenSendMail() {
+        return false;
     }
 }

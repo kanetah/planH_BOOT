@@ -95,40 +95,48 @@ public class CompactTool {
 
     public static void unZip(File zipFile, String descDir) {
         try {
-            ZipFile zip = new ZipFile(zipFile, Charset.forName("GBK"));
-            String name = zip.getName().substring(
-                    zip.getName().lastIndexOf('\\') + 1, zip.getName().lastIndexOf('.'));
-
-            File pathFile = new File(descDir + name);
-            if (!pathFile.exists())
-                if (!pathFile.mkdirs())
-                    throw new RuntimeException("can not mkdirs.");
-
-            for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); ) {
-                ZipEntry entry = entries.nextElement();
-                String zipEntryName = entry.getName();
-                InputStream in = zip.getInputStream(entry);
-                String outPath = (descDir + name + "/" + zipEntryName)
-                        .replaceAll("\\*", "/");
-
-                File file = new File(outPath.substring(0, outPath.lastIndexOf('/')));
-                if (!file.exists())
-                    if (!file.mkdirs())
-                        throw new RuntimeException("can not mkdirs.");
-                if (new File(outPath).isDirectory())
-                    continue;
-
-                FileOutputStream out = new FileOutputStream(outPath);
-                byte[] buf1 = new byte[1024];
-                for (int len; (len = in.read(buf1)) > 0; )
-                    out.write(buf1, 0, len);
-                in.close();
-                out.close();
-            }
-            zip.close();
+            unZip(zipFile, descDir, "utf-8");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            try {
+                unZip(zipFile, descDir, "GBK");
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         }
+    }
+
+    private static void unZip(File zipFile, String descDir, String charSet) throws IOException {
+        ZipFile zip = new ZipFile(zipFile, Charset.forName(charSet));
+        String name = zip.getName().substring(
+                zip.getName().lastIndexOf('\\') + 1, zip.getName().lastIndexOf('.'));
+
+        File pathFile = new File(descDir + name);
+        if (!pathFile.exists())
+            if (!pathFile.mkdirs())
+                throw new RuntimeException("can not mkdirs.");
+
+        for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); ) {
+            ZipEntry entry = entries.nextElement();
+            String zipEntryName = entry.getName();
+            InputStream in = zip.getInputStream(entry);
+            String outPath = (descDir + name + "/" + zipEntryName)
+                    .replaceAll("\\*", "/");
+
+            File file = new File(outPath.substring(0, outPath.lastIndexOf('/')));
+            if (!file.exists())
+                if (!file.mkdirs())
+                    throw new RuntimeException("can not mkdirs.");
+            if (new File(outPath).isDirectory())
+                continue;
+
+            FileOutputStream out = new FileOutputStream(outPath);
+            byte[] buf1 = new byte[1024];
+            for (int len; (len = in.read(buf1)) > 0; )
+                out.write(buf1, 0, len);
+            in.close();
+            out.close();
+        }
+        zip.close();
     }
 
     public static void unRar(File srcRarFile, String descPath) {
