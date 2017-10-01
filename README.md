@@ -12,6 +12,3 @@ planH是一个为练习spring框架而构建的项目，目的是搭建一个涉
 
 现在，planH已经运行于阿里云服务器上，可以直接访问：<a href="https://kanetah.top:8443/">PlanH</a>
 
-<ui>
-note:
-</ui>
