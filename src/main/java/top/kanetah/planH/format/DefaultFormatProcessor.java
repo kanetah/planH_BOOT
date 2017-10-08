@@ -13,6 +13,7 @@ import java.io.IOException;
 @FormatType("最外层文件名格式化处理器")
 public class DefaultFormatProcessor implements FormatSaveProcessor {
 
+    private static FormatSaveProcessor processor = null;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
 
@@ -43,5 +44,11 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
     @Override
     public Boolean fileUserWhenSendMail() {
         return true;
+    }
+
+    public static FormatSaveProcessor create() {
+        if(processor == null)
+            processor = new DefaultFormatProcessor();
+        return processor;
     }
 }

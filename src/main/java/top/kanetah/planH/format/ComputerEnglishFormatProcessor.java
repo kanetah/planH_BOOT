@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 @FormatType("计算机英语定制格式化处理器")
 public class ComputerEnglishFormatProcessor implements FormatSaveProcessor {
 
+    private static FormatSaveProcessor processor = null;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
 
@@ -61,5 +62,11 @@ public class ComputerEnglishFormatProcessor implements FormatSaveProcessor {
     @Override
     public Boolean fileUserWhenSendMail() {
         return false;
+    }
+
+    public static FormatSaveProcessor create() {
+        if(processor == null)
+            processor = new ComputerEnglishFormatProcessor();
+        return processor;
     }
 }

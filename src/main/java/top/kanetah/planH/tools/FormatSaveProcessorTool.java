@@ -1,22 +1,26 @@
 package top.kanetah.planH.tools;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.support.WebApplicationObjectSupport;
 import top.kanetah.planH.entity.node.Task;
 import top.kanetah.planH.format.FormatSaveProcessor;
 import top.kanetah.planH.format.FormatType;
 
 import java.util.List;
 
+@Component
 public class FormatSaveProcessorTool extends ApplicationObjectSupport {
 
     private static List<Class<Object>> processorInterfaces = InterfaceTool.getAllClassByInterface(
             FormatSaveProcessor.class
     );
 
-    public FormatSaveProcessor findProcessorByTask(Task task){
+    public FormatSaveProcessor findProcessorByTask(Task task) {
         FormatSaveProcessor saveProcessor = null;
         int i;
         for (i = 0; i < processorInterfaces.size(); ++i)
@@ -26,7 +30,10 @@ public class FormatSaveProcessorTool extends ApplicationObjectSupport {
                     ApplicationContext context = super.getApplicationContext();
                     assert context != null;
                     saveProcessor =
-                            (FormatSaveProcessor) context.getBean(processorInterfaces.get(i));
+//                            (FormatSaveProcessor) context.getBean(processorInterfaces.get(i));
+                            (FormatSaveProcessor)processorInterfaces.get(i)
+                                    .getMethod("create")
+                                    .invoke(null);
                     break;
                 } catch (Exception e) {
                     throw new RuntimeException(e);
