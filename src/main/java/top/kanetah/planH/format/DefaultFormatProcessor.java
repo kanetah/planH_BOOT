@@ -17,6 +17,11 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
 
+    public DefaultFormatProcessor() {
+        super();
+        processor = this;
+    }
+
     @Override
     public String saveFile(
             User user, Task task, MultipartFile file
@@ -37,7 +42,10 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
             if (!target.createNewFile())
                 throw new FileException();
         file.transferTo(target);
-        CompactFileProcessor.handleCompactFile(target, path, fileType);
+        try {
+            CompactFileProcessor.handleCompactFile(target, path, fileType);
+        }catch (FileTypeException ignored){
+        }
         return target.getName();
     }
 
@@ -47,8 +55,6 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
     }
 
     public static FormatSaveProcessor create() {
-        if(processor == null)
-            processor = new DefaultFormatProcessor();
         return processor;
     }
 }
