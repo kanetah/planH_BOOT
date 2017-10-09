@@ -145,4 +145,8 @@ $(() => {
         }
         download_icon_flag = !download_icon_flag
     });
+
+    setTimeout(() => {
+        $('#task').trigger('click');
+    }, 1500);
 });
