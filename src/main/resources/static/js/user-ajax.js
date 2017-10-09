@@ -1,16 +1,15 @@
-$(document).ready(function () {
-
+$(() => {
     $.ajaxPlanH({
         url: '/username',
-        success: function (username) {
+        success: (username) => {
             $('#username').html(username[0]);
         }
     });
 
     $.task_index = 0;
 
-    $('#task').click(function () {
-        var icon = $('#task').find('> i');
+    $('#task').click(() => {
+        let icon = $('#task').find('> i');
         if ($.task_index === null)
             return;
         $.setLoadingFlag(true);
@@ -21,15 +20,15 @@ $(document).ready(function () {
                 from: $.task_index,
                 to: $.task_index + 5
             },
-            beforeSend: function () {
+            beforeSend: () => {
                 icon.rotate({
                     animateTo: 720, duration: 2000,
-                    callback: function () {
+                    callback: () => {
                         icon.rotate(0);
                     }
                 });
             },
-            success: function (data) {
+            success: (data) => {
                 if (data.length === 0) {
                     $.task_index = null;
                     $.setLoadingFlag(false);
@@ -40,7 +39,7 @@ $(document).ready(function () {
                     return;
                 }
                 $.task_index += 5;
-                $.each(data, function (idx, elem) {
+                $.each(data, (idx, elem) => {
                     $.addTask(elem);
                 });
                 $.showBuffTask();
@@ -49,53 +48,53 @@ $(document).ready(function () {
         })
     });
 
-    $.addSubmit = function (form_data, task_id, task_title, label) {
+    $.addSubmit = (form_data, task_id, task_title, label) => {
 
-        var right_list_icon = $('.right-list > span > i');
-        var right_list = $('.right-list');
+        let right_list_icon = $('.right-list > span > i');
+        let right_list = $('.right-list');
         if (right_list.css('right') !== '0px')
             right_list_icon.click();
 
-        var template = $('.submit-template').clone(true);
+        let template = $('.submit-template').clone(true);
         template.removeClass('submit-template');
         $('.loading-box').append(template);
-        var title = template.find('.loading-id');
+        let title = template.find('.loading-id');
         title.html(task_title);
-        var progress_bar = template.find('> .progress > .progress-bar');
-        var per;
+        let progress_bar = template.find('> .progress > .progress-bar');
+        let per;
 
         $.ajaxPlanH({
             url: '/task/patch/' + task_id,
             data: new FormData(form_data[0]),
             cache: false,
-            beforeSend: function () {
+            beforeSend: () => {
                 progress_bar.css('width', '0');
             },
-            xhr: function () {
-                var xhr = $.ajaxSettings.xhr();
+            xhr: () => {
+                let xhr = $.ajaxSettings.xhr();
                 if (xhr.upload) {
-                    xhr.upload.addEventListener("progress", function (evt) {
+                    xhr.upload.addEventListener("progress", (evt) => {
                         per = Math.floor(100 * evt.loaded / evt.total);
                         progress_bar.css("width", per + "%");
                     }, false);
                     return xhr;
                 }
             },
-            success: function () {
+            success: () => {
                 label.removeClass('label-danger');
                 label.addClass('label-info');
                 label.html('已提交');
                 progress_bar.removeClass('progress-bar-striped');
                 progress_bar.text('完成');
             },
-            error: function (xhr) {
+            error: (xhr) => {
                 progress_bar.css('background-color', 'red');
                 label.removeClass('label-info');
                 label.addClass('label-danger');
                 label.html('提交失败');
                 progress_bar.text(xhr.responseJSON.message);
             },
-            complete: function () {
+            complete: () => {
                 progress_bar.removeClass('active');
             }
         });
@@ -103,9 +102,9 @@ $(document).ready(function () {
 
     $.ajaxPlanH({
         const_url: '/download/fileNames/get',
-        success: function (data) {
-            var download_box = $('.download-box');
-            $.each(data, function (index) {
+        success: (data) => {
+            let download_box = $('.download-box');
+            $.each(data, (index) => {
                 download_box.append(
                     '<a href="/download/' + data[index] + '">'
                     + data[index] +

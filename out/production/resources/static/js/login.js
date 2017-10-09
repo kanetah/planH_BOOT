@@ -1,33 +1,29 @@
-$(document).ready(function () {
-
-    $('body').onload = document.login_form.password.focus();
+$(() => {
+    document.login_form.password.focus();
     $('[name="login_form"]').submit(function () {
-        var userCode = $('[name="password"]');
+        let userCode = $('[name="password"]');
         if (userCode.val().indexOf($.cookie("userCodePrefix")) === 0)
             userCode.val(userCode.val().replace($.cookie("userCodePrefix"), ""));
         return true;
     });
 
-    var username_div = $("#user-name");
-    var password_div = $('#pwd-div');
-    var username = $('[name="username"]');
-    var password = $('[name="password"]');
-
-    function hideUserInput() {
+    let username_div = $("#user-name");
+    let password_div = $('#pwd-div');
+    let username = $('[name="username"]');
+    let password = $('[name="password"]');
+    const hideUserInput = () => {
         password.val("");
         password_div.find('div > span').html("口令");
-        username_div.slideUp("slow", function () {
+        username_div.slideUp("slow",() => {
             username.val("admin");
             password.attr("type", "password");
             password.focus();
         });
-    }
-
-    var drag = function (obj) {
-
+    };
+    const drag = (obj) => {
         obj.bind("mousedown", start);
-        var gapX;
-        var gapY;
+        let gapX;
+        let gapY;
 
         function start(event) {
             if (event.button === 0) {
@@ -36,7 +32,6 @@ $(document).ready(function () {
                 $(document).bind("mouseup", stop);
             }
         }
-
         function stop(event) {
             if ((event.clientY - gapY) > 10) {
                 password.val("");

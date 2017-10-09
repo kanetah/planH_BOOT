@@ -1,18 +1,22 @@
-$(document).ready(function () {
+$(function () {
+    var timer = setTimeout(function () {
+        alert("您的浏览器不支持ES6规范，请升级。")
+    }, 1000);
+    const global = {};
+    clearTimeout(timer);
 
-    $.global = {};
-    $.global.path_prefix_for_role = "";
+    global.path_prefix_for_role = "";
 
     window.jQuery || document.getElementById("body").appendChild(document.createTextNode('<script src="js/vendor/jquery.min.js"><\/script>'));
-    $.global.body = $('body');
-    $.global.body.append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
+    global.body = $('body');
+    global.body.append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
 
-    $.ajaxPlanH = function (args) {
+    $.ajaxPlanH = (args) => {
 
         if (args.url === undefined)
             args.url = '/';
         if (args.const_url === undefined)
-            args.url = $.global.path_prefix_for_role + args.url;
+            args.url = global.path_prefix_for_role + args.url;
         else
             args.url = args.const_url;
         if (args.type === undefined)
@@ -26,7 +30,7 @@ $(document).ready(function () {
         if (args.dataType === undefined)
             args.dataType = "json";
         if (args.error === undefined && args.complete === undefined)
-            args.error = function (XMLHttpRequest) {
+            args.error = (XMLHttpRequest) => {
                 alert(
                     "未预见的ajax请求错误，请联系管理员\n" +
                     "XMLHttpRequestStatus: " + XMLHttpRequest.status + "\n" +
@@ -34,7 +38,7 @@ $(document).ready(function () {
                 )
             };
 
-        var token = $("meta[name='_csrf']").attr("content");
+        const token = $("meta[name='_csrf']").attr("content");
         if (args.data instanceof FormData) {
             args.data.append("_csrf", token);
             args.contentType = false;
@@ -48,16 +52,16 @@ $(document).ready(function () {
 
     $.ajaxPlanH({
         const_url: '/role/get',
-        success: function (roles) {
-            var body = $.global.body;
-            $.global.role = roles[0];
+        success: (roles) => {
+            let body = global.body;
+            global.role = roles[0];
 
-            if ($.global.role === 'ADMIN') {
-                $.global.path_prefix_for_role = '/admin';
+            if (global.role === 'ADMIN') {
+                global.path_prefix_for_role = '/admin';
                 body.append('<script src="js/admin.js"><\/script>');
                 body.append('<script src="js/admin-ajax.js"><\/script>');
-            } else if ($.global.role === 'USER') {
-                $.global.path_prefix_for_role = '/user/' + $.cookie('userCode');
+            } else if (global.role === 'USER') {
+                global.path_prefix_for_role = '/user/' + $.cookie('userCode');
                 body.append('<script src="js/user.js"><\/script>');
                 body.append('<script src="js/user-ajax.js"><\/script>');
                 body.append('<script src="js/vendor/jquery.rotate.min.js"><\/script>');
@@ -66,10 +70,10 @@ $(document).ready(function () {
         }
     });
 
-    $('#logout').click(function () {
+    $('#logout').click(() => {
         $.ajaxPlanH({
             const_url: '/logout',
-            complete: function () {
+            complete: () => {
                 window.location.reload();
             }
         })
