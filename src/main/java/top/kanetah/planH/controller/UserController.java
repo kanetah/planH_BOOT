@@ -29,7 +29,7 @@ public class UserController {
             @RequestParam(value = "to") String to
     ) throws InterruptedException {
         return
-                userService.getTask(
+                userService.getTask_Compare(
                         Integer.valueOf(from),
                         Integer.valueOf(to),
                         Long.valueOf(userCode)

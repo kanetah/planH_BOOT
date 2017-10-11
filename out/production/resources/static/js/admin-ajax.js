@@ -70,9 +70,7 @@ $(() => {
         })
     };
 
-    const option = (elem) => {
-        return '<option>' + elem + '</option>'
-    };
+    const option = (elem) => `<option>${elem}</option>`;
 
     $.ajaxPlanH({
         const_url: "/subject/names",
