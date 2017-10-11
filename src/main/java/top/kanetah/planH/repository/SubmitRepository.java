@@ -5,6 +5,8 @@ import top.kanetah.planH.entity.relationship.Submit;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 @Repository
 public interface SubmitRepository
         extends PagingAndSortingRepository<Submit, Long> {

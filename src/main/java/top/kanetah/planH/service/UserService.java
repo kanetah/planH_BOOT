@@ -44,8 +44,8 @@ public class UserService extends ApplicationObjectSupport {
     }
 
     private class TaskSubmit {
-        public Task task;
-        public Submit submit;
+        Task task;
+        Submit submit;
 
         TaskSubmit(Task task, Submit submit) {
             this.task = task;
@@ -59,21 +59,19 @@ public class UserService extends ApplicationObjectSupport {
             repositoryService.taskRepository.findAll().iterator().forEachRemaining(task -> {
                 final Submit[] lastSubmit = {Submit.emptySubmit()};
                 repositoryService.submitRepository.findAllByUser_UserCode(userCode).forEach(submit -> {
-                    if (submit.getTask().getId().equals(task.getId()))
-                        if (lastSubmit[0] == null || lastSubmit[0].equals(Submit.emptySubmit())
-                                || lastSubmit[0].getSubmitDate().compareTo(submit.getSubmitDate()) > 0)
-                            lastSubmit[0] = submit;
+                    if (submit.getTask().getId().equals(task.getId())
+                            && (lastSubmit[0] == null || lastSubmit[0].equals(Submit.emptySubmit())
+                            || lastSubmit[0].getSubmitDate().compareTo(submit.getSubmitDate()) > 0))
+                        lastSubmit[0] = submit;
                 });
                 taskSubmitList.add(new TaskSubmit(task, lastSubmit[0]));
             });
-            taskSubmitList.sort(((o1, o2) -> {
-                if (o2.submit.equals(Submit.emptySubmit()) && !o1.submit.equals(Submit.emptySubmit()))
-                    return Integer.MAX_VALUE;
-                else if (!o2.submit.equals(Submit.emptySubmit()) && o1.submit.equals(Submit.emptySubmit()))
-                    return Integer.MIN_VALUE;
-                else
-                    return o2.task.getDeadlineOnJVM().compareTo(o1.task.getDeadlineOnJVM());
-            }));
+            taskSubmitList.sort((o1, o2) -> {
+                boolean b1 = o1.submit.equals(Submit.emptySubmit());
+                boolean b2 = o2.submit.equals(Submit.emptySubmit());
+                return !b1 && b2 ? 1 : b1 && !b2 ? -1 :
+                        o2.task.getDeadlineOnJVM().compareTo(o1.task.getDeadlineOnJVM());
+            });
             buff.put(userCode, taskSubmitList);
         }
 

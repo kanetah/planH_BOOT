@@ -88,12 +88,12 @@ $(() => {
     }
 
     let loadingFlag = false;
-    $(window).scroll(() => {
-        let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-        if (scrollBottom < 15 && loadingFlag === false) {
-            $('#task').trigger('click');
-        }
-    });
+    // $(window).scroll(() => {
+    //     let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+    //     if (scrollBottom < 15 && loadingFlag === false) {
+    //         $('#task').trigger('click');
+    //     }
+    // });
 
     let spinnerHolder = $('#spinnerHolder');
     $.setLoadingFlag = (val) => {
@@ -148,5 +148,11 @@ $(() => {
 
     setTimeout(() => {
         $('#task').trigger('click');
+        $(window).scroll(() => {
+            let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+            if (scrollBottom < 15 && loadingFlag === false) {
+                $('#task').trigger('click');
+            }
+        });
     }, 1500);
 });
