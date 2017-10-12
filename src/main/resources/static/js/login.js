@@ -51,8 +51,7 @@ $(() => {
     };
     drag($("main"));
 
-    let switch_role = () => {
-        let flag = true;
+    let switch_role = (flag = true) => {
         return () => {
             if (flag)
                 hideUserInput();
@@ -62,7 +61,7 @@ $(() => {
         }
     };
 
-    if ($.cookie("checkMobile") === "true") {
+    if (navigator.userAgent.match(/mobile/i)) {
         $('#content').css('width', '100%');
         $('form').css('width', '90%');
         $("#switch-btn").click(switch_role());

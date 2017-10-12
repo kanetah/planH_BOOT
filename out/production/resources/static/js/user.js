@@ -88,12 +88,6 @@ $(() => {
     }
 
     let loadingFlag = false;
-    // $(window).scroll(() => {
-    //     let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-    //     if (scrollBottom < 15 && loadingFlag === false) {
-    //         $('#task').trigger('click');
-    //     }
-    // });
 
     let spinnerHolder = $('#spinnerHolder');
     $.setLoadingFlag = (val) => {
@@ -104,17 +98,18 @@ $(() => {
         loadingFlag = val;
     };
 
+    let right_list = $('.right-list');
+    let download_file_div = $('.download_file_div');
     let moveDistance = '-18%';
-    if ($.cookie("checkMobile") === "true") {
+    if (navigator.userAgent.match(/mobile/i)) {
         $('#logout').insertBefore($('#mark')[0]);
         $('.navbar-fixed-top').css('top', '0');
         $('.task').css('width', "95%");
-        $('.right-list').css({'width': "60%", "right": "-60%"});
-        $('.download_file_div').css({'width': "60%", "left": "-60%"});
+        right_list.css({'width': "60%", "right": "-60%"});
+        download_file_div.css({'width': "60%", "left": "-60%"});
         moveDistance = '-55%';
     }
 
-    let right_list = $('.right-list');
     right_list.animate({
         right: moveDistance
     });
@@ -135,7 +130,6 @@ $(() => {
         right_list_icon_flag = !right_list_icon_flag;
     });
 
-    let download_file_div = $('.download_file_div');
     download_file_div.animate({
         left: moveDistance
     });
@@ -156,24 +150,13 @@ $(() => {
         download_icon_flag = !download_icon_flag
     });
 
-    let interval = setInterval(() => {
-        if ($.ajaxFileOver) {
-            $('#task').trigger('click');
-            $(window).scroll(() => {
-                let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-                if (scrollBottom < 15 && loadingFlag === false)
-                    $('#task').trigger('click');
-            });
-            clearInterval(interval);
-        }
-    }, 100);
-
-    // setTimeout(() => {
-    //     $('#task').trigger('click');
-    //     $(window).scroll(() => {
-    //         let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-    //         if (scrollBottom < 15 && loadingFlag === false)
-    //             $('#task').trigger('click');
-    //     });
-    // }, 1500);
+    let task_btn = $('#task');
+    setTimeout(() => {
+        $(window).scroll(() => {
+            let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+            if (scrollBottom < 15 && loadingFlag === false)
+                task_btn.trigger('click');
+        });
+        task_btn.trigger('click');
+    }, 500);
 });

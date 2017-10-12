@@ -44,9 +44,10 @@ public class PlanHLoginInterceptor implements HandlerInterceptor, InitializingBe
         response.addCookie(new Cookie(
                 "userCodePrefix", userCodePrefix
         ));
-        response.addCookie(new Cookie(
-                "checkMobile",
-                String.valueOf(checkMobileService.check(request))
-        ));
+//        Cookie cookie = new Cookie(
+//                "checkMobile",
+//                String.valueOf(checkMobileService.check(request)));
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
     }
 }
