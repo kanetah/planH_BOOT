@@ -31,7 +31,7 @@ public class Submit extends BaseRelationshipEntity {
     public Submit() {
     }
 
-    public Submit(User user, Task task, String submitFileName, String saveFileName, Date submitDate) {
+    public Submit(User user, Task task, String submitFileName, Date submitDate, String saveFileName) {
         this.user = user;
         this.task = task;
         this.submitFileName = submitFileName;

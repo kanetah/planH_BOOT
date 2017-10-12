@@ -14,10 +14,18 @@ $(() => {
     const hideUserInput = () => {
         password.val("");
         password_div.find('div > span').html("口令");
-        username_div.slideUp("slow",() => {
+        username_div.slideUp("slow", () => {
             username.val("admin");
             password.attr("type", "password");
             password.focus();
+        });
+    };
+    const hideAdminInput = () => {
+        password.val("");
+        username.val("");
+        password_div.find('div > span').html("学号");
+        username_div.slideDown("slow", function () {
+            password.attr("type", "text");
         });
     };
     const drag = (obj) => {
@@ -32,24 +40,32 @@ $(() => {
                 $(document).bind("mouseup", stop);
             }
         }
+
         function stop(event) {
-            if ((event.clientY - gapY) > 10) {
-                password.val("");
-                username.val("");
-                password_div.find('div > span').html("学号");
-                username_div.slideDown("slow", function () {
-                    password.attr("type", "text");
-                });
-            } else if ((event.clientY - gapY) < -10)
+            if ((event.clientY - gapY) > 10)
+                hideAdminInput();
+            else if ((event.clientY - gapY) < -10)
                 hideUserInput();
             $(document).unbind("mouseup", stop);
         }
     };
     drag($("main"));
 
+    let switch_role = () => {
+        let flag = true;
+        return () => {
+            if (flag)
+                hideUserInput();
+            else
+                hideAdminInput();
+            flag = !flag;
+        }
+    };
+
     if ($.cookie("checkMobile") === "true") {
         $('#content').css('width', '100%');
         $('form').css('width', '90%');
-        hideUserInput();
+        $("#switch-btn").click(switch_role());
+        $('#switch').slideDown("slow");
     }
 });

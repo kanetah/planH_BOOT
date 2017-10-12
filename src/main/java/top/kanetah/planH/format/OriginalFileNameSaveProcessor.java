@@ -8,35 +8,43 @@ import top.kanetah.planH.entity.node.User;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 @Component
-@FormatType("计算机英语定制格式化处理器")
-public class ComputerEnglishFormatProcessor implements FormatSaveProcessor {
+@FormatType("最外层原文件名存储处理器")
+public class OriginalFileNameSaveProcessor implements FormatSaveProcessor {
 
-    private static FormatSaveProcessor processor = null;
+    private static OriginalFileNameSaveProcessor processor = null;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
 
-    public ComputerEnglishFormatProcessor() {
+    public OriginalFileNameSaveProcessor() {
         super();
         processor = this;
     }
 
     @Override
-    public String saveFile(User user, Task task, MultipartFile file) throws IOException {
+    public String saveFile(
+            User user, Task task, MultipartFile file
+    ) throws IOException {
         String originalFilename = file.getOriginalFilename();
         assert originalFilename != null;
-        if(!Pattern.compile("^G\\d{1,2}-U\\d{1,2}-[BbCc]\\.((doc)|(docx)|(DOC)|(DOCX))$")
-                .matcher(originalFilename).matches())
-            throw new FileNameException();
+        String fileType = originalFilename.substring(originalFilename.indexOf("."));
+        if (!task.getFileFormat().contains(fileType))
+            throw new FileTypeException();
         String path = storePath + "/" + task.getSubject() + "/" + task.getTitle();
         File target = new File(path);
         if (!target.exists())
             if (!target.mkdirs())
                 throw new FileException();
-        target = new File(path + "/" + originalFilename);
+        target = new File(path + originalFilename);
+        if (!target.exists())
+            if (!target.createNewFile())
+                throw new FileException();
         file.transferTo(target);
+        try {
+            CompactFileProcessor.handleCompactFile(target, path, fileType);
+        }catch (FileTypeException ignored){
+        }
         return target.getName();
     }
 

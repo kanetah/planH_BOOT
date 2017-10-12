@@ -104,16 +104,27 @@ $(() => {
         loadingFlag = val;
     };
 
+    $('#logout').insertBefore($('#mark')[0]);
+    let moveDistance = '-18%';
+    if ($.cookie("checkMobile") === "true") {
+        $('#logout').insertBefore($('#mark')[0]);
+        $('.navbar-fixed-top').css('top', '0');
+        $('.task').css('width', "95%");
+        $('.right-list').css({'width':"60%", "right" : "-60%"});
+        $('.download_file_div').css({'width':"60%", "left" : "-60%"});
+        moveDistance = '-55%';
+    }
+
     let right_list = $('.right-list');
     right_list.animate({
-        right: '-18%'
+        right: moveDistance
     });
     let right_list_icon = right_list.find('> span > i');
     let right_list_icon_flag = false;
     right_list_icon.click(() => {
         if (right_list_icon_flag) {
             right_list.animate({
-                right: '-18%'
+                right: moveDistance
             }, 1000, "swing");
             right_list_icon.rotate({animateTo: 0});
         } else {
@@ -127,14 +138,14 @@ $(() => {
 
     let download_file_div = $('.download_file_div');
     download_file_div.animate({
-        left: '-18%'
+        left: moveDistance
     });
     let download_icon = download_file_div.find('> span > i');
     let download_icon_flag = false;
     download_icon.click(() => {
         if (download_icon_flag) {
             download_file_div.animate({
-                left: '-18%'
+                left: moveDistance
             }, 1000, "swing");
             download_icon.rotate({animateTo: 0});
         } else {
@@ -150,9 +161,8 @@ $(() => {
         $('#task').trigger('click');
         $(window).scroll(() => {
             let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-            if (scrollBottom < 15 && loadingFlag === false) {
+            if (scrollBottom < 15 && loadingFlag === false)
                 $('#task').trigger('click');
-            }
         });
     }, 1500);
 });

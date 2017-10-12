@@ -26,6 +26,12 @@
 <body>
 
 <main>
+    <div id="switch" hidden>
+        <button id="switch-btn" type="button" class="btn btn-default ">
+            <span class="glyphicon glyphicon glyphicon-retweet" aria-hidden="true"></span>
+        </button>
+    </div>
+
     <div id="content">
         <form name='login_form' th:action='@{/login}' method='POST'>
             <div id="pwd-div">

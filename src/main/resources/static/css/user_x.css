@@ -10,6 +10,11 @@ nav {
     z-index: 4;
 }
 
+.navbar-header > div {
+    position: fixed;
+    right: 0;
+}
+
 .header {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
