@@ -11,7 +11,7 @@ $(function () {
     global.body = $('body');
     global.body.append('<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>');
 
-    $.ajaxPlanH = (args) => {
+    $.ajaxPlanH = function (args) {
 
         if (args.url === undefined)
             args.url = '/';
@@ -30,7 +30,7 @@ $(function () {
         if (args.dataType === undefined)
             args.dataType = "json";
         if (args.error === undefined && args.complete === undefined)
-            args.error = (XMLHttpRequest) => {
+            args.error = function (XMLHttpRequest) {
                 alert(
                     "未预见的ajax请求错误，请联系管理员\n" +
                     "XMLHttpRequestStatus: " + XMLHttpRequest.status + "\n" +
@@ -52,8 +52,8 @@ $(function () {
 
     $.ajaxPlanH({
         const_url: '/role/get',
-        success: (roles) => {
-            let body = global.body;
+        success: function (roles) {
+            var body = global.body;
             global.role = roles[0];
 
             if (global.role === 'ADMIN') {
@@ -70,10 +70,10 @@ $(function () {
         }
     });
 
-    $('#logout').click(() => {
+    $('#logout').click(function () {
         $.ajaxPlanH({
             const_url: '/logout',
-            complete: () => {
+            complete: function () {
                 window.location.reload();
             }
         })

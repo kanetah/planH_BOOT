@@ -44,7 +44,7 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
         file.transferTo(target);
         try {
             CompactFileProcessor.handleCompactFile(target, path, fileType);
-        }catch (FileTypeException ignored){
+        } catch (FileTypeException ignored){
         }
         return target.getName();
     }

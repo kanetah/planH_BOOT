@@ -1,7 +1,7 @@
-$(() => {
+$(function () {
     $.ajaxPlanH({
         url: '/task/get',
-        success: (date) => {
+        success: function (date) {
             const ths = [
                 'id',
                 'subject',
@@ -12,21 +12,21 @@ $(() => {
                 'saveProcessor',
                 'deadline'
             ];
-            let task_table = $('#task_table');
-            $.each(date, (idx, elem) => {
-                let new_tr = document.createElement("tr");
-                $.each(ths, (i) => {
-                    let new_td = document.createElement("td");
+            var task_table = $('#task_table');
+            $.each(date, function (idx, elem) {
+                var new_tr = document.createElement("tr");
+                $.each(ths, function (i) {
+                    var new_td = document.createElement("td");
                     new_td.innerHTML = elem[ths[i]];
                     new_tr.append(new_td);
                     $(new_tr).attr(ths[i], elem[ths[i]]);
                 });
                 $(new_tr).bind('click', function (event) {
-                    let modal = $('#update_task_Modal');
-                    let task_id = $(this).attr('id');
-                    let body = modal.find('div > div > .modal-body');
+                    var modal = $('#update_task_Modal');
+                    var task_id = $(this).attr('id');
+                    var body = modal.find('div > div > .modal-body');
                     body.find('#update_id').html(task_id);
-                    let inputs = body.find('div');
+                    var inputs = body.find('div');
                     inputs.find('#update_subject').val($(this).attr('subject'));
                     inputs.find('#update_title').val($(this).attr('title'));
                     inputs.find('#update_content').val($(this).attr('content'));
@@ -43,19 +43,19 @@ $(() => {
         }
     });
 
-    let updateSubmitTable = (id) => {
+    var updateSubmitTable = function (id) {
         $.ajaxPlanH({
             url: "/task/submit",
             data: {
                 taskId: id
             },
-            success: (data) => {
-                let submitTable = $('#submit_table');
+            success: function (data) {
+                var submitTable = $('#submit_table');
                 $('tr').remove('.submit_table_tr');
-                $.each(data, (idx, elem) => {
-                    let new_tr = document.createElement("tr");
+                $.each(data, function (idx, elem) {
+                    var new_tr = document.createElement("tr");
                     $(new_tr).attr('class', 'submit_table_tr');
-                    let new_td = document.createElement("td");
+                    var new_td = document.createElement("td");
                     new_td.innerHTML = idx + 1;
                     new_tr.append(new_td);
                     new_td = document.createElement("td");
@@ -70,12 +70,14 @@ $(() => {
         })
     };
 
-    const option = (elem) => `<option>${elem}</option>`;
+    const option = function (elem) {
+        return '<option>' + elem + '</option>';
+    };
 
     $.ajaxPlanH({
         const_url: "/subject/names",
-        success: (data) => {
-            $.each(data, (idx, elem) => {
+        success: function (data) {
+            $.each(data, function (idx, elem) {
                 $('#update_subject').append(option(elem));
                 $('#subject').append(option(elem));
             });
@@ -84,16 +86,16 @@ $(() => {
 
     $.ajaxPlanH({
         const_url: "/processor/values",
-        success: (data) => {
-            $.each(data, (idx, elem) => {
+        success: function (data) {
+            $.each(data, function (idx, elem) {
                 $('#update_processor').append(option(elem));
                 $('#processor').append(option(elem));
             });
         }
     });
 
-    $('#create_task').click(() => {
-        let inputs = $('#create_task_Modal').find('div > div > #addTask > div');
+    $('#create_task').click(function () {
+        var inputs = $('#create_task_Modal').find('div > div > #addTask > div');
         $.ajaxPlanH({
             url: '/task/create',
             data: {
@@ -105,15 +107,15 @@ $(() => {
                 deadline: inputs.find('#date').val(),
                 processor: inputs.find('#processor').val()
             },
-            success: () => {
+            success: function () {
                 location.reload(true);
             }
         });
     });
 
-    $('#update_task').click(() => {
-        let task_id = $('#update_id').html();
-        let inputs = $('#update_task_Modal').find('div > div > .modal-body > div');
+    $('#update_task').click(function () {
+        var task_id = $('#update_id').html();
+        var inputs = $('#update_task_Modal').find('div > div > .modal-body > div');
         $.ajaxPlanH({
             url: '/task/update',
             data: {
@@ -126,44 +128,44 @@ $(() => {
                 deadline: inputs.find('#update_date').val(),
                 processor: inputs.find('#update_processor').val()
             },
-            success: () => {
+            success: function () {
                 location.reload(true);
             }
         });
     });
 
-    $('#create_user').click(() => {
+    $('#create_user').click(function () {
         $.ajaxPlanH({
             url: '/user/create',
             data: {
                 code: $('#code').val(),
                 name: $('#name').val()
             },
-            success: () => {
+            success: function () {
                 $('#cancel_create_user').trigger('click');
             }
         })
     });
 
-    $('#batch_user').click(() => {
-        let form_data = $('#batch_user_form');
+    $('#batch_user').click(function () {
+        var form_data = $('#batch_user_form');
         $.ajaxPlanH({
             url: '/user/batch',
             data: new FormData(form_data[0]),
             cache: false,
-            success: () => {
+            success: function () {
                 alert('成功');
             },
-            error: () => {
+            error: function () {
                 alert('失败');
             }
         });
     });
 
-    $('#shutdown').click(() => {
+    $('#shutdown').click(function () {
         $.ajaxPlanH({
             const_url: '/shutdown',
-            error: () => {
+            error: function () {
             }
         });
         $('.navbar-brand').append('（服务已停止）');

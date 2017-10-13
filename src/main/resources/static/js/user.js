@@ -1,15 +1,19 @@
-$(() => {
+$(function () {
     const window_width = $(window).width();
     const wrapper = $('.wrapper');
 
     if (window_width >= 992) {
         big_image = wrapper.find('> .header');
         $(window).on('scroll', materialKitDemo.checkScrollForParallax);
+    } else {
+        var mark = $('#mark')[0];
+        $('#task').insertBefore(mark);
+        $('#logout').insertBefore(mark);
     }
 
     const tasks = [];
-    $.addTask = (task_data) => {
-        let template = $('.template').clone(true);
+    $.addTask = function (task_data) {
+        var template = $('.template').clone(true);
         template.removeClass('template');
         template.css('top', '100px');
         template.css('opacity', '0');
@@ -20,7 +24,7 @@ $(() => {
         template.find('.title').html(task_data['title']);
         template.find('.content > p').html(task_data['content']);
         template.find('.deadline > .date').html(task_data['deadline'].substr(0, 10));
-        let label = template.find('.deadline > .label');
+        var label = template.find('.deadline > .label');
         template.find('.submitFileName > form > [type = "file"]')
             .on('change', function () {
                 template.find('.submit-button').removeAttr("disabled");
@@ -41,13 +45,13 @@ $(() => {
         } else {
             label.addClass('label-info');
             label.html('已提交');
-            let file = template.find('.submitFileName > a');
+            var file = template.find('.submitFileName > a');
             file.html(task_data['submitFileName']);
         }
-        let deadline = new Date(
+        var deadline = new Date(
             task_data['deadline']
         );
-        let now = new Date();
+        var now = new Date();
         if (now > deadline)
             label.before("<span class='label label-default'>已截止</span>");
 
@@ -58,8 +62,8 @@ $(() => {
                 .attr('accept', task_data['fileFormat']);
 
         template.find('.submit_div > .submit-button')
-            .bind("click", (event) => {
-                let uploadForm = template.find('.submitFileName > form');
+            .bind("click", function (event) {
+                var uploadForm = template.find('.submitFileName > form');
                 $.addSubmit(
                     uploadForm,
                     task_data['id'],
@@ -72,7 +76,7 @@ $(() => {
         tasks.unshift(template);
     };
 
-    $.showBuffTask = () => {
+    $.showBuffTask = function () {
         showNode(tasks.pop());
     };
 
@@ -82,15 +86,15 @@ $(() => {
         node.animate({
             top: 0,
             opacity: 1.0
-        }, 700, "swing", () => {
+        }, 700, "swing", function () {
             showNode(tasks.pop());
         })
     }
 
-    let loadingFlag = false;
+    var loadingFlag = false;
 
-    let spinnerHolder = $('#spinnerHolder');
-    $.setLoadingFlag = (val) => {
+    var spinnerHolder = $('#spinnerHolder');
+    $.setLoadingFlag = function (val) {
         if (val)
             spinnerHolder.append('<div class="spinner"></div>');
         else
@@ -98,11 +102,10 @@ $(() => {
         loadingFlag = val;
     };
 
-    let right_list = $('.right-list');
-    let download_file_div = $('.download_file_div');
-    let moveDistance = '-18%';
+    var right_list = $('.right-list');
+    var download_file_div = $('.download_file_div');
+    var moveDistance = '-18%';
     if (navigator.userAgent.match(/mobile/i)) {
-        $('#logout').insertBefore($('#mark')[0]);
         $('.navbar-fixed-top').css('top', '0');
         $('.task').css('width', "95%");
         right_list.css({'width': "60%", "right": "-60%"});
@@ -113,9 +116,9 @@ $(() => {
     right_list.animate({
         right: moveDistance
     });
-    let right_list_icon = right_list.find('> span > i');
-    let right_list_icon_flag = false;
-    right_list_icon.click(() => {
+    var right_list_icon = right_list.find('> span > i');
+    var right_list_icon_flag = false;
+    right_list_icon.click(function () {
         if (right_list_icon_flag) {
             right_list.animate({
                 right: moveDistance
@@ -133,9 +136,9 @@ $(() => {
     download_file_div.animate({
         left: moveDistance
     });
-    let download_icon = download_file_div.find('> span > i');
-    let download_icon_flag = false;
-    download_icon.click(() => {
+    var download_icon = download_file_div.find('> span > i');
+    var download_icon_flag = false;
+    download_icon.click(function () {
         if (download_icon_flag) {
             download_file_div.animate({
                 left: moveDistance
@@ -150,10 +153,10 @@ $(() => {
         download_icon_flag = !download_icon_flag
     });
 
-    let task_btn = $('#task');
-    setTimeout(() => {
-        $(window).scroll(() => {
-            let scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+    var task_btn = $('#task');
+    setTimeout(function () {
+        $(window).scroll(function () {
+            var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
             if (scrollBottom < 15 && loadingFlag === false)
                 task_btn.trigger('click');
         });

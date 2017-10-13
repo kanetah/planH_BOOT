@@ -1,4 +1,4 @@
-$(() => {
+$(function () {
     $('#cancel_create_task').click(function () {
         $('#title').val("");
         $('#content').val("");

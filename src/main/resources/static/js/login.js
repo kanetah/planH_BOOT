@@ -1,26 +1,42 @@
-$(() => {
+$(function () {
+    if (navigator.userAgent.match(/mobile/i)) {
+        $('#content').css('width', '100%');
+        $('form').css('width', '90%');
+        $("#switch-btn").click(function () {
+            var flag = true;
+            return function () {
+                if (flag)
+                    hideUserInput();
+                else
+                    hideAdminInput();
+                flag = !flag;
+            }
+        }());
+        $('#switch').slideDown("slow");
+    }
+
     document.login_form.password.focus();
     $('[name="login_form"]').submit(function () {
-        let userCode = $('[name="password"]');
+        var userCode = $('[name="password"]');
         if (userCode.val().indexOf($.cookie("userCodePrefix")) === 0)
             userCode.val(userCode.val().replace($.cookie("userCodePrefix"), ""));
         return true;
     });
 
-    let username_div = $("#user-name");
-    let password_div = $('#pwd-div');
-    let username = $('[name="username"]');
-    let password = $('[name="password"]');
-    const hideUserInput = () => {
+    var username_div = $("#user-name");
+    var password_div = $('#pwd-div');
+    var username = $('[name="username"]');
+    var password = $('[name="password"]');
+    const hideUserInput = function () {
         password.val("");
         password_div.find('div > span').html("口令");
-        username_div.slideUp("slow", () => {
+        username_div.slideUp("slow", function () {
             username.val("admin");
             password.attr("type", "password");
             password.focus();
         });
     };
-    const hideAdminInput = () => {
+    const hideAdminInput = function () {
         password.val("");
         username.val("");
         password_div.find('div > span').html("学号");
@@ -28,10 +44,10 @@ $(() => {
             password.attr("type", "text");
         });
     };
-    const drag = (obj) => {
+    const drag = function (obj) {
         obj.bind("mousedown", start);
-        let gapX;
-        let gapY;
+        var gapX;
+        var gapY;
 
         function start(event) {
             if (event.button === 0) {
@@ -50,21 +66,4 @@ $(() => {
         }
     };
     drag($("main"));
-
-    let switch_role = (flag = true) => {
-        return () => {
-            if (flag)
-                hideUserInput();
-            else
-                hideAdminInput();
-            flag = !flag;
-        }
-    };
-
-    if (navigator.userAgent.match(/mobile/i)) {
-        $('#content').css('width', '100%');
-        $('form').css('width', '90%');
-        $("#switch-btn").click(switch_role());
-        $('#switch').slideDown("slow");
-    }
 });
