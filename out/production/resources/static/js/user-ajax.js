@@ -2,52 +2,57 @@ $(function () {
     $.ajaxPlanH({
         url: '/username',
         success: function (username) {
-            $('#username').html(username[0]);
+            $('#username').html(username);
         }
     });
 
     $.task_index = 0;
 
-    var task_btn = $('#task');
+    const task_btn = $('#task');
     task_btn.click(function () {
-        var icon = task_btn.find('> i');
-        if ($.task_index === null)
-            return;
-        $.setLoadingFlag(true);
-
-        $.ajaxPlanH({
-            url: '/task/fetch',
-            data: {
-                from: $.task_index,
-                to: $.task_index + 5
-            },
-            beforeSend: function () {
-                icon.rotate({
-                    animateTo: 720, duration: 2000,
-                    callback: function () {
-                        icon.rotate(0);
+        const icon = task_btn.find('> i');
+        var historyTaskFlag = false;
+        return function () {
+            $.setLoadingFlag(true);
+            $.ajaxPlanH({
+                url: '/task/fetch',
+                data: {
+                    from: $.task_index,
+                    to: $.task_index + 5
+                },
+                beforeSend: function () {
+                    icon.rotate({
+                        animateTo: 720, duration: 2000,
+                        callback: function () {
+                            icon.rotate(0);
+                        }
+                    });
+                },
+                success: function (data) {
+                    if (data.length === 0) {
+                        $.task_index = null;
+                        $.setLoadingFlag(false);
+                        task_btn.attr({"disabled": "disabled"});
+                        $('.wrapper').append(
+                            '<br/>---&nbsp;&nbsp;没有了&nbsp;&nbsp;---'
+                        );
+                        return;
                     }
-                });
-            },
-            success: function (data) {
-                if (data.length === 0) {
-                    $.task_index = null;
+                    $.task_index += 5;
+                    $.each(data, function (idx, elem) {
+                        var flag = new Date() > new Date(elem['deadline']);
+                        if (!historyTaskFlag && flag) {
+                            historyTaskFlag = true;
+                            $('.wrapper').append('<hr/>');
+                        }
+                        $.addTask(elem, flag);
+                    });
+                    $.showBuffTask();
                     $.setLoadingFlag(false);
-                    task_btn.attr({"disabled": "disabled"});
-                    $('.wrapper').append(
-                        '<br/>---&nbsp;&nbsp;没有了&nbsp;&nbsp;---'
-                    );
-                    return;
                 }
-                $.task_index += 5;
-                $.each(data, function (idx, elem) {
-                    $.addTask(elem);
-                });
-                $.showBuffTask();
-                $.setLoadingFlag(false);
-            }
-        })
-    });
+            })
+        }
+    }());
 
     $.addSubmit = function (form_data, task_id, task_title, label) {
 

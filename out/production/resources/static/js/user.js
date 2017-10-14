@@ -12,7 +12,7 @@ $(function () {
     }
 
     const tasks = [];
-    $.addTask = function (task_data) {
+    $.addTask = function (task_data, oldTaskFlag) {
         var template = $('.template').clone(true);
         template.removeClass('template');
         template.css('top', '100px');
@@ -48,11 +48,7 @@ $(function () {
             var file = template.find('.submitFileName > a');
             file.html(task_data['submitFileName']);
         }
-        var deadline = new Date(
-            task_data['deadline']
-        );
-        var now = new Date();
-        if (now > deadline)
+        if (oldTaskFlag)
             label.before("<span class='label label-default'>已截止</span>");
 
         if (task_data['fileFormat'] !== undefined &&

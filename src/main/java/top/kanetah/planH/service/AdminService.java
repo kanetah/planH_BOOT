@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 @Service
@@ -142,11 +143,10 @@ public class AdminService implements InitializingBean {
 
         for (int i = 2; i <= sheet.getLastRowNum(); ++i) {
             row = sheet.getRow(i);
-            createUser(new User(
-                    Long.valueOf(
+            createUser(
+                    new User(Long.valueOf(
                             row.getCell(index.get(userCodeMark)).getStringCellValue()
-                                    .substring(userCodePrefix.length())
-                    ),
+                                    .substring(userCodePrefix.length())),
                     row.getCell(index.get(userNameMark)).getStringCellValue()
             ));
         }
@@ -160,6 +160,13 @@ public class AdminService implements InitializingBean {
         List<Object> tasks = new ArrayList<>();
         repositoryService.taskRepository.findAll().forEach(task ->
                 tasks.add(info.byOrigin(task)));
+        tasks.sort(Comparator.comparing(o -> {
+            try {
+                return (Date)o.getClass().getMethod("getDeadline").invoke(o);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }));
         return tasks;
     }
 

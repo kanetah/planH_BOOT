@@ -51,48 +51,48 @@ public class UserService extends ApplicationObjectSupport {
             this.task = task;
             this.submit = submit;
         }
+
+        Object[] getTaskAndSubmit() {
+            return new Object[]{task, submit};
+        }
+    }
+
+    private void putBuffList(long userCode) {
+        List<TaskSubmit> taskSubmitList = new ArrayList<>();
+        repositoryService.taskRepository.findAll().iterator().forEachRemaining(task -> {
+            final Submit[] lastSubmit = {Submit.emptySubmit()};
+            repositoryService.submitRepository.findAllByUser_UserCode(userCode).forEach(submit -> {
+                if (submit.getTask().getId().equals(task.getId())
+                        && (lastSubmit[0] == null || lastSubmit[0].equals(Submit.emptySubmit())
+                        || lastSubmit[0].getSubmitDate().before(submit.getSubmitDate())))
+                    lastSubmit[0] = submit;
+            });
+            taskSubmitList.add(new TaskSubmit(task, lastSubmit[0]));
+        });
+        final Date now = new Date();
+        taskSubmitList.sort((o1, o2) -> {
+            boolean b1 = o1.submit.equals(Submit.emptySubmit()) && o1.task.getDeadlineOnJVM().after(now);
+            boolean b2 = o2.submit.equals(Submit.emptySubmit()) && o2.task.getDeadlineOnJVM().after(now);
+            return !b1 && b2 ? 1 : b1 && !b2 ? -1 :
+                    o2.task.getDeadlineOnJVM().compareTo(o1.task.getDeadlineOnJVM());
+        });
+        buff.put(userCode, taskSubmitList);
     }
 
     public List<Map<String, Object>> getTask_Compare(int from, int to, long userCode) {
-        if (from == 0) {
-            List<TaskSubmit> taskSubmitList = new ArrayList<>();
-            repositoryService.taskRepository.findAll().iterator().forEachRemaining(task -> {
-                final Submit[] lastSubmit = {Submit.emptySubmit()};
-                repositoryService.submitRepository.findAllByUser_UserCode(userCode).forEach(submit -> {
-                    if (submit.getTask().getId().equals(task.getId())
-                            && (lastSubmit[0] == null || lastSubmit[0].equals(Submit.emptySubmit())
-                            || lastSubmit[0].getSubmitDate().compareTo(submit.getSubmitDate()) > 0))
-                        lastSubmit[0] = submit;
-                });
-                taskSubmitList.add(new TaskSubmit(task, lastSubmit[0]));
-            });
-            taskSubmitList.sort((o1, o2) -> {
-                boolean b1 = o1.submit.equals(Submit.emptySubmit());
-                boolean b2 = o2.submit.equals(Submit.emptySubmit());
-                return !b1 && b2 ? 1 : b1 && !b2 ? -1 :
-                        o2.task.getDeadlineOnJVM().compareTo(o1.task.getDeadlineOnJVM());
-            });
-            buff.put(userCode, taskSubmitList);
-        }
-
-        List<Object> taskInfoList = new ArrayList<>();
-        List<TaskSubmit> taskSubmits = buff.get(userCode);
+        if (from == 0)
+            putBuffList(userCode);
+        List<Map<String, Object>> ajaxList = new ArrayList<>();
         for (int i = from; i < to; ++i)
             try {
-                taskInfoList.add(info.byOrigin(taskSubmits.get(i).task, taskSubmits.get(i).submit));
+                Object task = info.byOrigin(buff.get(userCode).get(i).getTaskAndSubmit());
+                HashMap<String, Object> infoMap = new HashMap<>();
+                info.getEnumList(task.getClass()).forEach(attribute ->
+                        infoMap.put(attribute.getValue(), attribute.invokeMargetMethod(task)));
+                ajaxList.add(infoMap);
             } catch (IndexOutOfBoundsException e) {
                 break;
             }
-
-        List<Map<String, Object>> ajaxList = new ArrayList<>();
-        Object[] taskInfo = new Object[1];
-        taskInfoList.forEach(task -> {
-            taskInfo[0] = task;
-            HashMap<String, Object> infoMap = new HashMap<>();
-            info.getEnumList(task.getClass()).forEach(attribute ->
-                    infoMap.put(attribute.getValue(), attribute.invokeMargetMethod(taskInfo[0])));
-            ajaxList.add(infoMap);
-        });
         return ajaxList;
     }
 

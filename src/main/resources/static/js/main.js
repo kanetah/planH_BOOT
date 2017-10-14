@@ -1,10 +1,5 @@
 $(function () {
-    var timer = setTimeout(function () {
-        alert("您的浏览器不支持ES6规范，请升级。")
-    }, 1000);
     const global = {};
-    clearTimeout(timer);
-
     global.path_prefix_for_role = "";
 
     window.jQuery || document.getElementById("body").appendChild(document.createTextNode('<script src="js/vendor/jquery.min.js"><\/script>'));
@@ -31,11 +26,14 @@ $(function () {
             args.dataType = "json";
         if (args.error === undefined && args.complete === undefined)
             args.error = function (XMLHttpRequest) {
-                alert(
-                    "未预见的ajax请求错误，请联系管理员\n" +
-                    "XMLHttpRequestStatus: " + XMLHttpRequest.status + "\n" +
-                    "XMLHttpRequestReadyStatus: " + XMLHttpRequest.readyState
-                )
+                if (navigator.userAgent.match(/mobile/i))
+                    location.reload();
+                else
+                    alert(
+                        "未预见的ajax请求错误，请联系管理员或重载网页\n" +
+                        "XMLHttpRequestStatus: " + XMLHttpRequest.status + "\n" +
+                        "XMLHttpRequestReadyStatus: " + XMLHttpRequest.readyState
+                    )
             };
 
         const token = $("meta[name='_csrf']").attr("content");
