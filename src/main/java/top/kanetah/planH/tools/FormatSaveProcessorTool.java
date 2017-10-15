@@ -29,9 +29,8 @@ public class FormatSaveProcessorTool extends ApplicationObjectSupport {
                     assert context != null;
                     saveProcessor =
 //                            (FormatSaveProcessor) context.getBean(processorInterfaces.get(i));
-                            (FormatSaveProcessor)processorInterfaces.get(i)
-                                    .getMethod("create")
-                                    .invoke(null);
+                            (FormatSaveProcessor)
+                                    processorInterfaces.get(i).getMethod("create").invoke(null);
                     break;
                 } catch (Exception e) {
                     throw new RuntimeException(e);

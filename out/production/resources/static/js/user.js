@@ -149,13 +149,12 @@ $(function () {
         download_icon_flag = !download_icon_flag
     });
 
-    var task_btn = $('#task');
     setTimeout(function () {
         $(window).scroll(function () {
             var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
             if (scrollBottom < 15 && loadingFlag === false)
-                task_btn.trigger('click');
+                $('#task').trigger('click');
         });
-        task_btn.trigger('click');
+        $('#task').trigger('click');
     }, 500);
 });

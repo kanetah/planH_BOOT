@@ -13,6 +13,7 @@ $(function () {
         const icon = task_btn.find('> i');
         var historyTaskFlag = false;
         return function () {
+            if (task_btn.attr("disabled") === "disabled") return;
             $.setLoadingFlag(true);
             $.ajaxPlanH({
                 url: '/task/fetch',
@@ -33,9 +34,7 @@ $(function () {
                         $.task_index = null;
                         $.setLoadingFlag(false);
                         task_btn.attr({"disabled": "disabled"});
-                        $('.wrapper').append(
-                            '<br/>---&nbsp;&nbsp;没有了&nbsp;&nbsp;---'
-                        );
+                        $('.wrapper').append('<br/>---&nbsp;&nbsp;没有了&nbsp;&nbsp;---');
                         return;
                     }
                     $.task_index += 5;

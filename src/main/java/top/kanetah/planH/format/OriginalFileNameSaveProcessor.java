@@ -13,13 +13,12 @@ import java.io.IOException;
 @FormatType("最外层原文件名存储处理器")
 public class OriginalFileNameSaveProcessor implements FormatSaveProcessor {
 
-    private static OriginalFileNameSaveProcessor processor = null;
+    private static OriginalFileNameSaveProcessor processor;
     @Value(value = "${kanetah.planH.userPatchFileStorePath}")
     private String storePath;
 
     public OriginalFileNameSaveProcessor() {
-        super();
-        processor = this;
+        this.storePath = path;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class OriginalFileNameSaveProcessor implements FormatSaveProcessor {
         file.transferTo(target);
         try {
             CompactFileProcessor.handleCompactFile(target, path, fileType);
-        }catch (FileTypeException ignored){
+        } catch (FileTypeException ignored) {
         }
         return target.getName();
     }
@@ -54,6 +53,7 @@ public class OriginalFileNameSaveProcessor implements FormatSaveProcessor {
     }
 
     public static FormatSaveProcessor create() {
+        if (processor == null) processor = new OriginalFileNameSaveProcessor();
         return processor;
     }
 }

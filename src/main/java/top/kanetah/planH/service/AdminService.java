@@ -56,10 +56,7 @@ public class AdminService implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         Class<? extends AdminService> clazz = AdminService.class;
         new ObjectMapper().readValue(
-                FileTool.inputStreamToFile(
-                        poiConfigResource.getInputStream()
-                ),
-                Map.class
+                FileTool.inputStreamToFile(poiConfigResource.getInputStream()), Map.class
         ).forEach((k, v) -> {
             try {
                 Field field = clazz.getDeclaredField(k.toString());
@@ -185,6 +182,7 @@ public class AdminService implements InitializingBean {
                 i.submitDate = new Date(file.lastModified());
                 info.add(i);
             }
+        info.sort(Comparator.comparing(o -> o.fileName));
         return info;
     }
 }

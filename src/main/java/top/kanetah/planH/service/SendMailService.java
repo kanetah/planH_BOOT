@@ -32,6 +32,7 @@ public class SendMailService implements InitializingBean {
     private final RepositoryService repositoryService;
     private final AdminService adminService;
     private final JavaMailSenderImpl mailSender;
+    private final FormatSaveProcessorTool formatSaveProcessorTool;
     private final SpringTemplateEngine thymeleaf;
     @Value(value = "${kanetah.planH.subject.infoPath}")
     private String subjectInfoPath;
@@ -40,26 +41,25 @@ public class SendMailService implements InitializingBean {
     @Value(value = "${spring.mail.username}")
     private String mailUsername;
     private Map<String, Subject> subjectMap = new HashMap<>();
-    private static List<Date> timerList = new ArrayList<>();
 
     @Autowired
     public SendMailService(
             RepositoryService repositoryService,
             AdminService adminService,
             JavaMailSenderImpl mailSender,
+            FormatSaveProcessorTool formatSaveProcessorTool,
             SpringTemplateEngine thymeleaf
     ) {
         this.repositoryService = repositoryService;
         this.adminService = adminService;
         this.mailSender = mailSender;
+        this.formatSaveProcessorTool = formatSaveProcessorTool;
         this.thymeleaf = thymeleaf;
     }
 
     private static void setTimer(Task task) {
-        if (new Date().before(task.getDeadlineOnJVM())) {
+        if (new Date().before(task.getDeadlineOnJVM()))
             dateMap.add(task.getDeadlineOnJVM(), task.getId());
-            timerList.add(task.getDeadline());
-        }
     }
 
     static void setTimer(Task task, Long removeId) {
@@ -69,9 +69,7 @@ public class SendMailService implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        repositoryService.taskRepository.findAll().forEach(
-                SendMailService::setTimer
-        );
+        repositoryService.taskRepository.findAll().forEach(SendMailService::setTimer);
 
         new Thread(() -> {
             Exception exception;
@@ -81,9 +79,7 @@ public class SendMailService implements InitializingBean {
                         Date nextDate = dateMap.firstKey();
                         long sleepTime = nextDate.getTime() - new Date().getTime();
                         Thread.sleep((sleepTime < 0 ? 0 : sleepTime) + A_HOUR);
-                        dateMap.getValues(nextDate).forEach(
-                                SendMailService.this::sendMail
-                        );
+                        dateMap.getValues(nextDate).forEach(SendMailService.this::sendMail);
                         dateMap.remove(nextDate);
                     } else
                         Thread.sleep(3 * A_HOUR);
@@ -94,14 +90,13 @@ public class SendMailService implements InitializingBean {
             }
             throw new RuntimeException(exception);
         }).start();
+
+//        dateMap.getValues(dateMap.firstKey()).forEach(SendMailService.this::sendMail);
     }
 
     @SuppressWarnings("unchecked")
     private void beforeSendMail() throws IOException {
-        for (Map map : new ObjectMapper().readValue(
-                new File(subjectInfoPath),
-                Map[].class
-        )) {
+        for (Map map : new ObjectMapper().readValue(new File(subjectInfoPath), Map[].class)) {
             Subject subject = new Subject();
             map.forEach((k, v) -> {
                 try {
@@ -143,9 +138,7 @@ public class SendMailService implements InitializingBean {
 
     private File createTaskZipFile(Task task) {
         String srcPath = storePath + "/" + task.getSubject() + "/" + task.getTitle();
-        return new CompactTool(
-                srcPath + ".zip"
-        ).zip(srcPath);
+        return new CompactTool(srcPath + ".zip").zip(srcPath);
     }
 
     private String emailText(Task task) {
@@ -163,13 +156,11 @@ public class SendMailService implements InitializingBean {
         });
         context.setVariable("userCount", users.size());
         List<User> submitted = new ArrayList<>();
-        if (new FormatSaveProcessorTool().findProcessorByTask(task).fileUserWhenSendMail())
+        if (formatSaveProcessorTool.findProcessorByTask(task).fileUserWhenSendMail())
             for (String fileName : fileNames)
-                submitted.add(repositoryService.userRepository.findByUserCode(
-                        Long.valueOf("2" + RegexTool.lastRegex(
-                                fileName.replace(task.getTitle(), ""), "\\d{2}"
-                        ))
-                ));
+                submitted.add(repositoryService.userRepository.findByUserCode(Long.valueOf(
+                        "2" + RegexTool.lastRegex(
+                                fileName.replace(task.getTitle(), ""), "\\d{2}"))));
         int flagSize = 20;
         context.setVariable("flagSize", flagSize);
         context.setVariable("codePrefix", adminService.getUserCodePrefix());
@@ -210,11 +201,11 @@ public class SendMailService implements InitializingBean {
     }
 
     public Object[] getTimers() {
-        return timerList.toArray();
+        return dateMap.keySet().toArray();
     }
 
-    private class Cell {
-        String c1, c2;
+    class Cell {
+        public String c1, c2;
 
         Cell(String c1, String c2) {
             this.c1 = c1;

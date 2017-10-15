@@ -18,8 +18,7 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
     private String storePath;
 
     public DefaultFormatProcessor() {
-        super();
-        processor = this;
+        this.storePath = path;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
         file.transferTo(target);
         try {
             CompactFileProcessor.handleCompactFile(target, path, fileType);
-        } catch (FileTypeException ignored){
+        } catch (FileTypeException ignored) {
         }
         return target.getName();
     }
@@ -55,6 +54,7 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
     }
 
     public static FormatSaveProcessor create() {
+        if (processor == null) processor = new DefaultFormatProcessor();
         return processor;
     }
 }

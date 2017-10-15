@@ -19,15 +19,14 @@ public class ComputerEnglishFormatProcessor implements FormatSaveProcessor {
     private String storePath;
 
     public ComputerEnglishFormatProcessor() {
-        super();
-        processor = this;
+        this.storePath = path;
     }
 
     @Override
     public String saveFile(User user, Task task, MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         assert originalFilename != null;
-        if(!Pattern.compile("^G\\d{1,2}-U\\d{1,2}-[BbCc]\\.((doc)|(docx)|(DOC)|(DOCX))$")
+        if (!Pattern.compile("^G\\d{1,2}-U\\d{1,2}-[BbCc]\\.((doc)|(docx)|(DOC)|(DOCX))$")
                 .matcher(originalFilename).matches())
             throw new FileNameException();
         String path = storePath + "/" + task.getSubject() + "/" + task.getTitle();
@@ -46,6 +45,7 @@ public class ComputerEnglishFormatProcessor implements FormatSaveProcessor {
     }
 
     public static FormatSaveProcessor create() {
+        if (processor == null) processor = new ComputerEnglishFormatProcessor();
         return processor;
     }
 }
