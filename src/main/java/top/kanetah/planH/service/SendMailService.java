@@ -78,11 +78,11 @@ public class SendMailService implements InitializingBean {
                     if (!dateMap.isEmpty()) {
                         Date nextDate = dateMap.firstKey();
                         long sleepTime = nextDate.getTime() - new Date().getTime();
-                        Thread.sleep((sleepTime < 0 ? 0 : sleepTime) + A_HOUR);
+                        Thread.sleep((sleepTime < 0 ? 0 : sleepTime) + A_HOUR * 3);
                         dateMap.getValues(nextDate).forEach(SendMailService.this::sendMail);
                         dateMap.remove(nextDate);
                     } else
-                        Thread.sleep(3 * A_HOUR);
+                        Thread.sleep(5 * A_HOUR);
                 } catch (Exception e) {
                     exception = e;
                     break;

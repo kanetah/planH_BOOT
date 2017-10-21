@@ -27,7 +27,7 @@ public class DefaultFormatProcessor implements FormatSaveProcessor {
     ) throws IOException {
         String originalFilename = file.getOriginalFilename();
         assert originalFilename != null;
-        String fileType = originalFilename.substring(originalFilename.indexOf("."));
+        String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
         if (!task.getFileFormat().contains(fileType))
             throw new FileTypeException();
         String path = storePath + "/" + task.getSubject() + "/" + task.getTitle();
