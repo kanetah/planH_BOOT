@@ -19,8 +19,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group 'top.kanetah'
-version '0.4.6'
-
+version '0.4.7'
 description = """SDN4 University"""
 
 sourceCompatibility = 1.8

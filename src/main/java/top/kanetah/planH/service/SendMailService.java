@@ -18,10 +18,12 @@ import top.kanetah.planH.tools.FormatSaveProcessorTool;
 import top.kanetah.planH.tools.RegexTool;
 import top.kanetah.planH.pojo.TreeMultiValueMap;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.text.DateFormat;
 import java.util.*;
 
 @Service
@@ -88,10 +90,11 @@ public class SendMailService implements InitializingBean {
                     break;
                 }
             }
+            report(DateFormat.getInstance().format(new Date()) + "\t邮件服务异常关闭");
             throw new RuntimeException(exception);
         }).start();
 
-//        dateMap.getValues(dateMap.firstKey()).forEach(SendMailService.this::sendMail);
+        report(DateFormat.getInstance().format(new Date()) + "\t服务启动");
     }
 
     @SuppressWarnings("unchecked")
@@ -132,6 +135,25 @@ public class SendMailService implements InitializingBean {
             if (!submitZip.delete())
                 throw new Exception("Can not delete zip file: '" + submitZip.getName() + "'.");
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void sendMail(String taskId) throws NumberFormatException {
+        Long id = Long.valueOf(taskId);
+        sendMail(id);
+    }
+
+    private void report(String msg) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom(mailUsername);
+            helper.setTo(mailUsername);
+            helper.setSubject("PlanH 报告");
+            helper.setText(msg);
+            mailSender.send(message);
+        } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }

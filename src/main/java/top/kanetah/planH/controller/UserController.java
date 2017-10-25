@@ -28,8 +28,7 @@ public class UserController {
             @RequestParam(value = "from") String from,
             @RequestParam(value = "to") String to
     ) throws InterruptedException {
-        if(from.equals("") || to.equals("")) return null;
-        return
+        return (from.isEmpty() || to.isEmpty()) ? null :
                 userService.getTask_Compare(
                         Integer.valueOf(from),
                         Integer.valueOf(to),

@@ -6,6 +6,7 @@ import top.kanetah.planH.entity.node.User;
 import top.kanetah.planH.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import top.kanetah.planH.service.SendMailService;
 
 import java.io.IOException;
 
@@ -14,10 +15,15 @@ import java.io.IOException;
 public class AdminController {
 
     private final AdminService adminService;
+    private final SendMailService sendMailService;
 
     @Autowired
-    public AdminController(AdminService adminService) {
+    public AdminController(
+            AdminService adminService,
+            SendMailService sendMailService
+    ) {
         this.adminService = adminService;
+        this.sendMailService = sendMailService;
     }
 
     @ResponseBody
@@ -113,6 +119,22 @@ public class AdminController {
     ) throws IOException {
         adminService.batchCreateUser(file);
         return "[\"succeed\"]";
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/sendMail/{taskId}",
+            method = RequestMethod.POST
+    )
+    public String sendMail(
+            @PathVariable(value = "taskId") String taskId
+    ) throws IOException {
+        try {
+            sendMailService.sendMail(taskId);
+            return "[\"succeed\"]";
+        } catch (NumberFormatException e) {
+            return "[\"exception\"";
+        }
     }
 
     @ResponseBody
