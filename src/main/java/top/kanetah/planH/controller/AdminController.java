@@ -123,22 +123,6 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(
-            value = "/sendMail/{taskId}",
-            method = RequestMethod.POST
-    )
-    public String sendMail(
-            @PathVariable(value = "taskId") String taskId
-    ) throws IOException {
-        try {
-            sendMailService.sendMail(taskId);
-            return "[\"succeed\"]";
-        } catch (NumberFormatException e) {
-            return "[\"exception\"";
-        }
-    }
-
-    @ResponseBody
-    @RequestMapping(
             value = "/reset",
             method = RequestMethod.GET
     )

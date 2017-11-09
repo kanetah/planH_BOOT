@@ -55,6 +55,22 @@ public class AuxiliaryAjaxController {
     }
 
     @ResponseBody
+    @RequestMapping(
+            value = "/sendMail/{taskId}",
+            method = RequestMethod.GET
+    )
+    public String sendMail(
+            @PathVariable(value = "taskId") String taskId
+    ) throws IOException {
+        try {
+            sendMailService.sendMail(taskId);
+            return "[\"succeed\"]";
+        } catch (NumberFormatException e) {
+            return "[\"exception task " + taskId + "\"]";
+        }
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/shutdown", method = RequestMethod.POST)
     public void shutdown(){
         Runtime.getRuntime().exit(0);

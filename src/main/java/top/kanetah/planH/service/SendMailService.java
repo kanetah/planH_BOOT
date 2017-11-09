@@ -95,6 +95,7 @@ public class SendMailService implements InitializingBean {
         }).start();
 
         report(DateFormat.getInstance().format(new Date()) + "\t服务启动");
+//        sendMail(241L);
     }
 
     @SuppressWarnings("unchecked")
