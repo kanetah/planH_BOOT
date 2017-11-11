@@ -185,4 +185,8 @@ public class AdminService implements InitializingBean {
         info.sort(Comparator.comparing(o -> o.fileName));
         return info;
     }
+
+    public void deleteTask(long taskId){
+        repositoryService.taskRepository.deleteById(taskId);
+    }
 }

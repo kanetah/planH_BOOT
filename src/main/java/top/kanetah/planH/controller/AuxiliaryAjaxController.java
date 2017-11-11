@@ -1,6 +1,7 @@
 package top.kanetah.planH.controller;
 
 import org.springframework.web.bind.annotation.*;
+import top.kanetah.planH.service.AdminService;
 import top.kanetah.planH.service.RoleViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,16 +19,19 @@ public class AuxiliaryAjaxController {
     private final RoleViewService roleViewService;
     private final SendMailService sendMailService;
     private final UserService userService;
+    private final AdminService adminService;
 
     @Autowired
     public AuxiliaryAjaxController(
             RoleViewService roleViewService,
             SendMailService sendMailService,
-            UserService userService
+            UserService userService,
+            AdminService adminService
     ) {
         this.roleViewService = roleViewService;
         this.sendMailService = sendMailService;
         this.userService = userService;
+        this.adminService = adminService;
     }
 
     @ResponseBody
@@ -64,6 +68,22 @@ public class AuxiliaryAjaxController {
     ) throws IOException {
         try {
             sendMailService.sendMail(taskId);
+            return "[\"succeed\"]";
+        } catch (NumberFormatException e) {
+            return "[\"exception task " + taskId + "\"]";
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value = "/delete/{taskId}",
+            method = RequestMethod.GET
+    )
+    public String deleteTask(
+            @PathVariable(value = "taskId") String taskId
+    ) throws IOException {
+        try {
+            adminService.deleteTask(Long.valueOf(taskId));
             return "[\"succeed\"]";
         } catch (NumberFormatException e) {
             return "[\"exception task " + taskId + "\"]";
